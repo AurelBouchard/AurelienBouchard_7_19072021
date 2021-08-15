@@ -1,12 +1,11 @@
 import React from 'react';
-import Navbar from "./TCP_navbar";
+import {Link} from 'react-router-dom';
 import Input from "./TCP_input";
 import {Button} from "@material-tailwind/react";
 
 export default function ProfileEditor() {
     return (
         <div className="">
-            <Navbar />
             <div className="editor flex flex-col pt-4 md:p-8 mx-auto items-center
             md:flex-row flex-wrap md:justify-center md:max-w-2xl">
                 <img

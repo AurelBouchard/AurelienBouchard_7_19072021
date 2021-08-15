@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {Link} from 'react-router-dom';
 import Navbar from "@material-tailwind/react/Navbar";
 import NavbarContainer from "@material-tailwind/react/NavbarContainer";
 import NavbarWrapper from "@material-tailwind/react/NavbarWrapper";
@@ -29,37 +30,37 @@ export default function TCP_navbar() {
                 </NavbarWrapper>
 
                 <NavbarCollapse open={openNavbar}>
-                    <NavbarInput
+                    <input
                         className="hover:bg-white"
                         type="text"
                         placeholder="Search here"
                     />
                     <Nav>
-                        <NavLink
-                            className="hover:bg-white"
-                            href="#navbar"
-                            ripple="light">
-                            <i className="far fa-user text-lg"></i>
-                            Mon profile
-                        </NavLink>
+                        <Link to="/myprofile">
+                            <p
+                                className="hover:bg-white">
+                                <i className="far fa-user text-lg"></i>
+                                Mon profile
+                            </p>
+                        </Link>
+
+                        <Link to="/members">
+                            <p
+                                className="hover:bg-white">
+                                <i className="fas fa-users text-lg"></i>
+                                Membres
+                            </p>
+                        </Link>
+
+                        <Link to="/settings">
+                            <p
+                            >
+                                <i className="fas fa-cog text-lg"></i>
+                                Paramètres
+                            </p>
+                        </Link>
 
                         <NavLink
-                            className="hover:bg-white"
-                            href="#navbar"
-                            ripple="light">
-                            <i className="fas fa-users text-lg"></i>
-                            Membres
-                        </NavLink>
-
-                        <NavLink
-                            href="#navbar"
-                            ripple="light">
-                            <i className="fas fa-cog text-lg"></i>
-                            Paramètres
-                        </NavLink>
-
-                        <NavLink
-                            href="#navbar"
                             ripple="light">
                             <i className="fas fa-sign-out-alt text-lg"></i>
                             Deconnexion

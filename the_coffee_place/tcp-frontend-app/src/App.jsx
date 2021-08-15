@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
 //import './style/App.css';
 import 'tailwindcss/tailwind.css';
 import "@material-tailwind/react/tailwind.css";
@@ -10,6 +12,9 @@ import Flow from "./components/Flow";
 import {useFetch} from "./components/useFetch";
 import Members from "./components/Members";
 import ProfileEditor from "./components/ProfileEditor";
+//import {Navbar} from "@material-tailwind/react";
+
+import Navbar from './components/TCP_navbar'
 
 function App() {
     const [isConnected, setConnected] = useState(false);
@@ -47,22 +52,34 @@ function App() {
 
 
     return (
-        <div className="App bg-blue-100">
-            {askForSubscription ? <CreateAccount /> : null}
-            {(!isConnected && !askForSubscription) ?
-                <Connexion
-                      handleConnect={handleConnect}
-                      onChange={handleConnectChange}
-                      setAsk={handleAsk}
-                /> : null}
-            { isConnected ?
-                <>
-                    {/*<Flow />*/}
-                    <Members data={data} loading={loading} />
-                    {/*<ProfileEditor />*/}
-                </> : null}
-        </div>
+            <div className="App bg-blue-100">
+                {askForSubscription ? <CreateAccount /> : null}
+                {(!isConnected && !askForSubscription) ?
+                    <Connexion
+                        handleConnect={handleConnect}
+                        onChange={handleConnectChange}
+                        setAsk={handleAsk}
+                    /> : null}
+                { isConnected ?
+                    <Router>
+                        <Navbar />
+                        <Route exact path='/'>
+                            <Flow />
+                        </Route>
+                        <Route exact path='/members'>
+                            <Members data={data} loading={loading} />
+                        </Route>
+                        <Route exact path='/create'>
+                            <CreateAccount />
+                        </Route>
+                        <Route exact path='/myprofile'>
+                            <ProfileEditor />
+                        </Route>
+
+                    </Router>
+                    : null}
+            </div>
     )
-}
+};
 
 export default App;
