@@ -34,7 +34,7 @@ export default function Members({data, loading}) {
                 </div>
             )}
 
-            <TCP_Access />
+            <TCP_Access className={"fixed bottom-10 right-10 md:right-32 lg:right-60"}/>
 
         </div>
     )

@@ -10,7 +10,7 @@ import {H1,H2,H3,H4,H5,H6} from "./Headings.jsx";
 
 
 
-const Connexion = ({handleConnect, onChange, setAsk}) => {
+const Connexion = ({handleConnect, onChange, setAskForSubscription}) => {
 
     return (
         <div className="flex flex-col justify-between items-center w-full h-auto min-h-screen">
@@ -72,7 +72,7 @@ const Connexion = ({handleConnect, onChange, setAsk}) => {
                     buttonType="filled"
                     size="4xl"
                     ripple="dark"
-                    onClick={() =>{ setAsk() }}
+                    onClick={() =>{ setAskForSubscription() }}
                 >
                     Créez un compte en 30 seconde !
                 </Button>

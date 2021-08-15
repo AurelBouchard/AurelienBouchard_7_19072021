@@ -12,13 +12,13 @@ import Flow from "./components/Flow";
 import {useFetch} from "./components/useFetch";
 import Members from "./components/Members";
 import ProfileEditor from "./components/ProfileEditor";
-//import {Navbar} from "@material-tailwind/react";
+import NotFound from "./components/NotFound";
 
 import Navbar from './components/TCP_navbar'
 
 function App() {
     const [isConnected, setConnected] = useState(false);
-    const [askForSubscription, setAsk] = useState(false);
+    const [askForSubscription, setAskForSubscription] = useState(false);
     const pages = ['connect', 'subscribe', 'coffeePlace', 'profile'];
     const [currentPage, changeCurrentPage] = useState(0);
 
@@ -29,10 +29,10 @@ function App() {
     const handleConnect = () => {      console.log("handle connect");
         if (filledName && filledPass) {
             setConnected(true);
-            setAsk(false);
+            setAskForSubscription(false);
             //alert("vous etes connecté !!");
         } else {
-            alert("remplissez tout les champs svp")
+            !isConnected ? alert("remplissez tout les champs svp") : setConnected(false);
         }
     };
 
@@ -46,36 +46,45 @@ function App() {
             e.target.value.length === 0 ? setFilledPass(false) : setFilledPass(true)}
     };
 
-    const handleAsk = () => {
-        setAsk(true)
+    const handleAskForSubscription = () => {
+        setAskForSubscription(true)
     }
 
 
     return (
-            <div className="App bg-blue-100">
+            <div className="App bg-blue-100 pt-16 lg:pt-32">
                 {askForSubscription ? <CreateAccount /> : null}
                 {(!isConnected && !askForSubscription) ?
                     <Connexion
                         handleConnect={handleConnect}
                         onChange={handleConnectChange}
-                        setAsk={handleAsk}
+                        setAskForSubscription={handleAskForSubscription}
                     /> : null}
                 { isConnected ?
                     <Router>
-                        <Navbar />
-                        <Route exact path='/'>
-                            <Flow />
-                        </Route>
-                        <Route exact path='/members'>
-                            <Members data={data} loading={loading} />
-                        </Route>
-                        <Route exact path='/create'>
-                            <CreateAccount />
-                        </Route>
-                        <Route exact path='/myprofile'>
-                            <ProfileEditor />
-                        </Route>
+                        <Navbar disconnect={setConnected}/>
+                        <Switch>
+                            <Route exact path='/'>
+                                <Flow />
+                            </Route>
+                            <Route exact path='/members'>
+                                <Members data={data} loading={loading} />
+                            </Route>
+                            <Route exact path='/create'>
+                                <CreateAccount />
+                            </Route>
+                            <Route exact path='/myprofile'>
+                                <ProfileEditor />
+                            </Route>
+{/*                            <Route exact path='/settings'>
+                                <ProfileEditor />
+                            </Route>*/}
 
+                            <Route path=''>
+                                <NotFound />
+                            </Route>
+
+                        </Switch>
                     </Router>
                     : null}
             </div>

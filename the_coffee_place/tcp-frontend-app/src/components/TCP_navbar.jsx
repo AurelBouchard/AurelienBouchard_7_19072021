@@ -12,13 +12,13 @@ import NavLink from "@material-tailwind/react/NavLink";
 import NavbarInput from "@material-tailwind/react/NavbarInput";
 import Icon from "@material-tailwind/react/Icon";
 
-export default function TCP_navbar() {
+export default function TCP_navbar({disconnect}) {
     const [openNavbar, setOpenNavbar] = useState(false);
 
     return (
-        <Navbar color="amber" navbar>
+        <Navbar color="amber"  className="absolute fixed w-full z-30 top-0">
             <NavbarContainer>
-                <NavbarWrapper  className="">
+                <NavbarWrapper >
                     <NavbarBrand className=""
                     >The Coffee Place</NavbarBrand>
 
@@ -61,7 +61,8 @@ export default function TCP_navbar() {
                         </Link>
 
                         <NavLink
-                            ripple="light">
+                            ripple="light"
+                            onClick={() => disconnect()}>
                             <i className="fas fa-sign-out-alt text-lg"></i>
                             Deconnexion
                         </NavLink>
