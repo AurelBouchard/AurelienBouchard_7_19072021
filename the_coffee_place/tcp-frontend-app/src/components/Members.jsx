@@ -1,15 +1,16 @@
 import React from 'react';
 
 import Navbar from './TCP_navbar.jsx';
+import TCP_Access from './TCP_Access'
 
 
 
 export default function Members({data, loading}) {
     return (
-        <div className="">
+        <div className="relative">
             <Navbar />
             {loading ? "loading ..." : (
-                <div className="mx-auto md:max-w-sm max-w-min">
+                <div className="mx-auto md:max-w-sm max-w-min pb-8">
                     {data.results.map((fakeUser) => {
                         return (
                             <a className="m-2 p-3 flex flex-col md:flex-row rounded-3xl bg-white"
@@ -32,6 +33,8 @@ export default function Members({data, loading}) {
                     })}
                 </div>
             )}
+
+            <TCP_Access />
 
         </div>
     )
