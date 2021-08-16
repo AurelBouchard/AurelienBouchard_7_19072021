@@ -12,7 +12,7 @@ export default function Members({data, loading}) {
                 <div className="mx-auto md:max-w-sm max-w-min pb-8">
                     {data.results.map((fakeUser) => {
                         return (
-                            <Link to='/'
+                            <Link to={'/member/'+data.info.seed}
                                   className="m-2 p-3 flex flex-col md:flex-row rounded-3xl bg-white"
                                   key={fakeUser.login.uuid}
                                   title={"Voir le profil de "+fakeUser.name.first}>
@@ -20,7 +20,7 @@ export default function Members({data, loading}) {
                                     className="rounded-2xl"
                                     src={fakeUser.picture.large}
                                     alt="Profile picture"
-                                    width={200} height={200}
+                                    max-width={400} max-height={400}
                                 />
 
                                <div className="m-4 flex flex-col">

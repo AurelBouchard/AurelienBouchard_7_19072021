@@ -15,6 +15,7 @@ import ProfileEditor from "./components/ProfileEditor";
 import NotFound from "./components/NotFound";
 
 import Navbar from './components/TCP_navbar'
+import ShowProfile from "./components/ShowProfile";
 
 function App() {
     const [isConnected, setConnected] = useState(false);
@@ -23,7 +24,7 @@ function App() {
     const [currentPage, changeCurrentPage] = useState(0);
 
     // ################################################################################################################
-    const {data, loading} = useFetch('https://randomuser.me/api/?results=23&nat=fr&inc=gender,name,email,login,phone,picture&noinfo');
+    const {data, loading} = useFetch('https://randomuser.me/api/?results=23&nat=fr&inc=gender,name,email,login,phone,picture,info');
 
 
     const handleConnect = () => {      console.log("handle connect");
@@ -80,6 +81,18 @@ function App() {
                                 <ProfileEditor />
                             </Route>*/}
 
+{/*                            ROUTES WITH PARAMS :                    */}
+                            <Route path='/member/:id'>
+                                <ShowProfile />
+                            </Route>
+
+{/*                            <Route path='/post/:id'>
+                                <Post />
+                            </Route>*/}
+
+
+
+{/*                            404 ERROR :                    */}
                             <Route path=''>
                                 <NotFound />
                             </Route>
