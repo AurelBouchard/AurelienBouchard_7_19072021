@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-export default function TCP_Access({className}) {
+export default function AccessToFlow({className}) {
   return (
       <div className={className}>
           <Link to='/'

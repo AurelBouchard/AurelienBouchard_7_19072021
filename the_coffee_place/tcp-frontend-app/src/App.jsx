@@ -24,7 +24,7 @@ function App() {
     const [currentPage, changeCurrentPage] = useState(0);
 
     // ################################################################################################################
-    const {data, loading} = useFetch('https://randomuser.me/api/?results=23&nat=fr&inc=gender,name,email,login,phone,picture,info');
+    const {data, loading} = useFetch('https://randomuser.me/api/?results=23&nat=fr&inc=gender,name,email,login,phone,picture');
 
 
     const handleConnect = () => {      console.log("handle connect");

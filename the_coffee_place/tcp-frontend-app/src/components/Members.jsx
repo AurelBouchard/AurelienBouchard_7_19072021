@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-import TCP_Access from './TCP_Access'
+import AccessToFlow from './AccessToFlow'
 
 
 
@@ -26,7 +26,7 @@ export default function Members({data, loading}) {
                                <div className="m-4 flex flex-col">
                                    <p className="text-2xl">{fakeUser.name.first}</p>
                                    <p>{fakeUser.name.last}</p>
-                                   <p className="mt-4">Alias {fakeUser.login.username}</p>
+                                   <p className="mt-4">Alias {fakeUser.login.username.slice(0,-3)}</p>
                                </div>
                             </Link>
                         );
@@ -34,7 +34,7 @@ export default function Members({data, loading}) {
                 </div>
             )}
 
-            <TCP_Access className={"fixed bottom-10 right-10 md:right-32 lg:right-60"}/>
+            <AccessToFlow className={"fixed bottom-10 right-10 md:right-32 lg:right-60"}/>
 
         </div>
     )
