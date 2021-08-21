@@ -53,7 +53,7 @@ function App() {
 
 
     return (
-            <div className="App bg-blue-100 pt-16 lg:pt-32">
+            <div className="App bg-blue-100 pt-16 lg:pt-32l">
                 {askForSubscription ? <CreateAccount /> : null}
                 {(!isConnected && !askForSubscription) ?
                     <Connexion

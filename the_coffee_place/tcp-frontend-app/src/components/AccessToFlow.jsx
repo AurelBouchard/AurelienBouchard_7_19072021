@@ -9,9 +9,10 @@ export default function AccessToFlow({className}) {
               className=""
           >
               <img
-                  className="rounded-xl bg-yellow-400"
+                  className="rounded-xl bg-yellow-400 active:translate-y-1 transform transition
+                focus:outline-none focus:ring focus:ring-offset-2 focus:ring-coffee focus:ring-offset-foam"
                   src="src/assets/coffee-cup-192.png"
-                  alt="retours au fil de discussion"
+                  alt="retour au fil de discussion"
                   width={50} height={50}
               />
 

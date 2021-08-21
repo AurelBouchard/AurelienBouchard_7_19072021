@@ -1,11 +1,11 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import Input from "./TCP_input";
-import {Button} from "@material-tailwind/react";
+import Button from './TCP_button'
 
 export default function ProfileEditor() {
     return (
-        <div className="">
+        <div className="text-coffee-dark">
             <div className="editor flex flex-col pt-4 md:p-8 mx-auto items-center
             md:flex-row flex-wrap md:justify-center md:max-w-2xl">
                 <img
@@ -31,22 +31,14 @@ export default function ProfileEditor() {
                 <div className="admin flex flex-col m-4 mx-16 md:mx-4 md:w-full">
                     <p>Gestion du compte :</p>
                     <div className="md:flex md:flex-row md:justify-around">
-                        <button className="bg-pink-300" onClick={()=>{alert("modal de changement de mdp")}}>Changer le mot de passe</button>
-                        <button className="bg-pink-300" onClick={()=>{alert("modal de suppression de compte")}}>Supprimer le compte</button>
+                        <Button text="Changer le mot de passe"></Button>
+                        <Button text="Supprimer le compte"></Button>
                     </div>
                 </div>
 
                 <div className="btns flex flex-row w-full justify-evenly my-8">
-                    <Button
-                        color="orange"
-                        buttonType="filled"
-                        size="4xl"
-                        ripple="dark">Annuler</Button>
-                    <Button
-                        color="orange"
-                        buttonType="filled"
-                        size="4xl"
-                        ripple="dark">Valider</Button>
+                    <Button text="Annuler"></Button>
+                    <Button text="Valider"></Button>
                 </div>
             </div>
         </div>
