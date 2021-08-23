@@ -47,7 +47,7 @@ exports.logIn = (req, res) => {
 };
 
 
-exports.unsubscribe = (req, res) => {
+exports.remove = (req, res) => {
     // this endpoint is not handled by frontend by now
     // in the future it will must provide a DELETE request from an authenticated and logged user
 

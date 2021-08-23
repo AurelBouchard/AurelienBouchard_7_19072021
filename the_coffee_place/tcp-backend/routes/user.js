@@ -9,8 +9,7 @@ router.post("/login", userController.logIn);
 
 router.post("/signup", userController.signUp);
 
-// bonus : RGPD compliant endpoint
-router.delete('/deluser/:id', auth, userController.unsubscribe);
+router.delete('/deluser/:id', userController.remove);//auth
 
 
 module.exports = router;

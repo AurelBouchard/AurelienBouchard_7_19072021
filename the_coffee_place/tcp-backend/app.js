@@ -16,14 +16,14 @@ const app = express();
 
 const connectToDB = require('./db_management/connection');
 const prepareDB = require('./db_management/setup');
-let connectionIsOk = false;
+//let connectionIsOk = false;
 
 // connecting to SQL using sequelize
-connectToDB();
+//connectToDB();
 
 // create tables if not exist
- if (connectionIsOk) {prepareDB()}; // else {return};
-
+//if (connectionIsOk) {prepareDB()}; // else {return};
+prepareDB();
 
 
 app.use((req, res, next) => {
