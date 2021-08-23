@@ -4,7 +4,6 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
-// SEQUELIZE ?
 
 const postRoutes = require('./routes/post');
 const userRoutes = require('./routes/user');
@@ -15,14 +14,14 @@ const dotenv = require('dotenv');
 
 const app = express();
 
-const connectToDB = require('./util/db_connection');
-const prepareDB = require('./util/db_setup');
+const connectToDB = require('./db_management/connection');
+const prepareDB = require('./db_management/setup');
 
 // connecting to SQL using sequelize
 connectToDB();
 
 // create tables if not exist
-//prepareDB();
+prepareDB();
 
 
 app.use((req, res, next) => {

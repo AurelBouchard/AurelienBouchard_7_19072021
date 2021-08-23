@@ -1,5 +1,4 @@
-const sequelize = require('../util/database');
-
+const sequelize = require('./sequelize');
 
 async function connectToDB() {
     try {
@@ -8,6 +7,6 @@ async function connectToDB() {
     } catch (error) {
         console.error('Unable to connect to the database:\n', error);
     }
-};
+}
 
 module.exports = connectToDB;
