@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-import AccessToFlow from './AccessToFlow'
+import AccessToWall from './AccessToWall'
 
 
 
@@ -40,7 +40,7 @@ export default function Members({data, loading}) {
                 </div>
             )}
 
-            <AccessToFlow className={"fixed bottom-10 right-10 md:right-32 lg:right-60"}/>
+            <AccessToWall className={"fixed bottom-10 right-10 md:right-32 lg:right-60"}/>
 
         </div>
     )

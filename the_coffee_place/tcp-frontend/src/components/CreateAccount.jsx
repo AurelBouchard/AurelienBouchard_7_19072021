@@ -14,10 +14,7 @@ import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, val
 import {Input} from "@material-tailwind/react";
 
 
-function CreateAccount() {
-    const cancelRef = useRef();
-    const pseudoRef = useRef();
-    const captchaRef = useRef();
+const CreateAccount = ({setAskForSubscription}) => {
 
     useEffect(() => {
         document.title = "Inscription";
@@ -40,11 +37,7 @@ function CreateAccount() {
                                 color="yellow"
                                 placeholder="Pseudo"
                                 iconName="account_circle"
-                                ref={pseudoRef}
                             />
-                            <Tooltips placement="top" ref={pseudoRef}>
-                                <TooltipsContent>Tel que l'on vous appelle</TooltipsContent>
-                            </Tooltips>
                         </div>
                         <div className="mb-8 px-4">
                             <InputIcon
@@ -79,11 +72,7 @@ function CreateAccount() {
                                 type="text"
                                 color="yellow"
                                 placeholder="Copiez le captcha"
-                                ref={captchaRef}
                             />
-                            <Tooltips placement="top" ref={captchaRef}>
-                                <TooltipsContent>Anti robot</TooltipsContent>
-                            </Tooltips>
                         </div>
                     </CardBody>
                     <CardFooter>
@@ -101,13 +90,10 @@ function CreateAccount() {
                                 buttonType="filled"
                                 size="4xl"
                                 ripple="dark"
-                                ref={cancelRef}
+                                onClick={() =>{ setAskForSubscription(false); }}
                             >
                                 Annuler
                             </Button>
-                            <Tooltips placement="top" ref={cancelRef}>
-                                <TooltipsContent>Revenir à l'écran de connection</TooltipsContent>
-                            </Tooltips>
                         </div>
                     </CardFooter>
                 </Card>

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {Button} from "@material-tailwind/react";
-import AccessToFlow from "./AccessToFlow";
+import AccessToWall from "./AccessToWall";
 
 export default function notFound() {
     return (
@@ -18,7 +18,7 @@ export default function notFound() {
                     </p>
                 </div>
 
-                <AccessToFlow className={"fixed bottom-32"}/>
+                <AccessToWall className={"fixed bottom-32"}/>
             </div>
     )
 };

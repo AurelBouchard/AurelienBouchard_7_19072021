@@ -1,10 +1,10 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-export default function AccessToFlow({className}) {
+export default function AccessToWall({className}) {
   return (
       <div className={className}>
-          <Link to='/'
+          <Link to='/wall'
               title="The Coffee Place"
               className=""
           >

@@ -18,7 +18,7 @@ const fakePosts = [
             "D'autres formes peuvent être qualifiées de « rondes » : les surfaces et solides dont certaines sections planes sont des cercles (cylindres, cônes, tore, anneau, etc.)"}
 ]
 
-export default function Flow() {
+export default function Wall() {
     return (
         <div className="mx-auto pb-8 w-5/6 max-w-3xl cursor-default">
             <Redactor />

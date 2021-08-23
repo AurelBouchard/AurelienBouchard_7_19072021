@@ -10,7 +10,7 @@ import {H1,H2,H3,H4,H5,H6} from "./Headings.jsx";
 
 
 
-const Connexion = ({handleConnect, onChange, setAskForSubscription}) => {
+const Connection = ({handleConnect, onChange, setAskForSubscription}) => {
 
     return (
         <div className="flex flex-col justify-between items-center w-full h-auto min-h-screen">
@@ -46,7 +46,7 @@ const Connexion = ({handleConnect, onChange, setAskForSubscription}) => {
                                 placeholder="Mot de passe"
                                 iconName="lock"
                                 id="password"
-                                onChange={(e) =>{ onChange(e)}}
+                                onChange={ (e) => { onChange(e) } }
                             />
                         </div>
                     </CardBody>
@@ -72,7 +72,7 @@ const Connexion = ({handleConnect, onChange, setAskForSubscription}) => {
                     buttonType="filled"
                     size="4xl"
                     ripple="dark"
-                    onClick={() =>{ setAskForSubscription() }}
+                    onClick={() =>{ setAskForSubscription(true) }}
                 >
                     Créez un compte en 30 seconde !
                 </Button>
@@ -84,4 +84,4 @@ const Connexion = ({handleConnect, onChange, setAskForSubscription}) => {
     )
 }
 
-export default Connexion;
+export default Connection;
