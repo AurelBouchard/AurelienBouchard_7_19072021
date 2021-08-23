@@ -16,12 +16,14 @@ const app = express();
 
 const connectToDB = require('./db_management/connection');
 const prepareDB = require('./db_management/setup');
+let connectionIsOk = false;
 
 // connecting to SQL using sequelize
 connectToDB();
 
 // create tables if not exist
-prepareDB();
+ if (connectionIsOk) {prepareDB()}; // else {return};
+
 
 
 app.use((req, res, next) => {
@@ -39,3 +41,4 @@ app.use('/api/posts', postRoutes);    // / + /:id + /:id/like
 app.use('/api/auth', userRoutes);       // /api/auth/signup  +   /api/auth/login    +   /api/auth/unsubscribe
 
 module.exports = app;
+

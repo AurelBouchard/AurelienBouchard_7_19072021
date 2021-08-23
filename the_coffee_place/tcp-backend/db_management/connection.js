@@ -1,12 +1,19 @@
 const sequelize = require('./sequelize');
+const app = require("../app");
 
 async function connectToDB() {
-    try {
-        await sequelize.authenticate();
-        console.log('Connection to database has been established successfully.');
-    } catch (error) {
-        console.error('Unable to connect to the database:\n', error);
-    }
+    console.log('Connecting to database ...');
+
+        await sequelize.authenticate()
+            .then((result) => {
+                //console.log(result);
+                console.log("Connection is ok");
+                app.connectionIsOk = true;
+            })
+            .catch((err) => {
+                console.error("Unable to connect to the database : "+err.name+".\n"+err.parent.text);
+            })
+
 }
 
 module.exports = connectToDB;
