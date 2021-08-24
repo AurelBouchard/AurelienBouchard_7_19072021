@@ -3,7 +3,6 @@ const Post = require('../models/Post');
 
 
 exports.create = (req, res) => {
-
     User.findOne({where: {pseudo: req.body.author}})
         .then(author => {
             if (!author) {
@@ -14,7 +13,7 @@ exports.create = (req, res) => {
         })
         .then(() => {
             console.log("Post inserted")
-            res.status(201).json({message: "Post enregistré !"})
+            res.status(201).json({message: "Post enregistré"})
         })
         .catch(error => res.status(400).json({ error }));
 };
@@ -32,7 +31,7 @@ exports.like = (req, res) => {
                     // add userId in list of likers
                     $push: { usersLiked: req.body.userId}
                 })
-                .then( res.status(200).json({message: "post liked"}) )
+                .then( res.status(200).json({message: "post liké"}) )
                 .catch(error => res.status(404).json({ error }));
             break;
 
@@ -58,7 +57,7 @@ exports.like = (req, res) => {
                                     .then( res.status(200).json({message: "post is not disliked anymore"}) )
                                     .catch(error => res.status(404).json({ error }));
                             }
-                        } catch (err) {console.log(err | "this post is not disliked")};
+                        } catch (err) {console.log(err | "this post is not disliked")}
                     }
                 )
                 .catch(error => res.status(404).json({ error }));
@@ -71,16 +70,13 @@ exports.like = (req, res) => {
 
 exports.getAll = (req, res) => {
     Post.findAll({attributes:['datetime', 'text', 'author']})
-        .then(posts => {
-            console.log(posts)
-            res.status(200).json(posts)
-        })
+        .then(posts => res.status(200).json(posts))
         .catch(error => res.status(400).json({ error }));
 };
 
 
 exports.findById = (req, res) => {
-    Post.findOne({ _id: req.params.id })     //mongoose function
+    Post.findOne({where: {id: req.params.id} })
         .then(post => res.status(200).json(post))
         .catch(error => res.status(404).json({ error }));
 };
@@ -99,7 +95,18 @@ exports.findById = (req, res) => {
 
 
 exports.remove = (req, res) => {    // BY ADMIN ONLY
-    Post.deleteOne({_id: req.params.id})     //mongoose function
-        .then(()=> res.status(200).json({message:"Post supprimée "}))
-        .catch(error => res.status(400).json({ error }));
+    if (isNaN(req.params.index)) {
+        // when a pseudo is provided
+        Post.destroy({where: {author: req.params.index}})
+            .then(()=> { res.status(200).json({message: "Post(s) supprimé(s)"}); })
+            .catch(error => res.status(400).json({ error }));
+
+    } else {
+        // an id of post is provided
+        Post.destroy({where: {id: req.params.index}})
+            .then(()=> { res.status(200).json({message: "Post supprimé"}); })
+            .catch(error => res.status(400).json({ error }));
+    }
+
+
 };
