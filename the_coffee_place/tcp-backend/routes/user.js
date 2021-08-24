@@ -12,4 +12,10 @@ router.post("/signup", userController.signUp);
 router.delete('/deluser/:id', userController.remove);//auth
 
 
+
+
+
+
+
+
 module.exports = router;

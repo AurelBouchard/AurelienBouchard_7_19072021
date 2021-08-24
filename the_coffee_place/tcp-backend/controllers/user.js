@@ -1,22 +1,36 @@
 const User = require('../models/User.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+//const sequelize = require('../db_management/sequelize');
+
 
 
 exports.signUp = (req, res) => {
+
     if (!isPswOk(req.body.password)) {
-        res.status(400).json({message: "Mot de passe trop faible"});
-        return 0}
+            res.status(400).json({message: "Mot de passe trop faible"});
+            return 0}
+
     bcrypt.hash(req.body.password, 10)
         .then(hash =>{
-            const user = new User({
+
+            const newUser = User.build({
+                pseudo: req.body.pseudo,
                 email: req.body.email,
                 password: hash
             });
-            user.save( ) // handle here the duplicate email :function (err) {console.log(err);}
-                // https://www.npmjs.com/package/mongoose-unique-validator
-                .then(() => res.status(201).json({message: "Le nouvel utilisateur a été créé !"}))
-                .catch(error => res.status(400).json({error}));
+
+            console.log("Try create : "+req.body.pseudo+" / "+req.body.email+" / "+hash);
+
+            newUser.save()
+                .then(() => {
+                    console.log("User created.")
+                    res.status(201).json({message: "Le nouvel utilisateur a été créé !"})
+                })
+                .catch(err => {
+                    console.log("Unable to create user: \n"+err.name+".\n"+err.parent.text)
+                    res.status(400).json({err});
+                });
         })
         .catch(error => res.status(500).json({error}));
 };
