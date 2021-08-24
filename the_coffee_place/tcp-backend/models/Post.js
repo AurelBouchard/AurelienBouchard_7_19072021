@@ -12,10 +12,10 @@ const Post = sequelize.define("Post", {
         type: Sequelize.DATE,       // DATE = DATETIME for mysql
         allowNull: false,
     },
-/*    author: {                     // foreign key in SQL : UserId
+    author: {                       // used to quicker the frontend jobs
         type: Sequelize.STRING,     // STRING = VARCHAR(255)
         allowNull: false,
-    },*/
+    },
     text: {
         type: Sequelize.TEXT,
         allowNull: false,

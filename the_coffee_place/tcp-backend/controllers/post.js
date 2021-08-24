@@ -3,7 +3,6 @@ const Post = require('../models/Post');
 
 
 exports.create = (req, res) => {
-    // body contains 2 keys : { "post" : {post},  "author" : "pseudo" }
 
     User.findOne({where: {pseudo: req.body.author}})
         .then(author => {
@@ -11,7 +10,7 @@ exports.create = (req, res) => {
                 console.log("User not found");
                 return res.status(400).json({error: "Utilisateur non trouvé."});
             }
-            author.createPost(req.body.post);
+            author.createPost(req.body);
         })
         .then(() => {
             console.log("Post inserted")
@@ -71,8 +70,11 @@ exports.like = (req, res) => {
 
 
 exports.getAll = (req, res) => {
-    Post.find()     //mongoose function
-        .then(posts => res.status(200).json(posts))
+    Post.findAll({attributes:['datetime', 'text', 'author']})
+        .then(posts => {
+            console.log(posts)
+            res.status(200).json(posts)
+        })
         .catch(error => res.status(400).json({ error }));
 };
 
