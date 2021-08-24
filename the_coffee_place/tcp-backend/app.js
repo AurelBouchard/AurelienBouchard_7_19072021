@@ -5,8 +5,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const postRoutes = require('./routes/post');
 const userRoutes = require('./routes/user');
+const memberRoutes = require('./routes/member');
+const postRoutes = require('./routes/post');
 const path = require('path');
 
 const dotenv = require('dotenv');
@@ -39,6 +40,7 @@ app.use(bodyParser.json()); // DOES NOT HANDLE MULTIPART BODIES !!
 //app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/posts', postRoutes);    // / + /:id + /:id/like
 app.use('/api/auth', userRoutes);       // /api/auth/signup  +   /api/auth/login    +   /api/auth/unsubscribe
+app.use('/api/members', memberRoutes);       // /api/members  +   /api/members/:pseudo
 
 module.exports = app;
 
