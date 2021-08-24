@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken');
 exports.getAll = (req, res) => {
     User.findAll({attributes:['pseudo', 'firstName', 'lastName', 'email', 'about', 'createdAt']})
         .then(allMembers => {
-            console.log(allMembers)
+            //console.log(allMembers)
 
             res.status(200).json({allMembers});
         })

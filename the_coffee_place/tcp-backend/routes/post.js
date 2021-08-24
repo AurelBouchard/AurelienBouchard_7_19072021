@@ -5,20 +5,23 @@ const auth = require('../middleware/auth');
 //const fileManager = require('../middleware/multer-config');       // next stage feature
 const postController = require('../controllers/post');
 
+//#########################################################
+//    ADD auth MIDDLEWARE TO ALL ROUTES !!!!!!
+//#########################################################
 
 // POST METHODS : Create post
-router.post('/',    auth,   postController.create);    //fileManager,
+router.post('/',       postController.create);    //fileManager,
 
 // GET METHODS : Reach all or one post
-router.get('/',     auth,   postController.getAll);
-router.get('/:id',  auth,   postController.findById);
+router.get('/',        postController.getAll);
+router.get('/:id',    postController.findById);
 
 // PUT METHOD : Update post data
-router.put('/:id/like', auth,   postController.like);
+router.put('/:id/like',    postController.like);
 //router.put('/:id',  auth,   postController.modify);       // add links to comments ? or comments ?
 
 // DELETE METHOD : Delete post by admin only
-router.delete('/:id',   auth,   postController.remove);
+router.delete('/:id',      postController.remove);
 
 
 module.exports = router;

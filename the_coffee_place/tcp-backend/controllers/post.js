@@ -1,16 +1,22 @@
+const User = require('../models/User.js');
 const Post = require('../models/Post');
 
 
 exports.create = (req, res) => {
-    const postObject = JSON.parse(req.body.post);
-    //delete req.body._id;    // will be replaced by the mongodb one
-    let post = new Post({
-        ...postObject,
-        //imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
-    });
+    // body contains 2 keys : { "post" : {post},  "author" : "pseudo" }
 
-    post.save()     //mongoose function
-        .then(() => res.status(201).json({ message: "Post enregistrée !"}))
+    User.findOne({where: {pseudo: req.body.author}})
+        .then(author => {
+            if (!author) {
+                console.log("User not found");
+                return res.status(400).json({error: "Utilisateur non trouvé."});
+            }
+            author.createPost(req.body.post);
+        })
+        .then(() => {
+            console.log("Post inserted")
+            res.status(201).json({message: "Post enregistré !"})
+        })
         .catch(error => res.status(400).json({ error }));
 };
 
