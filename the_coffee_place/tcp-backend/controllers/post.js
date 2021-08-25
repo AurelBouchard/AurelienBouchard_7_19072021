@@ -36,35 +36,35 @@ exports.like = (req, res) => {
     if (req.body.liked) {     // user = liker
         let liker = 0;
 
-        console.log("finding who is the liker");
+        console.log("\nfinding who is the liker");
         User.findOne( {where: {pseudo: req.body.pseudo} } )
             .then(user => {
                 liker = user.id;
-                console.log("getting the table PostsLikedById"+liker);
+                console.log("\ngetting the table PostsLikedById"+liker);
                 return  sequelize.define("PostsLikedById" + liker);
             })
             .then(table => {
-                console.log("adding the postId ("+req.params.id+") to the list of post liked by this user");
-                return table.create({postId: parseInt(req.params.id)})
+                console.log("\nadding the postId ("+req.params.id+") to the list of posts liked by this user");
+                return table.create({attributes: {postId: parseInt(req.params.id)}})   //  ??????????????????????????? ne fonctionne pas, mais pas d'erreur
             })
             .then(() => {
-                console.log("getting the table LikersOfPost"+req.params.id);
+                console.log("\ngetting the table LikersOfPost"+req.params.id);
                 return sequelize.define("LikersOfPost"+req.params.id);
-
             })
             .then(table => {
-                console.log("adding the userId ("+liker+") to the list of user who like this post");
-                return table.create({userId: liker})
+                console.log("\nadding the userId ("+liker+") to the list of user who like this post");
+                return table.create({attributes: {userId: liker}})   //  ??????????????????????????? ne fonctionne pas, mais pas d'erreur
             })
             .then(() => {
-                console.log("finding the post with its id ("+req.params.id+")");
-                return Post.findOne({where: {id: req.params.id}}, {attributes: ['id','nOfLike']})
+                console.log("\nfinding the post with its id ("+req.params.id+")");
+                return Post.findOne({where: {id: req.params.id}})//, {attributes: ['id','nOfLike']})
             })
             .then(post => {
-                console.log("increment nOfLike of this post");
+                console.log("\nincrement nOfLike of this post");
                 post.increment('nOfLike');
-
-                console.log("end of 'like' procedure")
+            })
+            .then(() => {
+                console.log("\nend of 'like' procedure")
                 return res.status(200).json({message: "Post liké"});
             })
             .catch(error => {
