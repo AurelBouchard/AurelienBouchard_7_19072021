@@ -1,5 +1,9 @@
 const User = require('../models/User.js');
 const Post = require('../models/Post');
+const sequelize = require("../db_management/sequelize");
+const queryInterface = sequelize.getQueryInterface();
+const LikersOfPost = require("../models/LikersOfPost");
+const {Sequelize} = require("sequelize");
 
 
 exports.create = (req, res) => {
@@ -9,7 +13,15 @@ exports.create = (req, res) => {
                 console.log("User not found");
                 return res.status(400).json({error: "Utilisateur non trouvé."});
             }
-            author.createPost(req.body);
+            return author.createPost(req.body);
+        })
+        .then((post)=>{
+            // then each post have its own list of likers :
+            queryInterface.createTable(
+                "LikersOfPost"+post.id,
+                LikersOfPost,
+                {comment:'Created with the user'}
+            )
         })
         .then(() => {
             console.log("Post inserted")
@@ -20,56 +32,63 @@ exports.create = (req, res) => {
 
 
 exports.like = (req, res) => {
-    const opinion = req.body.like;  // 1 = like, 0 = unquote
-    switch(opinion) {                               // transform to if ---------------------
-        case 1:     // post is liked
-            Post.updateOne({ _id: req.params.id },     //mongoose function
-                {
-                    // increment N of likers
-                    $inc: { likes: 1},
 
-                    // add userId in list of likers
-                    $push: { usersLiked: req.body.userId}
-                })
-                .then( res.status(200).json({message: "post liké"}) )
-                .catch(error => res.status(404).json({ error }));
-            break;
+    if (req.body.liked) {     // user = liker
+        let liker = 0;
 
-        case 0:     // post is not liked or disliked
-            Post.findOne({ _id: req.params.id })     //mongoose function
-                .then( post =>
-                    {   // check if post were liked or disliked
-                        try {   // if post were liked
-                            if(post.usersLiked.includes(req.body.userId)) {
-                                post.updateOne(
-                                    // decrement N of likers then remove userId in list of likers
-                                    { $inc: { likes: -1}, $pull: { usersLiked: req.body.userId} })
-                                    .then( res.status(200).json({message: "post is not liked anymore"}) )
-                                    .catch(error => res.status(404).json({ error }));
-                            }
-                        } catch (err) {console.log(err | "this post is not liked")}
+        console.log("finding who is the liker");
+        User.findOne( {where: {pseudo: req.body.pseudo} } )
+            .then(user => {
+                liker = user.id;
+                console.log("getting the table PostsLikedById"+liker);
+                return  sequelize.define("PostsLikedById" + liker);
+            })
+            .then(table => {
+                console.log("adding the postId ("+req.params.id+") to the list of post liked by this user");
+                return table.create({postId: parseInt(req.params.id)})
+            })
+            .then(() => {
+                console.log("getting the table LikersOfPost"+req.params.id);
+                return sequelize.define("LikersOfPost"+req.params.id);
 
-                        try {  // if post were disliked
-                            if(post.usersDisliked.includes(req.body.userId)) {
-                                post.updateOne(
-                                    // decrement N of dislikers then remove userId in list of dislikers
-                                    { $inc: { dislikes: -1}, $pull: { usersDisliked: req.body.userId} })
-                                    .then( res.status(200).json({message: "post is not disliked anymore"}) )
-                                    .catch(error => res.status(404).json({ error }));
-                            }
-                        } catch (err) {console.log(err | "this post is not disliked")}
-                    }
-                )
-                .catch(error => res.status(404).json({ error }));
-            break;
+            })
+            .then(table => {
+                console.log("adding the userId ("+liker+") to the list of user who like this post");
+                return table.create({userId: liker})
+            })
+            .then(() => {
+                console.log("finding the post with its id ("+req.params.id+")");
+                return Post.findOne({where: {id: req.params.id}}, {attributes: ['id','nOfLike']})
+            })
+            .then(post => {
+                console.log("increment nOfLike of this post");
+                post.increment('nOfLike');
 
-    }
+                console.log("end of 'like' procedure")
+                return res.status(200).json({message: "Post liké"});
+            })
+            .catch(error => {
+                console.log("error while creating like :");
+                console.log(error)
+                res.status(400).json({error});
+            })
+
+        } else {    // user = not a liker anymore
+
+                // remove id of post to list of liked by user
+
+                // remove userId to list of post likers
+
+                // decrement
+
+
+        }
 
 };
 
 
 exports.getAll = (req, res) => {
-    Post.findAll({attributes:['datetime', 'text', 'author']})
+    Post.findAll({attributes:['datetime', 'text', 'author']})      // must Post.replaced by findAndCountAll() https://sequelize.org/master/manual/model-querying-finders.html#-code-findandcountall--code-
         .then(posts => res.status(200).json(posts))
         .catch(error => res.status(400).json({ error }));
 };

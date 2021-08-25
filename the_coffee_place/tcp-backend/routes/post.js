@@ -21,7 +21,7 @@ router.put('/:id/like',    postController.like);
 //router.put('/:id',  auth,   postController.modify);       // add links to comments ? or comments ?
 
 // DELETE METHOD : Delete post by admin only
-router.delete('/:index',      postController.remove);   // index can bi id of post to be removed or pseudo of author
+router.delete('/:index',      postController.remove);   // index can be id of post to be removed or pseudo of author
 
 
 module.exports = router;

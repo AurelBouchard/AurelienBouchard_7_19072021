@@ -20,6 +20,14 @@ const Post = sequelize.define("Post", {
         type: Sequelize.TEXT,
         allowNull: false,
     },
+    nOfLike: {
+        type: Sequelize.INTEGER,
+        defaultValue:0,
+    },
+    nOfComment: {
+        type: Sequelize.INTEGER,
+        defaultValue:0,
+    }
 });
 
  module.exports = Post;

@@ -5,16 +5,11 @@ const userController = require('../controllers/user');
 const auth = require('../middleware/auth');
 
 
-router.post("/login", userController.logIn);
-
 router.post("/signup", userController.signUp);
 
+router.post("/login", userController.logIn);
+
 router.delete('/deluser/:id', userController.remove);//auth
-
-
-
-
-
 
 
 

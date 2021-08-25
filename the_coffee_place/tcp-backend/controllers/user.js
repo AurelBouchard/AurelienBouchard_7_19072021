@@ -1,7 +1,10 @@
+const sequelize = require('../db_management/sequelize');
+const queryInterface = sequelize.getQueryInterface();
 const User = require('../models/User.js');
+const PostsLikedById = require('../models/PostsLikedById');
+const CommentsLikedById = require('../models/CommentsLikedById');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-//const sequelize = require('../db_management/sequelize');
 
 
 
@@ -14,6 +17,7 @@ exports.signUp = (req, res) => {
     bcrypt.hash(req.body.password, 10)
         .then(hash =>{
 
+            // preparing and create new user
             const newUser = User.build({
                 pseudo: req.body.pseudo,
                 email: req.body.email,
@@ -23,14 +27,31 @@ exports.signUp = (req, res) => {
             console.log("Try create : "+req.body.pseudo+" / "+req.body.email+" / "+hash);
 
             newUser.save()
-                .then(() => {
-                    console.log("User created.")
-                    res.status(201).json({message: "Le nouvel utilisateur a été créé !"})
+                .then((user) => {
+                    // each user have 2 tables dedicated : liked posts and liked comments
+                    queryInterface.createTable(
+                        "PostsLikedById"+user.dataValues.id,
+                        PostsLikedById,
+                        {comment:'Created with the user'}
+                    )
+                    queryInterface.createTable(
+                        "CommentsLikedById"+user.dataValues.id,
+                        CommentsLikedById,
+                        {comment:'Created with the user'}
+                    )
+                    console.log("User "+user.dataValues.id+" created.");
+                    res.status(201).json({message: "Le nouvel utilisateur a été créé !"});
                 })
                 .catch(err => {
-                    console.log("Unable to create user: \n"+err.name+".\n"+err.parent.text)
+                    try {
+                        console.log("Unable to create user: \n" + err.name + ".\n" + err.parent.text);
+                    } catch {
+                        console.log(err);
+                    }
+
                     res.status(400).json({err});
                 });
+
         })
         .catch(error => res.status(500).json({error}));
 };
