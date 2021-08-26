@@ -103,8 +103,8 @@ function App() {
                             </Route>*/}
 
 {/*                            ROUTES WITH PARAMS :                    */}
-                                <Route path='/member/:id'>
-                                    <ShowProfile />
+                                <Route path='/member/:pseudo'>
+                                    <ShowProfile pseudo={"toto"}/>
                                 </Route>
 
 {/*                            <Route path='/post/:id'>

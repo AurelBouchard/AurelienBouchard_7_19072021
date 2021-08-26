@@ -3,9 +3,9 @@ import {Link, useParams} from 'react-router-dom';
 import {Button} from "@material-tailwind/react";
 import {useFetch} from "./useFetch";
 
-export default function ShowProfile() {
-    const {seed} = useParams();
-    const {data, loading} = useFetch(`https://randomuser.me/api/?seed=${seed}`);
+export default function ShowProfile({pseudo}) {
+
+    const {data, loading} = useFetch(`http://localhost:4000/api/members/${pseudo}`);
 
     return (
         <div className="font-EXO text-coffee-dark">
@@ -23,15 +23,15 @@ export default function ShowProfile() {
                     </div>
 
                     <div className="names flex flex-col m-4 md:m-8">
-                        <p className="mb-8 handWritten text-4xl md:text-5xl">{data.results[0].login.username}</p>
+                        <p className="mb-8 handWritten text-4xl md:text-5xl">{data.pseudo}</p>
                         <p className="text-xl">Nom :</p>
-                        <p className="mb-8 text-2xl">{data.results[0].name.first} {data.results[0].name.last}</p>
+                        <p className="mb-8 text-2xl">{data.firstName} {data.lastName}</p>
                         <p className="text-xl">Pour me contacter :</p>
-                        <p className="mb-8 text-xl">{data.results[0].email}</p>
+                        <p className="mb-8 text-xl">{data.email}</p>
                     </div>
 
                     <div className="intro flex flex-col m-4 md:w-full ">
-                        <p className="handWritten text-2xl mx-auto">J'aime l'humour, la preuve, je suis de la compta !</p>
+                        <p className="handWritten text-2xl mx-auto">{data.about}</p>
                     </div>
 
                     <div className="btns flex flex-row w-full justify-evenly my-8">
@@ -39,7 +39,7 @@ export default function ShowProfile() {
                             color="orange"
                             buttonType="filled"
                             size="4xl"
-                            ripple="dark">Retour</Button>
+                            ripple="dark">Retour</Button> {/*   use history     */}
                     </div>
                 </div>
             )}

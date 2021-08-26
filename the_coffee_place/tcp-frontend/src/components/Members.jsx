@@ -20,7 +20,7 @@ export default function Members() {
                         (data.allMembers).map(({id, pseudo, firstName, lastName}) => {      // ajouter la photo dans la database  !!!!!!!!!!!
                             let key = uuidv4();
                             return (
-                                <Link to={'/wall'}          // a changer ------------------
+                                <Link to={`/member/${pseudo}`}          // a changer ------------------
                                       className="m-2 p-3 flex flex-col md:flex-row rounded-3xl bg-white font-EXO
                                       active:translate-y-1 transform transition
                                       focus:outline-none focus:ring focus:ring-offset-2 focus:ring-coffee focus:ring-offset-foam
