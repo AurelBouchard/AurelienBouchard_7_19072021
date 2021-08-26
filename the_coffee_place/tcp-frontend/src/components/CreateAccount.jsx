@@ -79,7 +79,7 @@ const CreateAccount = ({setAskForSubscription}) => {
                             email:values.email
                         }
 
-                        axios.post('http://localhost:4000/api/auth/signin', payload)
+                        axios.post('http://localhost:4000/api/auth/signup', payload)
                             .then(function (response) {
                                 //console.log(response.data);
                                 console.log(response.status);
