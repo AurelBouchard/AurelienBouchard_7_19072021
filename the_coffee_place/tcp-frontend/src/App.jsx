@@ -6,15 +6,21 @@ import 'tailwindcss/tailwind.css';
 import "@material-tailwind/react/tailwind.css";
 
 
-import Connexion from './components/Connection';
+import Connection from './components/Connection';
 import CreateAccount from "./components/CreateAccount";
 import Wall from "./components/Wall";
 import Members from "./components/Members";
+import ShowProfile from "./components/ShowProfile";
 import ProfileEditor from "./components/ProfileEditor";
 import NotFound from "./components/NotFound";
 
 import Navbar from './components/TCP_navbar'
-import ShowProfile from "./components/ShowProfile";
+
+//import {} from 'dotenv/config';
+//import path from 'path'
+//import { config } from 'dotenv';
+//config();
+
 
 function App() {
     const [isConnected, setConnected] = useState(false);
@@ -24,26 +30,23 @@ function App() {
     let history = useHistory();
 
 
-    function handleConnect() {     // console.log("handle connect");
-        if (filledName && filledPass) {
-            setConnected(true);
-            setAskForSubscription(false);
+/*    function handleSubmit() {     // console.log("handle connect");
+            //setConnected(true);
+            //setAskForSubscription(false);
             //alert("vous etes connecté !!");
             //history.push('/wall');
-        } else {
-            !isConnected ? alert("remplissez tout les champs svp") : setConnected(false);
-        }
-    };
+
+    };*/
 
 
-    const [filledName, setFilledName] = useState(false);
+/*    const [filledName, setFilledName] = useState(false);
     const [filledPass, setFilledPass] = useState(false);
     const handleConnectChange = (e) =>{   console.log("handle connect change");
         if (e.target.id === 'pseudo') {
             e.target.value.length === 0 ? setFilledName(false) : setFilledName(true)}
         if (e.target.id === 'password') {
             e.target.value.length === 0 ? setFilledPass(false) : setFilledPass(true)}
-    };
+    };*/
 
     function handleAskForSubscription(bool) {
         setAskForSubscription(bool);
@@ -67,9 +70,8 @@ function App() {
 
                                 <Route exact path='/login'>
                                     {!askForSubscription ?
-                                        <Connexion
-                                            handleConnect={handleConnect}
-                                            onChange={handleConnectChange}
+                                        <Connection
+                                            setConnected={setConnected}
                                             setAskForSubscription={handleAskForSubscription}
                                         />
                                         : <Redirect to='/signin'></Redirect>

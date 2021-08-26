@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link, useParams} from 'react-router-dom';
 import {Button} from "@material-tailwind/react";
-import {useFetch} from "./useFetch";
+import {useFetch} from "../utils/useFetch";
 
 export default function ShowProfile({pseudo}) {
 

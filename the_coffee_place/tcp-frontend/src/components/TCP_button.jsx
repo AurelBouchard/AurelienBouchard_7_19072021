@@ -1,8 +1,12 @@
 import React from "react";
 
-export default function Button({text}) {
+export default function Button({text, type, disabled, onSubmit, onClick}) {
     return (
             <button
+                type={type}
+                disabled={disabled}
+                //onSubmit={onSubmit}
+                onClick={onClick}
                 /*onClick={(e) => {e.preventDefault}}*/
                 className="bg-coffee text-cream p-4 pt-3 mb-2 font-EXO italic rounded-lg
                 hover:bg-coffee-dark hover:text-foam

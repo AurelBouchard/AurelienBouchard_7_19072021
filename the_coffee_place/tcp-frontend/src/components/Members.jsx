@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 
-import {useFetch} from "./useFetch";
+import {useFetch} from "../utils/useFetch";
 
 import AccessToWall from './AccessToWall'
 
