@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
+
+import {useFetch} from "./useFetch";
 
 import Redactor from "./Redactor";
 import Post from "./Post";
 import ScrollToTop from "./ScrollToTop";
 
-import {useFetch} from "./useFetch";
 
 
 /*const fakePosts = [
@@ -29,10 +31,11 @@ export default function Wall() {
             <Redactor />
             <>
                 {loading ? "loading ..." : (
-                    data.map(({id, datetime, text, author   }) => {
+                    data.map(({datetime, text, author   }) => {
+                        let key = uuidv4();
                         return (
                             <Post
-                                key={id}
+                                key={key}
                                 date={datetime}
                                 clock={datetime}
                                 liked={true}

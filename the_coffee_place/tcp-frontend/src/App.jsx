@@ -9,7 +9,6 @@ import "@material-tailwind/react/tailwind.css";
 import Connexion from './components/Connection';
 import CreateAccount from "./components/CreateAccount";
 import Wall from "./components/Wall";
-import {useFetch} from "./components/useFetch";
 import Members from "./components/Members";
 import ProfileEditor from "./components/ProfileEditor";
 import NotFound from "./components/NotFound";
@@ -23,9 +22,6 @@ function App() {
     const pages = ['connect', 'subscribe', 'coffeePlace', 'profile'];
     const [currentPage, changeCurrentPage] = useState(0);
     let history = useHistory();
-
-    // ################################################################################################################
-    const {data, loading} = useFetch('https://randomuser.me/api/?results=23&nat=fr&inc=gender,name,email,login,phone,picture');
 
 
     function handleConnect() {     // console.log("handle connect");
@@ -96,7 +92,7 @@ function App() {
                                     <Wall />
                                 </Route>
                                 <Route exact path='/members'>
-                                    <Members data={data} loading={loading} />
+                                    <Members />
                                 </Route>
                                 <Route exact path='/myprofile'>
                                     <ProfileEditor />
