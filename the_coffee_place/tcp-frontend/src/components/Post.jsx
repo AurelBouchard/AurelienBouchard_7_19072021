@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 
 
-export default function Post({date, clock, liked, fakeText, fakeUsername}) {
+export default function Post({date, clock, liked, text, username}) {
 
     return (
         <>
@@ -12,7 +12,7 @@ export default function Post({date, clock, liked, fakeText, fakeUsername}) {
                     /*        will handle large view with router.redirect and router.parameters     */
                     alert('show full')}}>
                     <p className="handWritten text-2xl
-                    overflow-ellipsis overflow-hidden whitespace-pre-line">{fakeText}</p>
+                    overflow-ellipsis overflow-hidden whitespace-pre-line">{text}</p>
                 </div>
 
                 <div className="footer flex flex-row justify-between items-end">
@@ -26,7 +26,7 @@ export default function Post({date, clock, liked, fakeText, fakeUsername}) {
                     </div>
 
                     <div className="mt-2 flex flex-row flex-1 justify-end">
-                        <p className="handWritten text-2xl overflow-hidden overflow-ellipsis whitespace-nowrap h-8 pr-2 -mr-1">{fakeUsername}</p>
+                        <p className="handWritten text-2xl overflow-hidden overflow-ellipsis whitespace-nowrap h-8 pr-2 -mr-1">{username}</p>
                         <div className="cursor-pointer h-8 flex flex-col"
                              onClick={(e) => {
                             e.stopPropagation();

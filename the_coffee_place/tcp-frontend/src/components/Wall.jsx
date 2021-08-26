@@ -4,8 +4,10 @@ import Redactor from "./Redactor";
 import Post from "./Post";
 import ScrollToTop from "./ScrollToTop";
 
+import {useFetch} from "./useFetch";
 
-const fakePosts = [
+
+/*const fakePosts = [
     {key:"001", date:"17/08/2021", clock:"12:35:00", liked:true, username:"toto", post:"C'est l'histoire d'une sardine qui rentre dans un bar"},
     {key:"002", date:"", clock:"13:22:00", liked:true, username:"KeuV'1", post:"Hier je mais acheter une Mégane RS, en bonne étas ! Ces tros de la bombe cet baniol"},
     {key:"003", date:"", clock:"07:01:00", liked:false, username:"JP (de la compta)", post:"Quelqu'un sait où se trouve mon bureau ? je veux dire, à part moi."},
@@ -16,27 +18,43 @@ const fakePosts = [
             "Dans le plan euclidien, il s'agit du « rond » qui est associé en français au terme de cercle. Dans un plan non euclidien ou dans le cas de la définition d'une distance non euclidienne, la forme peut être plus complexe. Dans un espace de dimension quelconque, l'ensemble des points placés à une distance constante d'un centre est appelé sphère.\n" +
             "\n" +
             "D'autres formes peuvent être qualifiées de « rondes » : les surfaces et solides dont certaines sections planes sont des cercles (cylindres, cônes, tore, anneau, etc.)"}
-]
+]*/
 
 export default function Wall() {
+
+    const {data, loading} = useFetch('http://localhost:4000/api/posts');
+
     return (
         <div className="mx-auto pb-8 w-5/6 max-w-3xl cursor-default">
             <Redactor />
             <>
-                { fakePosts.map(({key, date, clock, liked, username, post}) =>{
-                    return (
-                        <Post
-                            key={key}
-                            date={date}
-                            clock={clock}
-                            liked={liked}
-                            fakeUsername={username}
-                            fakeText={post}/>
-                    )
-                })
-
-                }
+                {loading ? "loading ..." : (
+                    data.map(({id, datetime, text, author   }) => {
+                        return (
+                            <Post
+                                key={id}
+                                date={datetime}
+                                clock={datetime}
+                                liked={true}
+                                username={author}
+                                text={text}/>
+                        )
+                    })
+                )}
             </>
-
-        </div> );
+        </div>
+    );
 }
+
+/*
+{ fakePosts.map(({key, date, clock, liked, username, post}) =>{
+    return (
+        <Post
+            key={key}
+            date={date}
+            clock={clock}
+            liked={liked}
+            fakeUsername={username}
+            fakeText={post}/>
+    )})}
+    */
