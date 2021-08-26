@@ -15,7 +15,7 @@ import CardFooter from "@material-tailwind/react/CardFooter";
 
 
 
-const Connection = ({setConnected, setAskForSubscription}) => (
+const Connection = ({setConnected, setAskForSubscription, setCurrentUser}) => (
     // no return here ??????????
     <div className="flex flex-col justify-between items-center w-full h-auto min-h-screen">
         <div className="mb-8 md:hidden">
@@ -57,7 +57,9 @@ const Connection = ({setConnected, setAskForSubscription}) => (
                         .then(() => {
                             setConnected(true);
                             setAskForSubscription(false);
-                            console.log("Vous êtes connecté(e)")
+                            localStorage.setItem('tcp_user', values.pseudo)
+                            setCurrentUser(values.pseudo);
+                            console.log("Vous êtes connecté(e) en tant que "+values.pseudo)
                         })
                         .catch(err => {
                             console.log(err)

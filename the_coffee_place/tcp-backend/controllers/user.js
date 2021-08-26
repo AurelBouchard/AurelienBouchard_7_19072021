@@ -8,6 +8,17 @@ const jwt = require('jsonwebtoken');
 
 
 
+exports.getFullProfile = (req, res) => {
+	User.findOne({where: {pseudo: req.params.pseudo}})
+		.then(user => {
+			
+			return res.status(200).json({user});
+            
+		})
+		.catch(err =>  res.status(400).json({err}))
+};
+
+
 exports.signUp = (req, res) => {
 
     if (!isPswOk(req.body.password)) {

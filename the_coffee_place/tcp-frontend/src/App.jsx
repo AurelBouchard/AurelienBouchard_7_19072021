@@ -25,8 +25,8 @@ import Navbar from './components/TCP_navbar'
 function App() {
     const [isConnected, setConnected] = useState(false);
     const [askForSubscription, setAskForSubscription] = useState(false);
-    const pages = ['connect', 'subscribe', 'coffeePlace', 'profile'];
-    const [currentPage, changeCurrentPage] = useState(0);
+    const lastUser = localStorage.getItem('tcp_user');
+    const [currentUser, setCurrentUser] = useState(lastUser);
     let history = useHistory();
 
 
@@ -53,10 +53,13 @@ function App() {
     };
 
 
+
     return (
             <div className="App bg-blue-100 pt-16 lg:pt-32l">
                 <Router>
                     {!isConnected ?
+
+
                         <>
                             <Switch>
                                 <Route exact path='/signin'>
@@ -73,6 +76,7 @@ function App() {
                                         <Connection
                                             setConnected={setConnected}
                                             setAskForSubscription={handleAskForSubscription}
+                                            setCurrentUser={setCurrentUser}
                                         />
                                         : <Redirect to='/signin'></Redirect>
                                     }
@@ -97,7 +101,7 @@ function App() {
                                     <Members />
                                 </Route>
                                 <Route exact path='/myprofile'>
-                                    <ProfileEditor />
+                                    <ProfileEditor currentUser={currentUser} />
                                 </Route>
 
 {/*                            <Route exact path='/settings'>
