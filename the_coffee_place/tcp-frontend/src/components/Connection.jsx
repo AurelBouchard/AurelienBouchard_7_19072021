@@ -17,12 +17,21 @@ import CardFooter from "@material-tailwind/react/CardFooter";
 
 const Connection = ({setConnected, setAskForSubscription}) => (
     // no return here ??????????
-    <div>
+    <div className="flex flex-col justify-between items-center w-full h-auto min-h-screen">
+        <div className="mb-8 md:hidden">
+            <H2>The Coffee Place ...</H2>
+            <H3>... la salle de pause de Groupomania</H3>
+        </div>
+        <div className="h-0 md:mb-16 md:h-auto md:block overflow-hidden">
+            <H1>The Coffee Place ...</H1>
+            <H2>... la salle de pause de Groupomania</H2>
+        </div>
         <Formik
             initialValues={{ pseudo: '', password: '' }}
             validate={values => {
                 const errors = {};
                 if (!values.pseudo) { errors.pseudo = 'Champ requis'; }
+                if (!values.password) { errors.password = 'Champ requis'; }
                 return errors;
             }}
             onSubmit={(values, { setSubmitting }) => {
@@ -44,9 +53,13 @@ const Connection = ({setConnected, setAskForSubscription}) => (
                             console.log(response.config);
                             //setState( {data: response, loading: false} );
 
+                        })
+                        .then(() => {
                             setConnected(true);
                             setAskForSubscription(false);
-                        }).then().catch(err => {
+                            console.log("Vous êtes connecté(e)")
+                        })
+                        .catch(err => {
                             console.log(err)
                     });
 
@@ -57,14 +70,6 @@ const Connection = ({setConnected, setAskForSubscription}) => (
         >
             {({ isSubmitting }) => (
                 <Form>
-                    <div className="mb-8 md:hidden">
-                        <H2>The Coffee Place ...</H2>
-                        <H3>... la salle de pause de Groupomania</H3>
-                    </div>
-                    <div className="h-0 md:mb-16 md:h-auto md:block overflow-hidden">
-                        <H1>The Coffee Place ...</H1>
-                        <H2>... la salle de pause de Groupomania</H2>
-                    </div>
                     <div  className="mx-8 max-w-sm">
                         <Card>
                             <CardHeader color="yellow" size="lg">
@@ -73,11 +78,11 @@ const Connection = ({setConnected, setAskForSubscription}) => (
 
                             <CardBody>
                                 <div className="mt-4 mb-8 px-4">
-                                    <Field name="pseudo" placeholder="pseudo"/>
+                                    <Field name="pseudo" placeholder="pseudo" />
                                     <ErrorMessage name="pseudo" component="div" />
                                 </div>
                                 <div className="mb-4 px-4">
-                                    <Field type="password" name="password" />
+                                    <Field type="password" name="password" placeholder="mot_de_passe" />
                                     <ErrorMessage name="password" component="div" />
                                 </div>
                             </CardBody>
@@ -87,7 +92,6 @@ const Connection = ({setConnected, setAskForSubscription}) => (
                                         text="Se connecter"
                                         type="submit"
                                         disabled={isSubmitting}
-                                        //onSubmit={handleSubmit}
                                     >
                                     </Button>
                                 </div>
