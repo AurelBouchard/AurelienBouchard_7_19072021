@@ -3,7 +3,8 @@ import {Link, useParams} from 'react-router-dom';
 import {Button} from "@material-tailwind/react";
 import {useFetch} from "../utils/useFetch";
 
-export default function ShowProfile({pseudo}) {
+export default function ShowProfile() {
+    let {pseudo} = useParams();
 
     const {data, loading} = useFetch(`http://localhost:4000/api/members/${pseudo}`);
 

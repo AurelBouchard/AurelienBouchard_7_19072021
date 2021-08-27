@@ -45,11 +45,11 @@ export default function ProfileEditor({currentUser}) {
 
                             const payload = {
                                 //imgUrl:     data.user.imgUrl,
-                                pseudo:     data.user.pseudo,
-                                firstName:  data.user.firstName,
-                                lastName:   data.user.lastName,
-                                email:      data.user.email,
-                                about:      data.user.about
+                                pseudo:     values.pseudo,
+                                firstName:  values.firstName,
+                                lastName:   values.lastName,
+                                email:      values.email,
+                                about:      values.about
                             }
 
                             axios.put(`http://localhost:4000/api/auth/update/${data.user.id}`, payload)
@@ -68,8 +68,6 @@ export default function ProfileEditor({currentUser}) {
                                 .catch(err => {
                                     console.log(err)
                                 });
-
-
                             setSubmitting(false);
                         }, 400);
                     }}
@@ -91,15 +89,15 @@ export default function ProfileEditor({currentUser}) {
 
                                 <div className="names flex flex-col m-4 md:m-8">
                                     {/*<Input type={"text"} label={"Pseudo"} placeholder={data.user.pseudo} />*/}
-                                    <Field id="pseudo" name="pseudo" />
+                                    <Field type='text' id="pseudo" name="pseudo" />
                                     <ErrorMessage name="pseudo" component="div" />
 
                                     {/*<Input type={"text"} label={"Prénom"} placeholder={data.user.firstName} />*/}
-                                    <Field id="firstName" name="firstName" />
+                                    <Field type='text' id="firstName" name="firstName" />
                                     <ErrorMessage name="firstName" component="div" />
 
                                     {/*<Input type={"text"} label={"Nom"} placeholder={data.user.lastName} />*/}
-                                    <Field id="lastName" name="lastName" />
+                                    <Field type='text' id="lastName" name="lastName" />
                                     <ErrorMessage name="lastName" component="div" />
 
                                     {/*<Input type={"email"} label={"Email"} placeholder={data.user.email} />*/}

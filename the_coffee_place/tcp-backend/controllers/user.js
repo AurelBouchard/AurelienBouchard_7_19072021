@@ -8,16 +8,6 @@ const jwt = require('jsonwebtoken');
 
 
 
-exports.getFullProfile = (req, res) => {
-	User.findOne({where: {pseudo: req.params.pseudo}})
-		.then(user => {
-			
-			return res.status(200).json({user});
-            
-		})
-		.catch(err =>  res.status(400).json({err}))
-};
-
 
 exports.signUp = (req, res) => {
 
@@ -99,6 +89,28 @@ exports.logIn = (req, res) => {
 };
 
 
+exports.getFullProfile = (req, res) => {
+	User.findOne({where: {pseudo: req.params.pseudo}})
+		.then(user => {
+            console.log("give full profile data")
+			return res.status(200).json({user});
+		})
+		.catch(err =>  res.status(400).json({err}))
+};
+
+
+exports.update = (req, res) => {
+    console.log("---------------------");
+    console.log(req.body);
+    User.update({ ...req.body },{where: {id: req.params.id}})
+        .then(() => {
+            console.log("profile update successful")
+            return res.status(200).json({message:"Profil mis à jour"});
+        })
+        .catch(err =>  res.status(400).json({err}))
+};
+
+
 exports.remove = (req, res) => {
     User.destroy({where: {id: req.params.id}})
         .then(()=> {
@@ -108,6 +120,8 @@ exports.remove = (req, res) => {
         .catch(error => res.status(400).json({ error }));
 
 };
+
+
 
 
 function isPswOk(password) {

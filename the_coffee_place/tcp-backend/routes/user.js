@@ -5,13 +5,16 @@ const userController = require('../controllers/user');
 const auth = require('../middleware/auth');
 
 
-router.get('/user/:pseudo', userController.getFullProfile);
-
 router.post('/signup', userController.signUp);
 
 router.post('/login', userController.logIn);
 
+router.get('/user/:pseudo', userController.getFullProfile);
+
+router.put('/update/:id', userController.update);//auth
+
 router.delete('/deluser/:id', userController.remove);//auth
+
 
 
 
