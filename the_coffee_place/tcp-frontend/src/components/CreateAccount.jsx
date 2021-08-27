@@ -26,7 +26,7 @@ const CreateAccount = ({setAskForSubscription}) => {
 
     useEffect(() => {
         document.title = "Inscription";
-        //loadCaptchaEnginge(6);
+        loadCaptchaEnginge(6);
     });
 
     return (
@@ -66,12 +66,13 @@ const CreateAccount = ({setAskForSubscription}) => {
 
                         console.log("try to create account ...");
 
-                        //let user_captcha_value = document.getElementById('user_captcha_input').value;
+                        let user_captcha_value = document.getElementById('user_captcha_input').value;
 
-/*                        if (validateCaptcha(user_captcha_value)!==true) {
+                        if (validateCaptcha(user_captcha_value)!==true) {
                             console.log("captcha incorrect, êtes-vous un robot ?")
                             setSubmitting(false);
-                        return}*/
+                        return
+                        }
 
                         const payload = {
                             pseudo:values.pseudo,
@@ -112,36 +113,37 @@ const CreateAccount = ({setAskForSubscription}) => {
 
                                 <CardBody>
                                     <div className="mt-4 mb-8 px-4">
+                                        <label htmlFor='pseudo' className='block'>Pseudo</label>
                                         <Field id="pseudo" name="pseudo" placeholder="pseudo" />
                                         <ErrorMessage name="pseudo" component="div" />
                                     </div>
 
                                     <div className="mb-8 px-4">
+                                        <label htmlFor='email' className='block'>Email</label>
                                         <Field type="email" id="email"name="email" placeholder="email" />
                                         <ErrorMessage name="email" component="div" />
                                     </div>
 
                                     <div className="mb-8 px-4">
+                                        <label htmlFor='password' className='block'>Mot de passe</label>
                                         <Field type="password" name="password" placeholder="mot_de_passe" />
                                         <ErrorMessage name="password" component="div" />
                                     </div>
 
                                     <div className="mb-4 px-4">
+                                        <label htmlFor='passwordConf' className='block'>Mot de passe</label>
                                         <Field type="password" name="passwordConf" placeholder="Confirmez le mot de passe" />
                                         <ErrorMessage name="passwordConf" component="div" />
                                     </div>
 
-{/*                                    <div className="mb-8 px-4">
+                                    <div className="mb-8 px-4">
                                         <div className="py-4 mx-auto">
                                             <LoadCanvasTemplateNoReload className="text-center"/>
                                         </div>
-
-                                        <input id="user_captcha_input" type='text'
-                                        placeholder="Copiez le captcha"/>
-
-                                        <Field id="user_captcha_input" name="user_captcha_input" placeholder="Copiez le captcha" />
+                                        <label htmlFor='user_captcha_input' className='block'>Captcha</label>
+                                        <Field autocomplete="off" id="user_captcha_input" name="user_captcha_input" placeholder="Copiez le captcha" />
                                         <ErrorMessage name="user_captcha_input" component="div" />
-                                    </div>*/}
+                                    </div>
                                 </CardBody>
                                 <CardFooter>
                                     <div className="flex justify-between">

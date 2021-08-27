@@ -16,10 +16,6 @@ import NotFound from "./components/NotFound";
 
 import Navbar from './components/TCP_navbar'
 
-//import {} from 'dotenv/config';
-//import path from 'path'
-//import { config } from 'dotenv';
-//config();
 
 
 function App() {
@@ -115,9 +111,7 @@ function App() {
 
                             </Switch>
                         </>
-
                     }
-
                 </Router>
             </div>
     )

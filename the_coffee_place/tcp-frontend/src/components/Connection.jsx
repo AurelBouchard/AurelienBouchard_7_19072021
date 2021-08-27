@@ -80,10 +80,12 @@ const Connection = ({setConnected, setAskForSubscription, setCurrentUser}) => (
 
                             <CardBody>
                                 <div className="mt-4 mb-8 px-4">
+                                    <label htmlFor='pseudo' className='block'>Pseudo</label>
                                     <Field name="pseudo" placeholder="pseudo" />
                                     <ErrorMessage name="pseudo" component="div" />
                                 </div>
                                 <div className="mb-4 px-4">
+                                    <label htmlFor='password' className='block'>Mot de passe</label>
                                     <Field type="password" name="password" placeholder="mot_de_passe" />
                                     <ErrorMessage name="password" component="div" />
                                 </div>

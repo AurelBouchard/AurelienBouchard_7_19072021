@@ -2,11 +2,13 @@ import {useEffect, useState} from "react";
 import axios from 'axios';
 
 
-const initialState = {data:null, loading: true};
+const initialState = {data:undefined, loading: true};
 
 
 export const useAxiosGet = (url) => {
     const [state, setState] = useState(initialState);
+
+
 
     useEffect(async() => {
         setState(initialState);
@@ -16,7 +18,6 @@ export const useAxiosGet = (url) => {
                 //console.log(result);
                 setState( {data: response.data, loading: false} );
             })
-
 
     }, [url]);
 

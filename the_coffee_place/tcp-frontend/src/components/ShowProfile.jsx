@@ -1,10 +1,11 @@
 import React from 'react';
-import {Link, useParams} from 'react-router-dom';
+import {Link, useHistory, useParams} from 'react-router-dom';
 import {Button} from "@material-tailwind/react";
 import {useFetch} from "../utils/useFetch";
 
 export default function ShowProfile() {
     let {pseudo} = useParams();
+    const history = useHistory();
 
     const {data, loading} = useFetch(`http://localhost:4000/api/members/${pseudo}`);
 
@@ -36,11 +37,10 @@ export default function ShowProfile() {
                     </div>
 
                     <div className="btns flex flex-row w-full justify-evenly my-8">
-                        <Button
-                            color="orange"
-                            buttonType="filled"
-                            size="4xl"
-                            ripple="dark">Retour</Button> {/*   use history     */}
+
+                        <Button text="Retour" type='reset'
+                                onClick={() => { history.goBack(); }}>
+                        </Button>
                     </div>
                 </div>
             )}

@@ -15,8 +15,6 @@ export default function Wall({currentUser, handleNewPost}) {
 
 
 
-
-
     return (
         <div className="mx-auto pb-8 w-5/6 max-w-3xl cursor-default">
                 <>

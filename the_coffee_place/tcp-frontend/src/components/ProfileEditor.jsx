@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 
 import Input from "./TCP_input";
 import Button from './TCP_button'
@@ -9,7 +9,9 @@ import {useAxiosGet} from "../utils/useAxiosGet";
 
 
 export default function ProfileEditor({currentUser}) {
-    const [userData, setUserData] = useState();
+    //const [userData, setUserData] = useState();
+
+    const history = useHistory();
 
     const {data, loading} = useAxiosGet(`http://localhost:4000/api/auth/user/${currentUser}`);
     //const {id, pseudo, password, firstName, lastName, email, about, createdAt, updatedAt} = data.user;
@@ -31,12 +33,14 @@ export default function ProfileEditor({currentUser}) {
                         about:      data.user.about || "Quelques mot sur vous",
                     }}
 
-                /*    validate={values => {
+                    validate={values => {
                         const errors = {};
                         if (!values.pseudo) { errors.pseudo = 'Champ requis'; }
-                        if (!values.password) { errors.password = 'Champ requis'; }
+                        if (!values.firstName) { errors.firstName = 'Champ requis'; }
+                        if (!values.lastName) { errors.lastName = 'Champ requis'; }
+                        if (!values.email) { errors.email = 'Champ requis'; }
                         return errors;
-                    }}*/
+                    }}
 
                     onSubmit={(values, { setSubmitting }) => {
                         setTimeout(() => {
@@ -71,7 +75,7 @@ export default function ProfileEditor({currentUser}) {
                     {({ isSubmitting }) => (
 
                         <Form>
-                            <div className="editor flex flex-col pt-4 md:p-8 mx-auto items-center
+                            <div className="editor flex flex-col pt-4 md:p-8 mx-auto items-center font-EXO
                     md:flex-row flex-wrap md:justify-center md:max-w-2xl">
                                 <img
                                     className="rounded-2xl bg-white md:m-8 md:self-start "
@@ -83,27 +87,32 @@ export default function ProfileEditor({currentUser}) {
                                 />
 
                                 <div className="names flex flex-col m-4 md:m-8">
-                                    {/*<Input type={"text"} label={"Pseudo"} placeholder={data.user.pseudo} />*/}
-                                    <Field type='text' id="pseudo" name="pseudo" />
-                                    <ErrorMessage name="pseudo" component="div" />
+                                    <label htmlFor='pseudo' className='block mb-1'>Pseudo :</label>
+                                    <Field type='text' id="pseudo" name="pseudo" className='handWritten mb-4 pl-1 text-2xl text-coffee-dark rounded
+                focus:outline-none focus:ring focus:ring-offset-2 focus:ring-coffee focus:ring-offset-foam'/>
+                                    <ErrorMessage name="pseudo" component="div" className='-mt-4 mb-1 text-red-500'/>
 
-                                    {/*<Input type={"text"} label={"Prénom"} placeholder={data.user.firstName} />*/}
-                                    <Field type='text' id="firstName" name="firstName" />
-                                    <ErrorMessage name="firstName" component="div" />
+                                    <label htmlFor='firstName' className='block mb-1 mt-2'>Prénom :</label>
+                                    <Field type='text' id="firstName" name="firstName" className='handWritten mb-4 pl-1 text-2xl text-coffee-dark rounded
+                focus:outline-none focus:ring focus:ring-offset-2 focus:ring-coffee focus:ring-offset-foam'/>
+                                    <ErrorMessage name="firstName" component="div" className='-mt-4 mb-1 text-red-500'/>
 
-                                    {/*<Input type={"text"} label={"Nom"} placeholder={data.user.lastName} />*/}
-                                    <Field type='text' id="lastName" name="lastName" />
-                                    <ErrorMessage name="lastName" component="div" />
+                                    <label htmlFor='lastName' className='block mb-1 mt-2'>Nom :</label>
+                                    <Field type='text' id="lastName" name="lastName" className='handWritten mb-4 pl-1 text-2xl text-coffee-dark rounded
+                focus:outline-none focus:ring focus:ring-offset-2 focus:ring-coffee focus:ring-offset-foam'/>
+                                    <ErrorMessage name="lastName" component="div" className='-mt-4 mb-1 text-red-500'/>
 
-                                    {/*<Input type={"email"} label={"Email"} placeholder={data.user.email} />*/}
-                                    <Field type="email" id="email"name="email" />
-                                    <ErrorMessage name="email" component="div" />
+                                    <label htmlFor='email' className='block mb-1 mt-2'>Email :</label>
+                                    <Field type="email" id="email"name="email" className='handWritten mb-4 pl-1 text-2xl text-coffee-dark rounded
+                focus:outline-none focus:ring focus:ring-offset-2 focus:ring-coffee focus:ring-offset-foam'/>
+                                    <ErrorMessage name="email" component="div" className='-mt-4 mb-1 text-red-500'/>
                                 </div>
 
                                 <div className="intro flex flex-col m-4 md:w-full ">
-                                    {/*<Input type={"textarea"} label={"Présentation"} placeholder={"Quelques mots sur vous ..."}/>*/}
-                                    <Field type='undefined' id="about"name="about" />
-                                    <ErrorMessage name="about" component="div" />
+                                    <label htmlFor='about' className='block mb-1'>A propos de moi :</label>
+                                    <Field type='undefined' autocomplete='off' id="about" name="about" className='handWritten mb-4 pl-1 text-2xl text-coffee-dark rounded
+                focus:outline-none focus:ring focus:ring-offset-2 focus:ring-coffee focus:ring-offset-foam'/>
+                                    <ErrorMessage name="about" component="div" className='-mt-4 mb-1 text-red-500'/>
                                 </div>
 
                                 <div className="admin flex flex-col m-4 mx-16 md:mx-4 md:w-full">
@@ -118,8 +127,7 @@ export default function ProfileEditor({currentUser}) {
 
                                 <div className="btns flex flex-row w-full justify-evenly my-8">
                                     <Button text="Retour" type='reset'
-                                            onClick={() => {// use history
-                                                 }}>
+                                            onClick={() => { history.goBack(); }}>
                                     </Button>
                                     <Button text="Valider" type='submit'>
                                     </Button>
