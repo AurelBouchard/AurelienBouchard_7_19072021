@@ -1,8 +1,6 @@
 const sequelize = require('../db_management/sequelize');
 const queryInterface = sequelize.getQueryInterface();
 const User = require('../models/User.js');
-const PostsLikedById = require('../models/PostsLikedById');
-const CommentsLikedById = require('../models/CommentsLikedById');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -11,9 +9,9 @@ const jwt = require('jsonwebtoken');
 
 exports.signUp = (req, res) => {
 
-    if (!isPswOk(req.body.password)) {
+/*    if (!isPswOk(req.body.password)) {    // see note down page
             res.status(400).json({message: "Mot de passe trop faible"});
-            return 0}
+            return 0}*/
 
     bcrypt.hash(req.body.password, 10)
         .then(hash =>{
@@ -29,28 +27,12 @@ exports.signUp = (req, res) => {
 
             newUser.save()
                 .then((user) => {
-                    // each user have 2 tables dedicated : liked posts and liked comments
-                    queryInterface.createTable(
-                        "PostsLikedById"+user.dataValues.id,
-                        PostsLikedById,
-                        {comment:'Created with the user'}
-                    )
-                    queryInterface.createTable(
-                        "CommentsLikedById"+user.dataValues.id,
-                        CommentsLikedById,
-                        {comment:'Created with the user'}
-                    )
                     console.log("User "+user.dataValues.id+" created.");
                     res.status(201).json({message: "Le nouvel utilisateur a été créé !"});
                 })
-                .catch(err => {
-                    try {
-                        console.log("Unable to create user: \n" + err.name + ".\n" + err.parent.text);
-                    } catch {
-                        console.log(err);
-                    }
-
-                    res.status(400).json({err});
+                .catch(err => { try { console.log("Unable to create user : \n" + err.name + ".\n" + err.parent.text);
+                    } catch { console.log(err); }
+                    res.status(500).json({err});
                 });
 
         })
@@ -100,8 +82,6 @@ exports.getFullProfile = (req, res) => {
 
 
 exports.update = (req, res) => {
-    console.log("---------------------");
-    console.log(req.body);
     User.update({ ...req.body },{where: {id: req.params.id}})
         .then(() => {
             console.log("profile update successful")
@@ -123,7 +103,8 @@ exports.remove = (req, res) => {
 
 
 
-
+/*
+// PASSWORD PATTERN VALIDATED BY FRONTEND WITH SAME REGEX
 function isPswOk(password) {
     // use regex : ^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})
     // (?=.*[a-z]) => must includes lowercase
@@ -134,3 +115,4 @@ function isPswOk(password) {
     const pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[?!@#$%^&*=|£²³`"'ø§€])(?=.{8,})/;
     return pattern.test(password);
 }
+*/

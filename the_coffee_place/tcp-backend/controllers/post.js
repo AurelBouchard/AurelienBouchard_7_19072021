@@ -2,8 +2,7 @@ const User = require('../models/User.js');
 const Post = require('../models/Post');
 const sequelize = require("../db_management/sequelize");
 const queryInterface = sequelize.getQueryInterface();
-const LikersOfPost = require("../models/LikersOfPost");
-const PostLikedById = require('../models/PostsLikedById')
+const LikersOfPost = require("../models/Like");
 const {Sequelize} = require("sequelize");
 
 
@@ -18,19 +17,14 @@ exports.create = (req, res) => {
             }
             return author.createPost(req.body);
         })
-        .then((post)=>{
-            // then each post have its own list of likers :
-            queryInterface.createTable(
-                "LikersOfPost"+post.id,
-                LikersOfPost,
-                {comment:'Created with the user'}
-            )
-        })
         .then(() => {
             console.log("Post inserted")
             res.status(201).json({message: "Post enregistré"})
         })
-        .catch(error => res.status(400).json({ error }));
+        .catch(err => { try { console.log("Unable to create post : \n" + err.name + ".\n" + err.parent.text);
+        } catch { console.log(err); }
+            res.status(400).json({err});
+        });
 };
 
 
@@ -70,11 +64,10 @@ exports.like = (req, res) => {
                 console.log("\nend of 'like' procedure")
                 return res.status(200).json({message: "Post liké"});
             })
-            .catch(error => {
-                console.log("error while creating like :");
-                console.log(error)
-                res.status(400).json({error});
-            })
+            .catch(err => { try { console.log("Error while creating like : \n" + err.name + ".\n" + err.parent.text);
+            } catch { console.log(err); }
+                res.status(500).json({err});
+            });
 
         } else {    // user = not a liker anymore
 

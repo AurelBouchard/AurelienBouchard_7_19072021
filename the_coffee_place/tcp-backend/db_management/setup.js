@@ -1,11 +1,26 @@
 const sequelize = require("./sequelize");
 
-const User = require("../models/User")
-const Post = require("../models/Post")
+const User = require("../models/User");
+const Post = require("../models/Post");
+const Comm = require('../models/Comm');
+const Like = require('../models/Like');
 
 function prepareDB() {
     console.log("Preparing database")
-    User.hasMany(Post);
+    User.hasMany(Post);     // foreign key : userId
+    Post.belongsTo(User);
+
+    User.hasMany(Like);     // foreign key : userId
+    Like.belongsTo(User);
+
+    Post.hasMany(Like);     // foreign key : postId
+    Like.belongsTo(Post);
+
+    Post.hasMany(Comm);     // foreign key : postId
+    Comm.belongsTo(Post);
+
+    User.hasMany(Comm);     // foreign key : userId
+    Comm.belongsTo(User);
 
     sequelize
         .sync()
