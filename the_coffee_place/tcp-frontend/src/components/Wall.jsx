@@ -22,7 +22,7 @@ export default function Wall({currentUser, handleNewPost}) {
                 <>
                     <Redactor author={currentUser} newPost={handleNewPost}/>
                 {loading ? "loading ..." : (
-                    data.map(({datetime, text, author   }) => {
+                    data.slice(0).reverse().map(({datetime, text, author   }) => {
                         let key = uuidv4();
                         return (
                             <Post

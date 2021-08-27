@@ -3,7 +3,10 @@ const Post = require('../models/Post');
 const sequelize = require("../db_management/sequelize");
 const queryInterface = sequelize.getQueryInterface();
 const LikersOfPost = require("../models/LikersOfPost");
+const PostLikedById = require('../models/PostsLikedById')
 const {Sequelize} = require("sequelize");
+
+
 
 
 exports.create = (req, res) => {
@@ -41,7 +44,7 @@ exports.like = (req, res) => {
             .then(user => {
                 liker = user.id;
                 console.log("\ngetting the table PostsLikedById"+liker);
-                return  sequelize.define("PostsLikedById" + liker);
+                return  sequelize.define("PostsLikedById"+liker, PostLikedById);
             })
             .then(table => {
                 console.log("\nadding the postId ("+req.params.id+") to the list of posts liked by this user");
@@ -49,15 +52,15 @@ exports.like = (req, res) => {
             })
             .then(() => {
                 console.log("\ngetting the table LikersOfPost"+req.params.id);
-                return sequelize.define("LikersOfPost"+req.params.id);
+                return sequelize.define("LikersOfPost"+req.params.id, LikersOfPost );
             })
             .then(table => {
                 console.log("\nadding the userId ("+liker+") to the list of user who like this post");
-                return table.create({attributes: {userId: liker}})   //  ??????????????????????????? ne fonctionne pas, mais pas d'erreur
+                return table.create({userId: liker})   //  ??????????????????????????? ne fonctionne pas, mais pas d'erreur
             })
             .then(() => {
                 console.log("\nfinding the post with its id ("+req.params.id+")");
-                return Post.findOne({where: {id: req.params.id}})//, {attributes: ['id','nOfLike']})
+                return Post.findOne({where: {id: req.params.id}}, {attributes: ['id','nOfLike']})//, {attributes: ['id','nOfLike']})
             })
             .then(post => {
                 console.log("\nincrement nOfLike of this post");

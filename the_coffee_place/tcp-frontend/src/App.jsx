@@ -49,8 +49,6 @@ function App() {
             <div className="App bg-blue-100 pt-16 lg:pt-32l">
                 <Router>
                     {!isConnected ?
-
-
                         <>
                             <Switch>
                                 <Route exact path='/signin'>

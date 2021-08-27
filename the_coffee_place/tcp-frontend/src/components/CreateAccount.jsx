@@ -146,15 +146,15 @@ const CreateAccount = ({setAskForSubscription}) => {
                                 <CardFooter>
                                     <div className="flex justify-between">
                                         <Button
-                                            text="Valider"
-                                            type='submit'
-                                            disabled={isSubmitting}
-                                        >
-                                        </Button>
-                                        <Button
                                             text="Annuler"
                                             type='reset'
                                             onClick={() =>{ setAskForSubscription(false); }}
+                                        >
+                                        </Button>
+                                        <Button
+                                            text="Valider"
+                                            type='submit'
+                                            disabled={isSubmitting}
                                         >
                                         </Button>
                                     </div>
