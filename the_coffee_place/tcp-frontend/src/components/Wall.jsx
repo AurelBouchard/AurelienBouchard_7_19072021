@@ -14,22 +14,24 @@ export default function Wall({currentUser, handleNewPost}) {
     const {data, loading} = useFetch('http://localhost:4000/api/posts');
 
 
-
     return (
         <div className="mx-auto pb-8 w-5/6 max-w-3xl cursor-default">
                 <>
                     <Redactor author={currentUser} newPost={handleNewPost}/>
                 {loading ? "loading ..." : (
-                    data.slice(0).reverse().map(({datetime, text, author   }) => {
+                    data.slice(0).reverse().map(({date, clock, text, author, nOfLike, nOfComment, UserId  }) => {
                         let key = uuidv4();
                         return (
                             <Post
                                 key={key}
-                                date={datetime}
-                                clock={datetime}
+                                date={date}
+                                clock={clock}
                                 liked={true}
                                 username={author}
-                                text={text}/>
+                                text={text}
+                                nOfComm={nOfComment}
+                                UserId={UserId}
+                            />
                         )
                     })
                 )}

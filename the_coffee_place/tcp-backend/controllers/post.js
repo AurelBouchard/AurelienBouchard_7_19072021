@@ -84,8 +84,24 @@ exports.like = (req, res) => {
 
 
 exports.getAll = (req, res) => {
-    Post.findAll({attributes:['datetime', 'text', 'author']})      // must Post.replaced by findAndCountAll() https://sequelize.org/master/manual/model-querying-finders.html#-code-findandcountall--code-
-        .then(posts => res.status(200).json(posts))
+    Post.findAll({attributes:['datetime', 'text', 'author', 'nOfComment', 'nOfLike', 'UserId']})      // must Post.replaced by findAndCountAll() https://sequelize.org/master/manual/model-querying-finders.html#-code-findandcountall--code-
+        .then(posts => {
+            // adapt posts :
+            const formattedPosts = posts.map((post) => {
+                let formattedPost = {};
+                //formattedPost['date'] = ((post.dataValues.datetime).toLocaleString('fr-FR')).split(',')[0];
+                let dateTime = [(((post.dataValues.datetime).toLocaleString('fr-FR')).split(',')[0]).slice(0,-5),
+                    (((post.dataValues.datetime).toLocaleString('fr-FR')).split(',')[1]).slice(0,-3)];
+                formattedPost['clock'] = dateTime.join(" - ");
+                formattedPost['text'] = post.dataValues.text;
+                formattedPost['author'] = post.dataValues.author;
+                formattedPost['nOfComment'] = post.dataValues.nOfComment;
+                formattedPost['nOfLike'] = post.dataValues.nOfLike;
+                formattedPost['UserId'] = post.dataValues.UserId;
+                return formattedPost;
+            });
+            res.status(200).json(formattedPosts);
+        })
         .catch(error => res.status(400).json({ error }));
 };
 
@@ -125,3 +141,9 @@ exports.remove = (req, res) => {    // BY ADMIN ONLY
 
 
 };
+
+
+/* time formating :
+*     const time = new Date;
+* time.toLocaleString('fr-FR')).split(',')[0]
+*/

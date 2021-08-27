@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 
 
-export default function Post({date, clock, liked, text, username}) {
+export default function Post({date, clock, liked, text, username, nOfComm, nOfLike, UserId}) {
+    const [showComm, setShowComm] = useState(false);
 
     return (
         <>
@@ -19,9 +20,9 @@ export default function Post({date, clock, liked, text, username}) {
                     <p className="mono mt-2 mr-4 font-EXO">{clock}</p>
 
                     <div className="comments mono font-EXO cursor-pointer h-6 flex flex-row" onClick={() => {
-                        alert("show comments")
+                        // expend here !!!!
                     }}>
-                        <p className="overflow-ellipsis overflow-hidden h-6 min-w-0 flex-shrink">Commentaires (0) </p>
+                        <p className="overflow-ellipsis overflow-hidden h-6 mr-1 min-w-0 flex-shrink">{`Commentaires (${nOfComm})`}</p>
                         <p className="h-6 inline-bloc flex-shrink-0"><i className="fas fa-chevron-down"></i></p>
                     </div>
 
@@ -38,7 +39,7 @@ export default function Post({date, clock, liked, text, username}) {
                     </div>
                 </div>
             </div>
-
+{/*
             {date ? <div className="border-b border-coffee-dark md:-mt-4 w-full flex flex-row justify-center md:justify-start
             font-EXO text-coffee-dark cursor-pointer"
                          onClick={() => {
@@ -46,16 +47,13 @@ export default function Post({date, clock, liked, text, username}) {
             }}>
                 <span className=""><i className="fas fa-chevron-up"></i> {date}</span>
                 </div> : null}
+            */}
         </>
 
     )
 };
 
 
-/* time formating :
-*     const time = new Date;
-* time.toLocaleString('fr-FR')).split(',')[0]
-*/
 
 
 const badWords = [
