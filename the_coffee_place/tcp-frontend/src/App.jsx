@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch, Link, Redirect, useHistory } from 'react-router-dom';
 
 //import './style/App.css';
@@ -29,29 +29,20 @@ function App() {
     const [currentUser, setCurrentUser] = useState(lastUser);
     let history = useHistory();
 
+    const [haveNewPost, setHaveNewPost] = useState(true);
 
-/*    function handleSubmit() {     // console.log("handle connect");
-            //setConnected(true);
-            //setAskForSubscription(false);
-            //alert("vous etes connecté !!");
-            //history.push('/wall');
+    function handleNewPost() {
+        setHaveNewPost(false);
+    }
 
-    };*/
+    useEffect(() => {
+        if (haveNewPost === false) {setHaveNewPost(true)}
+    }, [haveNewPost]);
 
-
-/*    const [filledName, setFilledName] = useState(false);
-    const [filledPass, setFilledPass] = useState(false);
-    const handleConnectChange = (e) =>{   console.log("handle connect change");
-        if (e.target.id === 'pseudo') {
-            e.target.value.length === 0 ? setFilledName(false) : setFilledName(true)}
-        if (e.target.id === 'password') {
-            e.target.value.length === 0 ? setFilledPass(false) : setFilledPass(true)}
-    };*/
 
     function handleAskForSubscription(bool) {
         setAskForSubscription(bool);
     };
-
 
 
     return (
@@ -95,7 +86,7 @@ function App() {
                                     <Redirect to='/wall'></Redirect>
                                 </Route>
                                 <Route exact path='/wall'>
-                                    <Wall currentUser={currentUser} />
+                                    {haveNewPost ? <Wall currentUser={currentUser} handleNewPost={handleNewPost}/> : null }
                                 </Route>
                                 <Route exact path='/members'>
                                     <Members />

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from 'uuid';
 
 import {useFetch} from "../utils/useFetch";
@@ -9,14 +9,18 @@ import ScrollToTop from "./ScrollToTop";
 
 
 
-export default function Wall({currentUser}) {
+export default function Wall({currentUser, handleNewPost}) {
 
     const {data, loading} = useFetch('http://localhost:4000/api/posts');
 
+
+
+
+
     return (
         <div className="mx-auto pb-8 w-5/6 max-w-3xl cursor-default">
-            <Redactor author={currentUser}/>
-            <>
+                <>
+                    <Redactor author={currentUser} newPost={handleNewPost}/>
                 {loading ? "loading ..." : (
                     data.map(({datetime, text, author   }) => {
                         let key = uuidv4();
@@ -32,6 +36,7 @@ export default function Wall({currentUser}) {
                     })
                 )}
             </>
+
         </div>
     );
 }

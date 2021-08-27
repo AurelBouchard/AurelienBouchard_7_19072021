@@ -54,13 +54,8 @@ export default function ProfileEditor({currentUser}) {
 
                             axios.put(`http://localhost:4000/api/auth/update/${data.user.id}`, payload)
                                 .then(function (response) {
-                                    //console.log(response.data);
-                                    console.log(response.status);
-                                    //console.log(response.statusText);
-                                    console.log(response.headers);
-                                    console.log(response.config);
-                                    //setState( {data: response, loading: false} );
-
+                                    console.log("response status "+response.status);
+                                    alert("Votre profil a été mis à jour");
                                 })
                                 .then(() => {
                                     console.log("profile successfully updated")

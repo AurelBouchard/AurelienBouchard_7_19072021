@@ -4,7 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 import Button from './TCP_button'
 
-const Redactor = ({author}) => {
+const Redactor = ({author, newPost}) => {
     const [isOpen, toggleOpen] =useState(false);
 
     return (
@@ -30,7 +30,7 @@ const Redactor = ({author}) => {
                         return errors;
                     }}
 
-                    onSubmit={(values, { setSubmitting }) => {
+                    onSubmit={(values, actions ) => {   //{ setSubmitting }
                         setTimeout(() => {
                             console.log("try to send post")
 
@@ -40,44 +40,29 @@ const Redactor = ({author}) => {
                                 datetime:   Date.now(),
                             }
 
-                            console.log(payload)
-
                             axios.post(`http://localhost:4000/api/posts/`, payload)
                                 .then(function (response) {
-                                    //console.log(response.data);
-                                    console.log(response.status);
-                                    //console.log(response.statusText);
-                                    console.log(response.headers);
-                                    console.log(response.config);
-                                    //setState( {data: response, loading: false} );
-
+                                    console.log("response status "+response.status);
                                 })
                                 .then(() => {
-                                    console.log("Profil modifié avec succes")
+                                    console.log("post successfully added");
+
+                                    // reset values
+                                    actions.resetForm();
+
+                                    // close redactor
+                                    toggleOpen(!isOpen);
+
+                                    // reload wall (redactor's parent)
+                                    newPost();
+
                                 })
                                 .catch(err => {
                                     console.log(err)
                                 });
-
-
-
-
-
-
-
-
-
-
-                            setSubmitting(false);
-                            // reset values
-
-                            // close redactor
-
-                            // reload wall
-
+                            actions.setSubmitting(false);
                         }, 400);
                     }}
-
 
                     >
                         {props => (
