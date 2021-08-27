@@ -41,7 +41,7 @@ export default function ProfileEditor({currentUser}) {
                     onSubmit={(values, { setSubmitting }) => {
                         setTimeout(() => {
 
-                            console.log("try to modify account ...");
+                            console.log("try to modify profile ...");
 
                             const payload = {
                                 //imgUrl:     data.user.imgUrl,
@@ -63,7 +63,7 @@ export default function ProfileEditor({currentUser}) {
 
                                 })
                                 .then(() => {
-                                    console.log("Profil modifié avec succes")
+                                    console.log("profile successfully updated")
                                 })
                                 .catch(err => {
                                     console.log(err)

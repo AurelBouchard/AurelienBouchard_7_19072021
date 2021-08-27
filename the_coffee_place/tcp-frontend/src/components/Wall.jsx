@@ -9,13 +9,13 @@ import ScrollToTop from "./ScrollToTop";
 
 
 
-export default function Wall() {
+export default function Wall({currentUser}) {
 
     const {data, loading} = useFetch('http://localhost:4000/api/posts');
 
     return (
         <div className="mx-auto pb-8 w-5/6 max-w-3xl cursor-default">
-            <Redactor />
+            <Redactor author={currentUser}/>
             <>
                 {loading ? "loading ..." : (
                     data.map(({datetime, text, author   }) => {

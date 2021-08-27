@@ -95,7 +95,7 @@ function App() {
                                     <Redirect to='/wall'></Redirect>
                                 </Route>
                                 <Route exact path='/wall'>
-                                    <Wall />
+                                    <Wall currentUser={currentUser} />
                                 </Route>
                                 <Route exact path='/members'>
                                     <Members />
