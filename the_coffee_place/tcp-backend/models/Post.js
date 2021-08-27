@@ -8,10 +8,6 @@ const Post = sequelize.define("Post", {
         allowNull: false,
         primaryKey: true,
     },
-    datetime: {
-        type: Sequelize.DATE,       // DATE = DATETIME for mysql
-        allowNull: false,
-    },
     author: {                       // used to quicker the frontend jobs
         type: Sequelize.STRING,     // STRING = VARCHAR(255)
         allowNull: false,

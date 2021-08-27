@@ -18,6 +18,7 @@ router.get('/:id',    postController.findById);
 
 // PUT METHOD : Update post data
 router.put('/:id/like',    postController.like);
+router.put('/:id/comment',    postController.comment);
 //router.put('/:id',  auth,   postController.modify);       // add links to comments ? or comments ?
 
 // DELETE METHOD : Delete post by admin only

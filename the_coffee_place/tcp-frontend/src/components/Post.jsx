@@ -19,11 +19,10 @@ export default function Post({date, clock, liked, text, username, nOfComm, nOfLi
                 <div className="footer flex flex-row justify-between items-end">
                     <p className="mono mt-2 mr-4 font-EXO">{clock}</p>
 
-                    <div className="comments mono font-EXO cursor-pointer h-6 flex flex-row" onClick={() => {
-                        // expend here !!!!
-                    }}>
+                    <div className="comments mono font-EXO cursor-pointer h-6 flex flex-row" onClick={() => {{setShowComm(!showComm)} }}>
                         <p className="overflow-ellipsis overflow-hidden h-6 mr-1 min-w-0 flex-shrink">{`Commentaires (${nOfComm})`}</p>
-                        <p className="h-6 inline-bloc flex-shrink-0"><i className="fas fa-chevron-down"></i></p>
+                        {(!showComm) ? <p className="h-6 inline-bloc flex-shrink-0"><i className="fas fa-chevron-down"></i></p>
+                            : <p className="h-6 bloc flex-shrink-0"><i className="fas fa-chevron-up"></i></p> }
                     </div>
 
                     <div className="mt-2 flex flex-row flex-1 justify-end">
@@ -38,6 +37,14 @@ export default function Post({date, clock, liked, text, username, nOfComm, nOfLi
                         </div>
                     </div>
                 </div>
+
+                {(!showComm) ? null :
+                    <div className="comments">
+                        <div className="flex flex-col">
+                            <p>kjgazrefkygc kugerkufygrzu kyvkuer kuergkuerg vukygkurf</p>
+                            <p>kjgazrefkygc kugerkufygrzu kyvkuer kuergkuerg vukygkurf</p>
+                        </div>
+                    </div> }
             </div>
 {/*
             {date ? <div className="border-b border-coffee-dark md:-mt-4 w-full flex flex-row justify-center md:justify-start

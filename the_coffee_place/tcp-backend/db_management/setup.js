@@ -10,14 +10,8 @@ function prepareDB() {
     User.hasMany(Post);     // foreign key : userId
     Post.belongsTo(User);
 
-    User.hasMany(Like);     // foreign key : userId
-    Like.belongsTo(User);
-
     Post.hasMany(Like);     // foreign key : postId
     Like.belongsTo(Post);
-
-    Post.hasMany(Comm);     // foreign key : postId
-    Comm.belongsTo(Post);
 
     User.hasMany(Comm);     // foreign key : userId
     Comm.belongsTo(User);

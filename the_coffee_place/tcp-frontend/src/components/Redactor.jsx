@@ -37,7 +37,6 @@ const Redactor = ({author, newPost}) => {
                             const payload = {
                                 author:     author,
                                 text:       values.post,
-                                datetime:   Date.now(),
                             }
 
                             axios.post(`http://localhost:4000/api/posts/`, payload)
@@ -96,6 +95,6 @@ const Redactor = ({author, newPost}) => {
         </div>
 
     );
-;}
+}
 
 export default Redactor;

@@ -83,15 +83,48 @@ exports.like = (req, res) => {
 };
 
 
+exports.comment = (req, res) => {
+
+        console.log("\nfinding who make the comment");
+        User.findOne( {where: {pseudo: req.body.pseudo} } )
+            .then(commenter => {
+                let entry = {};
+                entry['author'] = req.body.pseudo;
+                entry['text'] = req.body.comm;
+                entry['postId'] = req.params.id;
+
+                console.log("\ncreate the comment");
+                return commenter.createComm(entry);
+            })
+            .then(() =>{
+                console.log("\nfinding the post");
+                return Post.findOne({where: {id:req.params.id}});
+            })
+            .then((post) => {
+                console.log("\nincrement nOfComment of this post");
+                post.increment('nOfComment');
+            })
+            .then(() => {
+                console.log("Comment inserted")
+                res.status(201).json({message: "Commentaire enregistré"})
+            })
+            .catch(err => { try { console.log("Error while creating comment : \n" + err.name + ".\n" + err.parent.text);
+            } catch { console.log(err); }
+                res.status(500).json({err});
+            });
+};
+
+
+
 exports.getAll = (req, res) => {
-    Post.findAll({attributes:['datetime', 'text', 'author', 'nOfComment', 'nOfLike', 'UserId']})      // must Post.replaced by findAndCountAll() https://sequelize.org/master/manual/model-querying-finders.html#-code-findandcountall--code-
+    Post.findAll({attributes:['text', 'author', 'nOfComment', 'nOfLike', 'UserId', 'createdAt']})      // must Post.replaced by findAndCountAll() https://sequelize.org/master/manual/model-querying-finders.html#-code-findandcountall--code-
         .then(posts => {
             // adapt posts :
             const formattedPosts = posts.map((post) => {
                 let formattedPost = {};
                 //formattedPost['date'] = ((post.dataValues.datetime).toLocaleString('fr-FR')).split(',')[0];
-                let dateTime = [(((post.dataValues.datetime).toLocaleString('fr-FR')).split(',')[0]).slice(0,-5),
-                    (((post.dataValues.datetime).toLocaleString('fr-FR')).split(',')[1]).slice(0,-3)];
+                let dateTime = [(((post.dataValues.createdAt).toLocaleString('fr-FR')).split(',')[0]).slice(0,-5),
+                    (((post.dataValues.createdAt).toLocaleString('fr-FR')).split(',')[1]).slice(0,-3)];
                 formattedPost['clock'] = dateTime.join(" - ");
                 formattedPost['text'] = post.dataValues.text;
                 formattedPost['author'] = post.dataValues.author;
