@@ -5,7 +5,7 @@ import axios from 'axios';
 const initialState = {data:undefined, loading: true};
 
 
-export const useAxiosGet = (url) => {
+export const useGet = (url) => {
     const [state, setState] = useState(initialState);
 
 

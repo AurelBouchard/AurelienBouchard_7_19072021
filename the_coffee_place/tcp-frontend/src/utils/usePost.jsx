@@ -7,7 +7,7 @@ const initialState = {data:null, loading: true};
 
 
 
-export const useAxiosPost = ({url, params, payload}) => {
+export const usePost = ({url, params, payload}) => {
     const [state, setState] = useState(initialState);
 
     useEffect(async() => {

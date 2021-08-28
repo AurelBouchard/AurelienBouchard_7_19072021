@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import {Link, useHistory} from 'react-router-dom';
 
 import Input from "./TCP_input";
 import Button from './TCP_button'
-import {useAxiosGet} from "../utils/useAxiosGet";
+import {useGet} from "../utils/useGet";
 
 
 export default function ProfileEditor({currentUser}) {
@@ -13,7 +13,11 @@ export default function ProfileEditor({currentUser}) {
 
     const history = useHistory();
 
-    const {data, loading} = useAxiosGet(`http://localhost:4000/api/auth/user/${currentUser}`);
+    useEffect(() => {
+        document.title = "Mon profil";
+    });
+
+    const {data, loading} = useGet(`http://localhost:4000/api/auth/user/${currentUser}`);
     //const {id, pseudo, password, firstName, lastName, email, about, createdAt, updatedAt} = data.user;
     // il manque la photo !!
 

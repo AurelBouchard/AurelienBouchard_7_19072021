@@ -1,5 +1,6 @@
-const User = require('../models/User.js');
+const User = require('../models/User');
 const Post = require('../models/Post');
+const Comm = require('../models/Comm')
 const sequelize = require("../db_management/sequelize");
 const queryInterface = sequelize.getQueryInterface();
 const LikersOfPost = require("../models/Like");
@@ -28,7 +29,7 @@ exports.create = (req, res) => {
 };
 
 
-exports.like = (req, res) => {
+exports.addLike = (req, res) => {
 
     if (req.body.liked) {     // user = liker
         let liker = 0;
@@ -83,13 +84,13 @@ exports.like = (req, res) => {
 };
 
 
-exports.comment = (req, res) => {
+exports.addComment = (req, res) => {
 
         console.log("\nfinding who make the comment");
-        User.findOne( {where: {pseudo: req.body.pseudo} } )
+        User.findOne( {where: {pseudo: req.body.author} } )
             .then(commenter => {
                 let entry = {};
-                entry['author'] = req.body.pseudo;
+                entry['author'] = req.body.author;
                 entry['text'] = req.body.comm;
                 entry['postId'] = req.params.id;
 
@@ -117,7 +118,7 @@ exports.comment = (req, res) => {
 
 
 exports.getAll = (req, res) => {
-    Post.findAll({attributes:['text', 'author', 'nOfComment', 'nOfLike', 'UserId', 'createdAt']})      // must Post.replaced by findAndCountAll() https://sequelize.org/master/manual/model-querying-finders.html#-code-findandcountall--code-
+    Post.findAll({attributes:['id','text', 'author', 'nOfComment', 'nOfLike', 'UserId', 'createdAt']})      // must Post.replaced by findAndCountAll() https://sequelize.org/master/manual/model-querying-finders.html#-code-findandcountall--code-
         .then(posts => {
             // adapt posts :
             const formattedPosts = posts.map((post) => {
@@ -131,6 +132,7 @@ exports.getAll = (req, res) => {
                 formattedPost['nOfComment'] = post.dataValues.nOfComment;
                 formattedPost['nOfLike'] = post.dataValues.nOfLike;
                 formattedPost['UserId'] = post.dataValues.UserId;
+                formattedPost['postId'] = post.dataValues.id;
                 return formattedPost;
             });
             res.status(200).json(formattedPosts);
@@ -142,6 +144,27 @@ exports.getAll = (req, res) => {
 exports.findById = (req, res) => {
     Post.findOne({where: {id: req.params.id} })
         .then(post => res.status(200).json(post))
+        .catch(error => res.status(404).json({ error }));
+};
+
+
+exports.getComments = (req, res) => {
+    console.log("getting all comments for one post")
+    Comm.findAll({where: {postId: req.params.id} })
+        .then(comments => {
+            console.log(comments);
+            // adapt comments :
+            const formattedComments = comments.map((comm) => {
+                let formattedComm = {};
+                formattedComm['text'] = comm.dataValues.text;
+                formattedComm['author'] = comm.dataValues.author;
+                console.log(formattedComm)
+                return formattedComm;
+            });
+            console.log("------------------------------------------------------------------------ FINALLY :")
+            console.log(formattedComments)
+            res.status(200).json(formattedComments)
+        })
         .catch(error => res.status(404).json({ error }));
 };
 

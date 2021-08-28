@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -11,6 +11,10 @@ import AccessToWall from './AccessToWall'
 export default function Members() {
 
     const {data, loading} = useFetch('http://localhost:4000/api/members');
+
+    useEffect(() => {
+        document.title = "Membres";
+    });
 
     return (
         <div className="relative">

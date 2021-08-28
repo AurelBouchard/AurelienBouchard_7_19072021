@@ -1,9 +1,12 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
+import {useGet} from "../utils/useGet";
+import Commentor from "./Commentor";
 
 
-export default function Post({date, clock, liked, text, username, nOfComm, nOfLike, UserId}) {
+export default function Post({date, clock, liked, text, author, nOfComm, nOfLike, UserId, postId, currentUser, newComm}) {
     const [showComm, setShowComm] = useState(false);
+
 
     return (
         <>
@@ -19,14 +22,17 @@ export default function Post({date, clock, liked, text, username, nOfComm, nOfLi
                 <div className="footer flex flex-row justify-between items-end">
                     <p className="mono mt-2 mr-4 font-EXO">{clock}</p>
 
-                    <div className="comments mono font-EXO cursor-pointer h-6 flex flex-row" onClick={() => {{setShowComm(!showComm)} }}>
-                        <p className="overflow-ellipsis overflow-hidden h-6 mr-1 min-w-0 flex-shrink">{`Commentaires (${nOfComm})`}</p>
+                    <div className="comments mono font-EXO cursor-pointer h-6 flex flex-row"
+                         onClick={() => {{setShowComm(!showComm)} }}>
+                        <p className="overflow-ellipsis overflow-hidden h-6 mr-1 min-w-0 flex-shrink">
+                            {`Commentaires (${nOfComm})`}
+                        </p>
                         {(!showComm) ? <p className="h-6 inline-bloc flex-shrink-0"><i className="fas fa-chevron-down"></i></p>
                             : <p className="h-6 bloc flex-shrink-0"><i className="fas fa-chevron-up"></i></p> }
                     </div>
 
                     <div className="mt-2 flex flex-row flex-1 justify-end">
-                        <p className="handWritten text-2xl overflow-hidden overflow-ellipsis whitespace-nowrap h-8 pr-2 -mr-1">{username}</p>
+                        <p className="handWritten text-2xl overflow-hidden overflow-ellipsis whitespace-nowrap h-8 pr-2 -mr-1">{author}</p>
                         <div className="cursor-pointer h-8 flex flex-col"
                              onClick={(e) => {
                             e.stopPropagation();
@@ -38,13 +44,7 @@ export default function Post({date, clock, liked, text, username, nOfComm, nOfLi
                     </div>
                 </div>
 
-                {(!showComm) ? null :
-                    <div className="comments">
-                        <div className="flex flex-col">
-                            <p>kjgazrefkygc kugerkufygrzu kyvkuer kuergkuerg vukygkurf</p>
-                            <p>kjgazrefkygc kugerkufygrzu kyvkuer kuergkuerg vukygkurf</p>
-                        </div>
-                    </div> }
+                {(!showComm) ? null : <Commentor postId={postId} currentUser={currentUser} newComm={newComm}/> }
             </div>
 {/*
             {date ? <div className="border-b border-coffee-dark md:-mt-4 w-full flex flex-row justify-center md:justify-start

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link, useHistory, useParams} from 'react-router-dom';
-import {Button} from "@material-tailwind/react";
+import Button from './TCP_button'
 import {useFetch} from "../utils/useFetch";
 
 export default function ShowProfile() {
