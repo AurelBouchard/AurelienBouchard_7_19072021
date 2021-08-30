@@ -15,6 +15,8 @@ router.get('/:pseudo/likedposts',   userController.getLikedPosts);      //auth
 
 router.put('/update/:id',           userController.update);     //auth
 
+router.put('/updatePW/:id',         userController.updatePW);     //auth
+
 router.delete('/deluser/:id',       userController.remove);     //auth
 
 

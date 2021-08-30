@@ -48,11 +48,11 @@ const Connection = ({setConnected, setAskForSubscription, setCurrentUser}) => {
                         console.log("try to connect ...");
 
                         const payload = {
-                            pseudo: values.pseudo,
-                            password: values.password
+                            pseudo:     values.pseudo,
+                            password:   values.password
                         }
 
-                        axios.post('http://localhost:4000/api/auth/login', payload)
+                        axios.post('http://localhost:4000/api/user/login', payload)
                             .then(function (response) {
                                 //console.log(response.data);
                                 console.log(response.status);

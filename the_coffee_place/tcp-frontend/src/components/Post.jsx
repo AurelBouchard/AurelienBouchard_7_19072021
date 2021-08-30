@@ -1,13 +1,11 @@
 import React, {useState} from 'react';
-import {Link} from 'react-router-dom';
-import {useGet} from "../utils/useGet";
+
 import Commentor from "./Commentor";
 import axios from "axios";
 
 
 export default function Post({date, clock, liked, text, author, nOfComm, nOfLike, UserId, postId, currentUser, newComm}) {
     const [showComm, setShowComm] = useState(false);
-    const [click, incrementClick] = useState(0);
 
 
     return (
@@ -54,8 +52,7 @@ export default function Post({date, clock, liked, text, author, nOfComm, nOfLike
                                      .then(() => {
                                          console.log("like/notlike ok");
 
-                                         // reload post by changing an harmless state
-                                         //incrementClick(click+1);
+                                         // reload wall (post's parent)
                                          newComm();
                                      })
                                      .catch(err => { console.log(err) });

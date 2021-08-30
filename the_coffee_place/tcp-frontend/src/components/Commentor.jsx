@@ -47,9 +47,6 @@ const Commentor = ({currentUser, postId, newComm}) => {
                                         // reset values
                                         actions.resetForm();
 
-                                        // close commentor
-                                        //toggleOpen(!isOpen);
-
                                         // reload wall (commentor's parent)
                                         newComm();
 

@@ -112,7 +112,6 @@ exports.addComment = (req, res) => {
 };
 
 
-
 exports.getAll = (req, res) => {
     Post.findAll({attributes:['id','text', 'author', 'nOfComment', 'nOfLike', 'UserId', 'createdAt']})      // use findAndCountAll() instead ? https://sequelize.org/master/manual/model-querying-finders.html#-code-findandcountall--code-
         .then(posts => {

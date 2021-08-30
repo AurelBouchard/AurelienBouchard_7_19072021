@@ -31,7 +31,7 @@ const CreateAccount = ({setAskForSubscription}) => {
                     email: '',
                     password: '',
                     passwordConf: '',
-                    //user_captcha_input: '',
+                    user_captcha_input: '',
                 }}
 
                 validate={values => {
@@ -45,12 +45,13 @@ const CreateAccount = ({setAskForSubscription}) => {
                     else if ( !/^(?=.{8,})/i.test(values.password) ) { errors.password = 'Doit contenir 8 caractères'; }
                     else if ( !/^(?=.*[?!@#$%^&*=|£²³`"'ø§€])/i.test(values.password) ) { errors.password = 'Doit au moins 1 caractère spécial'; }
                     else if ( !/^(?=.*[0-9])/i.test(values.password) ) { errors.password = 'Doit contenir au moins 1 chiffre'; }
-                    else if ( !/^(?=.*[A-Z])(?=.*[a-z])/i.test(values.password) ) { errors.password = 'Doit contenir des minuscules et majuscules'; }
+                    else if ( !/^(?=.*[A-Z])/i.test(values.password) ) { errors.password = 'Doit contenir au moins 1 majuscule'; }
+                    else if ( !/^(?=.*[a-z])/i.test(values.password) ) { errors.password = 'Doit contenir au moins 1 minuscule'; }
 
                     if (!values.passwordConf)  { errors.passwordConf = 'Champ requis'; }
                     else if ( values.password !== values.passwordConf ) { errors.passwordConf = 'Doit être identique'; }
 
-                    //if (!values.user_captcha_input)  { errors.user_captcha_input = 'Recopiez le captcha'; }
+                    if (!values.user_captcha_input)  { errors.user_captcha_input = 'Recopiez le captcha'; }
 
                     return errors;
                 }}
@@ -69,12 +70,12 @@ const CreateAccount = ({setAskForSubscription}) => {
                         }
 
                         const payload = {
-                            pseudo:values.pseudo,
-                            password:values.password,
-                            email:values.email
+                            pseudo:     values.pseudo,
+                            password:   values.password,
+                            email:      values.email
                         }
 
-                        axios.post('http://localhost:4000/api/auth/signup', payload)
+                        axios.post('http://localhost:4000/api/user/signup', payload)
                             .then(function (response) {
                                 //console.log(response.data);
                                 console.log(response.status);

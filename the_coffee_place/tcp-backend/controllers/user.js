@@ -110,6 +110,36 @@ exports.update = (req, res) => {
 };
 
 
+exports.updatePW = (req, res) => {
+    User.findOne({where: {id: req.params.id}})
+        .then((user) => {
+            bcrypt.compare(req.body.oldPassword, user.password)
+                .then(valid => {
+                    if (!valid) {
+                        console.log("Wrong password");
+                        return res.status(401).json({error: "Mot de passe erroné."});
+                    }
+
+                    console.log("Old password ok");
+                })
+                .then(() => {
+                    bcrypt.hash(req.body.newPassword, 10)
+                        .then(hash => {
+                            return User.update({ password: hash },{where: {id: req.params.id}})
+                        })
+                        .then(() => {
+                            console.log("password update successful")
+                            return res.status(200).json({message:"Mot de passe mis à jour"});
+                        })
+
+
+                })
+                .catch(error => res.status(500).json({error}));
+        })
+        .catch(err =>  res.status(400).json({err}))
+};
+
+
 exports.remove = (req, res) => {
     User.destroy({where: {id: req.params.id}})
         .then(()=> {

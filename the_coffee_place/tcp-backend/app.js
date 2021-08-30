@@ -39,7 +39,7 @@ app.use(bodyParser.json()); // DOES NOT HANDLE MULTIPART BODIES !!
 
 //app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/posts', postRoutes);    // / + /:id + /:id/like
-app.use('/api/auth', userRoutes);       // /api/auth/signup  +   /api/auth/login    +   /api/auth/unsubscribe
+app.use('/api/user', userRoutes);       // /api/auth/signup  +   /api/auth/login    +   /api/auth/unsubscribe
 app.use('/api/members', memberRoutes);       // /api/members  +   /api/members/:pseudo
 
 module.exports = app;

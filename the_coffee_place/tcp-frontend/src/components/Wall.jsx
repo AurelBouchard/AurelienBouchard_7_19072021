@@ -13,8 +13,7 @@ import ScrollToTop from "./ScrollToTop";
 export default function Wall({currentUser, handleNewPost}) {
 
     const {data, loading} = useGet('http://localhost:4000/api/posts');
-    const {listOfLikedPost, finding} = useGetLikedPost(`http://localhost:4000/api/auth/${currentUser}/likedposts`);
-    // listOfLikedPost format : [ [1], [3], ... ]
+    const {listOfLikedPost, finding} = useGetLikedPost(`http://localhost:4000/api/user/${currentUser}/likedposts`);
 
     useEffect(() => {
         document.title = "Discussion";
@@ -27,8 +26,6 @@ export default function Wall({currentUser, handleNewPost}) {
                 {(loading || finding) ? "loading ..." : (
                     data.slice(0).reverse().map(({date, clock, text, author, nOfLike, nOfComment, UserId, postId }) => {
                         let key = uuidv4();
-                        console.log("list of liked posts :")
-                        console.log(listOfLikedPost);
                         const isLiked = listOfLikedPost.includes(postId);
                         return (
                             <Post
