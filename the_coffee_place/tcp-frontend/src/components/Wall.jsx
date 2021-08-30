@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from 'uuid';
 
-import {useFetch} from "../utils/useFetch";
+import {useGet} from '../utils/useGet';
+import {useGetLikedPost} from '../utils/useGetLikedPost';
 
 import Redactor from "./Redactor";
 import Post from "./Post";
 import ScrollToTop from "./ScrollToTop";
-import {loadCaptchaEnginge} from "react-simple-captcha";
 
 
 
 export default function Wall({currentUser, handleNewPost}) {
 
-    const {data, loading} = useFetch('http://localhost:4000/api/posts');
+    const {data, loading} = useGet('http://localhost:4000/api/posts');
+    const {listOfLikedPost, finding} = useGetLikedPost(`http://localhost:4000/api/auth/${currentUser}/likedposts`);
+    // listOfLikedPost format : [ [1], [3], ... ]
 
     useEffect(() => {
         document.title = "Discussion";
@@ -22,15 +24,18 @@ export default function Wall({currentUser, handleNewPost}) {
         <div className="mx-auto pb-8 w-5/6 max-w-3xl cursor-default">
                 <>
                     <Redactor author={currentUser} newPost={handleNewPost}/>
-                {loading ? "loading ..." : (
+                {(loading || finding) ? "loading ..." : (
                     data.slice(0).reverse().map(({date, clock, text, author, nOfLike, nOfComment, UserId, postId }) => {
                         let key = uuidv4();
+                        console.log("list of liked posts :")
+                        console.log(listOfLikedPost);
+                        const isLiked = listOfLikedPost.includes(postId);
                         return (
                             <Post
                                 key={key}
                                 date={date}
                                 clock={clock}
-                                liked={true}
+                                liked={isLiked}
                                 author={author}
                                 text={text}
                                 nOfComm={nOfComment}

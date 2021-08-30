@@ -2,10 +2,10 @@ import {useEffect, useState} from "react";
 import axios from 'axios';
 
 
-const initialState = {data:undefined, loading: true};
+const initialState = {listOfLikedPost:undefined, finding: true};
 
 
-export const useGet = (url) => {
+export const useGetLikedPost = (url) => {
     const [state, setState] = useState(initialState);
 
     console.log('USE GET WITH URL : '+url);
@@ -15,8 +15,9 @@ export const useGet = (url) => {
 
         axios.get(url)
             .then( response => {
-                //console.log(result);
-                setState( {data: response.data, loading: false} );
+                console.log("useGetLikedPost response :");
+                console.log(response);
+                setState( {listOfLikedPost: response.data, finding: false} );
             })
 
     }, [url]);

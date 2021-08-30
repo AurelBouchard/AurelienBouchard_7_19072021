@@ -3,8 +3,9 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
 import axios from "axios";
 
-import Input from './TCP_input';
+
 import Button from './TCP_button';
+import {H1,H2,H3,H4,H5,H6} from "./Headings.jsx";
 
 
 
@@ -13,13 +14,6 @@ import Card from "@material-tailwind/react/Card";
 import CardHeader from "@material-tailwind/react/CardHeader";
 import CardBody from "@material-tailwind/react/CardBody";
 import CardFooter from "@material-tailwind/react/CardFooter";
-import InputIcon from "@material-tailwind/react/InputIcon";
-//import Button from "@material-tailwind/react/Button";
-import {H1,H2,H3,H4,H5,H6} from "./Headings.jsx";
-import Tooltips from "@material-tailwind/react/Tooltips";
-import TooltipsContent from "@material-tailwind/react/TooltipsContent";
-
-//import {Input} from "@material-tailwind/react";
 
 
 const CreateAccount = ({setAskForSubscription}) => {
@@ -141,7 +135,7 @@ const CreateAccount = ({setAskForSubscription}) => {
                                             <LoadCanvasTemplateNoReload className="text-center"/>
                                         </div>
                                         <label htmlFor='user_captcha_input' className='block'>Captcha</label>
-                                        <Field autocomplete="off" id="user_captcha_input" name="user_captcha_input" placeholder="Copiez le captcha" />
+                                        <Field autoComplete="off" id="user_captcha_input" name="user_captcha_input" placeholder="Copiez le captcha" />
                                         <ErrorMessage name="user_captcha_input" component="div" />
                                     </div>
                                 </CardBody>

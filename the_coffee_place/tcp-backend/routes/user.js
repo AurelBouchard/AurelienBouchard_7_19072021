@@ -5,15 +5,17 @@ const userController = require('../controllers/user');
 const auth = require('../middleware/auth');
 
 
-router.post('/signup', userController.signUp);
+router.post('/signup',              userController.signUp);
 
-router.post('/login', userController.logIn);
+router.post('/login',               userController.logIn);
 
-router.get('/user/:pseudo', userController.getFullProfile);
+router.get('/:pseudo',              userController.getFullProfile);     //auth
 
-router.put('/update/:id', userController.update);//auth
+router.get('/:pseudo/likedposts',   userController.getLikedPosts);      //auth
 
-router.delete('/deluser/:id', userController.remove);//auth
+router.put('/update/:id',           userController.update);     //auth
+
+router.delete('/deluser/:id',       userController.remove);     //auth
 
 
 

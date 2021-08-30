@@ -1,10 +1,11 @@
 const User = require('../models/User');
 const Post = require('../models/Post');
-const Comm = require('../models/Comm')
-const sequelize = require("../db_management/sequelize");
-const queryInterface = sequelize.getQueryInterface();
-const LikersOfPost = require("../models/Like");
-const {Sequelize} = require("sequelize");
+const Comm = require('../models/Comm');
+const Like = require('../models/Like');
+//const sequelize = require("../db_management/sequelize");
+//const queryInterface = sequelize.getQueryInterface();
+//const LikersOfPost = require("../models/Like");
+//const {Sequelize} = require("sequelize");
 
 
 
@@ -30,57 +31,52 @@ exports.create = (req, res) => {
 
 
 exports.addLike = (req, res) => {
-
-    if (req.body.liked) {     // user = liker
-        let liker = 0;
-
+    if (req.body.liked) {
+        // STRATEGY : find who like, find the concerned post then increment the nOfLikers and create Like that belong to that post
         console.log("\nfinding who is the liker");
-        User.findOne( {where: {pseudo: req.body.pseudo} } )
+        User.findOne({where: {pseudo: req.body.pseudo}})
             .then(user => {
-                liker = user.id;
-                console.log("\ngetting the table PostsLikedById"+liker);
-                return  sequelize.define("PostsLikedById"+liker, PostLikedById);
+
+                console.log("\nfinding the post");
+                return Post.findOne({where: {id: req.params.id}})
+                    .then((post) => {
+                        console.log("\nincrement nOfLike of this post");
+                        post.increment('nOfLike');
+
+                        console.log("create like");
+                        post.createLike({'userId':user.id, 'pseudo':req.body.pseudo});
+                        res.status(201).json({message: "Like ajouté"});
+                    })
+                    .catch(err => {
+                        try { console.log("Error while creating like : \n" + err.name + ".\n" + err.parent.text);
+                        } catch { console.log(err); }
+                        res.status(500).json({err});
+                    });
             })
-            .then(table => {
-                console.log("\nadding the postId ("+req.params.id+") to the list of posts liked by this user");
-                return table.create({attributes: {postId: parseInt(req.params.id)}})   //  ??????????????????????????? ne fonctionne pas, mais pas d'erreur
-            })
-            .then(() => {
-                console.log("\ngetting the table LikersOfPost"+req.params.id);
-                return sequelize.define("LikersOfPost"+req.params.id, LikersOfPost );
-            })
-            .then(table => {
-                console.log("\nadding the userId ("+liker+") to the list of user who like this post");
-                return table.create({userId: liker})   //  ??????????????????????????? ne fonctionne pas, mais pas d'erreur
-            })
-            .then(() => {
-                console.log("\nfinding the post with its id ("+req.params.id+")");
-                return Post.findOne({where: {id: req.params.id}}, {attributes: ['id','nOfLike']})//, {attributes: ['id','nOfLike']})
-            })
-            .then(post => {
-                console.log("\nincrement nOfLike of this post");
-                post.increment('nOfLike');
-            })
-            .then(() => {
-                console.log("\nend of 'like' procedure")
-                return res.status(200).json({message: "Post liké"});
-            })
-            .catch(err => { try { console.log("Error while creating like : \n" + err.name + ".\n" + err.parent.text);
-            } catch { console.log(err); }
-                res.status(500).json({err});
+            .catch(err => {
+                console.log("user not found");
+                res.status(404).json({err});
             });
 
-        } else {    // user = not a liker anymore
-
-                // remove id of post to list of liked by user
-
-                // remove userId to list of post likers
-
-                // decrement
-
-
+    } else {
+        // STRATEGY : remove the like then find the post and decrement nOfLike
+        console.log("\nremove the like");
+        Like.destroy({where :{pseudo: req.body.pseudo, postId: req.params.id} })
+            .then(() => {
+                console.log("\nfinding the post");
+                return Post.findOne({where: {id: req.params.id}})
+            })
+            .then((post) => {
+                console.log("\ndecrement nOfLike of this post");
+                post.decrement('nOfLike');
+                res.status(200).json({message: "Like supprimé"})
+            })
+            .catch(err => {
+                try { console.log("Error while removing like : \n" + err.name + ".\n" + err.parent.text);
+                } catch { console.log(err); }
+                res.status(500).json({err});
+            });
         }
-
 };
 
 
@@ -118,7 +114,7 @@ exports.addComment = (req, res) => {
 
 
 exports.getAll = (req, res) => {
-    Post.findAll({attributes:['id','text', 'author', 'nOfComment', 'nOfLike', 'UserId', 'createdAt']})      // must Post.replaced by findAndCountAll() https://sequelize.org/master/manual/model-querying-finders.html#-code-findandcountall--code-
+    Post.findAll({attributes:['id','text', 'author', 'nOfComment', 'nOfLike', 'UserId', 'createdAt']})      // use findAndCountAll() instead ? https://sequelize.org/master/manual/model-querying-finders.html#-code-findandcountall--code-
         .then(posts => {
             // adapt posts :
             const formattedPosts = posts.map((post) => {
@@ -167,6 +163,10 @@ exports.getComments = (req, res) => {
         })
         .catch(error => res.status(404).json({ error }));
 };
+
+
+
+
 
 
 /*exports.modify = (req, res) => {

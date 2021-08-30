@@ -9,21 +9,22 @@ const postController = require('../controllers/post');
 //    ADD auth MIDDLEWARE TO ALL ROUTES !!!!!!
 //#########################################################
 
-// POST METHODS : Create post
-router.post('/',       postController.create);    //fileManager,
 
-// GET METHODS : Reach all or one post
-router.get('/',        postController.getAll);
-router.get('/:id',    postController.findById);
-router.get('/:id/comments',    postController.getComments);
+router.post('/',            postController.create);    //fileManager,
 
-// PUT METHOD : Update post data
-router.put('/:id/like',    postController.addLike);
-router.put('/:id/comment',    postController.addComment);
+router.get('/',             postController.getAll);
+
+router.get('/:id',          postController.findById);
+
+router.get('/:id/comments', postController.getComments);
+
+router.put('/:id/like',     postController.addLike);
+
+router.put('/:id/comment',  postController.addComment);
 //router.put('/:id',  auth,   postController.modify);       // add links to comments ? or comments ?
 
-// DELETE METHOD : Delete post by admin only
-router.delete('/:index',      postController.remove);   // index can be id of post to be removed or pseudo of author
+router.delete('/:index',    postController.remove);   // index can be id of post to be removed or pseudo of author
+
 
 
 module.exports = router;

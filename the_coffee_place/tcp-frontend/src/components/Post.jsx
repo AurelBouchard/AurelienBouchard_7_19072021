@@ -2,10 +2,12 @@ import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import {useGet} from "../utils/useGet";
 import Commentor from "./Commentor";
+import axios from "axios";
 
 
 export default function Post({date, clock, liked, text, author, nOfComm, nOfLike, UserId, postId, currentUser, newComm}) {
     const [showComm, setShowComm] = useState(false);
+    const [click, incrementClick] = useState(0);
 
 
     return (
@@ -23,7 +25,7 @@ export default function Post({date, clock, liked, text, author, nOfComm, nOfLike
                     <p className="mono mt-2 mr-4 font-EXO">{clock}</p>
 
                     <div className="comments mono font-EXO cursor-pointer h-6 flex flex-row"
-                         onClick={() => {{setShowComm(!showComm)} }}>
+                         onClick={() => {setShowComm(!showComm);} }>
                         <p className="overflow-ellipsis overflow-hidden h-6 mr-1 min-w-0 flex-shrink">
                             {`Commentaires (${nOfComm})`}
                         </p>
@@ -35,8 +37,29 @@ export default function Post({date, clock, liked, text, author, nOfComm, nOfLike
                         <p className="handWritten text-2xl overflow-hidden overflow-ellipsis whitespace-nowrap h-8 pr-2 -mr-1">{author}</p>
                         <div className="cursor-pointer h-8 flex flex-col"
                              onClick={(e) => {
-                            e.stopPropagation();
-                            alert('toggle like : liked/notliked')
+                                 e.stopPropagation();
+                                 console.log("click sur like / not like, etat de isLiked :");
+                                 console.log(liked);
+
+                                 const payload = {
+                                     liked:     !liked,
+                                     pseudo:    currentUser
+                                 }
+
+                                 // send new state to backend
+                                 axios.put(`http://localhost:4000/api/posts/${postId}/like`, payload)
+                                     .then(function (response) {
+                                         console.log("response status "+response.status);
+                                     })
+                                     .then(() => {
+                                         console.log("like/notlike ok");
+
+                                         // reload post by changing an harmless state
+                                         //incrementClick(click+1);
+                                         newComm();
+                                     })
+                                     .catch(err => { console.log(err) });
+
                         }}>
                             {liked ? <span className="liked ml-2 h-8 text-coffee text-xl"><i className="fas fa-thumbs-up"></i></span>
                             : <span className="notliked pt-1 h-8 text-gray-300"><i className="fas fa-thumbs-up"></i></span> }
