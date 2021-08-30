@@ -86,7 +86,7 @@ function App() {
                                     <Members />
                                 </Route>
                                 <Route exact path='/myprofile'>
-                                    <ProfileEditor currentUser={currentUser} />
+                                    <ProfileEditor currentUser={currentUser} setConnected={setConnected} />
                                 </Route>
 
 {/*                            <Route exact path='/settings'>

@@ -8,7 +8,7 @@ import Button from './TCP_button'
 import {useGet} from "../utils/useGet";
 
 
-export default function ProfileEditor({currentUser}) {
+export default function ProfileEditor({currentUser, setConnected}) {
     const [mode, changeModeTo] = useState('normal'); // possible states : 'normal' / 'changePW' / 'rmProfile'
 
     const history = useHistory();
@@ -119,7 +119,59 @@ export default function ProfileEditor({currentUser}) {
         return (
             <div className="text-coffee-dark">
                 {loading ? ("loading ...") : (
-                    "RM PROFILE"
+                    <Formik     // change password case
+                        initialValues={{ }}
+
+                        validate={values => { }}
+
+                        onSubmit={(values, {setSubmitting}) => {
+                            setTimeout(() => {
+
+                                console.log("try to delete profile ...");
+
+                                axios.delete(`http://localhost:4000/api/user/deluser/${data.user.id}`)
+                                    .then(function (response) {
+                                        console.log("response status " + response.status);
+                                    })
+                                    .then(() => {
+                                        alert("Le compte a été supprimé");
+                                        console.log("profile successfully removed")
+                                    })
+                                    .catch(err => {
+                                        console.log(err)
+                                    });
+                                setSubmitting(false);
+                            }, 400);
+
+                            // disconnect from app
+                            setConnected(false);
+                        }}
+                    >
+
+                        {({isSubmitting}) => (
+
+                            <Form>
+                                <div className="flex flex-col pt-4 md:p-8 mx-auto items-center justify justify-between font-EXO
+                    md:flex-row flex-wrap md:justify-center md:max-w-2xl">
+
+
+                                    <p>Êtes-vous sûr de vouloir supprimer votre profil ?</p>
+                                    <p>Cette action est irréversible.</p>
+
+
+                                    <div className="admin flex flex-col m-4 mx-16 md:mx-4 md:w-full">
+                                        <div className="md:flex md:flex-row md:justify-around">
+                                            <Button type='reset' text="Annuler" onClick={() => {changeModeTo('normal')}}>
+                                            </Button>
+                                            <Button type='submit' text="Confirmer la suppression">
+                                            </Button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </Form>
+                        )}
+                    </Formik>   // end of change password case
                 )}
             </div>
         )
