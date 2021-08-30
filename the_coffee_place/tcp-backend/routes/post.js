@@ -21,9 +21,10 @@ router.get('/:id/comments', postController.getComments);
 router.put('/:id/like',     postController.addLike);
 
 router.put('/:id/comment',  postController.addComment);
-//router.put('/:id',  auth,   postController.modify);       // add links to comments ? or comments ?
 
-router.delete('/:index',    postController.remove);   // index can be id of post to be removed or pseudo of author
+router.delete('/:index',    postController.removePost);   // index can be id of post to be removed or pseudo of author
+
+router.delete('/comment/:index',    postController.removeComment);   // index can be id of post to be removed or pseudo of author
 
 
 

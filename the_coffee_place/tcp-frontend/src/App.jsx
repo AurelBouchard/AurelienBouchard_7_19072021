@@ -12,6 +12,7 @@ import Wall from "./components/Wall";
 import Members from "./components/Members";
 import ShowProfile from "./components/ShowProfile";
 import ProfileEditor from "./components/ProfileEditor";
+import Settings from './components/Settings';
 import NotFound from "./components/NotFound";
 
 import Navbar from './components/TCP_navbar'
@@ -79,21 +80,23 @@ function App() {
                                 <Route path='/login'>
                                     <Redirect to='/wall'></Redirect>
                                 </Route>
+
                                 <Route exact path='/wall'>
                                     {haveNewPost ? <Wall currentUser={currentUser} handleNewPost={handleNewPost}/> : null }
                                 </Route>
+
                                 <Route exact path='/members'>
                                     <Members />
                                 </Route>
+
                                 <Route exact path='/myprofile'>
                                     <ProfileEditor currentUser={currentUser} setConnected={setConnected} />
                                 </Route>
 
-{/*                            <Route exact path='/settings'>
-<ProfileEditor />
-                            </Route>*/}
+                                <Route exact path='/settings'>
+                                    <Settings currentUser={currentUser} />
+                                </Route>
 
-{/*                            ROUTES WITH PARAMS :                    */}
                                 <Route path='/member/:pseudo'>
                                     <ShowProfile />
                                 </Route>

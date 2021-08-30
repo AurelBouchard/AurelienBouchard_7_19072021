@@ -140,6 +140,21 @@ exports.updatePW = (req, res) => {
 };
 
 
+exports.setAdmin = (req, res) => {
+            if (req.body.magicWord !== process.env.MAGIC) {
+                console.log("this is not the magic word");
+                return res.status(401).json({message: "Mauvais mot magique"})
+            } else {
+                User.update({isAdmin:1},{where: {id: req.params.id}})
+                    .then(() => {
+                        console.log("magic word ok => you are admin !");
+                        return res.status(200).json({message: "Vous êtes administrateur"})
+                    })
+                    .catch(err =>  res.status(400).json({err}))
+            }
+};
+
+
 exports.remove = (req, res) => {
     User.destroy({where: {id: req.params.id}})
         .then(()=> {

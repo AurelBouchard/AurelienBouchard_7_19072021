@@ -180,7 +180,7 @@ exports.getComments = (req, res) => {
 };*/
 
 
-exports.remove = (req, res) => {    // BY ADMIN ONLY
+exports.removePost = (req, res) => {    // ONLY BY ADMIN
     if (isNaN(req.params.index)) {
         // when a pseudo is provided
         Post.destroy({where: {author: req.params.index}})
@@ -193,12 +193,21 @@ exports.remove = (req, res) => {    // BY ADMIN ONLY
             .then(()=> { res.status(200).json({message: "Post supprimé"}); })
             .catch(error => res.status(400).json({ error }));
     }
-
-
 };
 
 
-/* time formating :
-*     const time = new Date;
-* time.toLocaleString('fr-FR')).split(',')[0]
-*/
+exports.removeComment = (req, res) => {    // ONLY BY ADMIN
+    if (isNaN(req.params.index)) {
+        // when a pseudo is provided
+        Comm.destroy({where: {author: req.params.index}})
+            .then(()=> { res.status(200).json({message: "Commentaire(s) supprimé(s)"}); })
+            .catch(error => res.status(400).json({ error }));
+
+    } else {
+        // an id of comment is provided
+        Comm.destroy({where: {id: req.params.index}})
+            .then(()=> { res.status(200).json({message: "Commentaire supprimé"}); })
+            .catch(error => res.status(400).json({ error }));
+    }
+};
+
