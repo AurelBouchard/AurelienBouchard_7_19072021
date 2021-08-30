@@ -17,7 +17,7 @@ router.put('/update/:id',           userController.update);     //auth
 
 router.put('/updatePW/:id',         userController.updatePW);     //auth
 
-router.put('/setadmin/:id',         userController.setAdmin);   // auth
+router.put('/setadmin/:pseudo',     userController.setAdmin);   // auth
 
 router.delete('/deluser/:id',       userController.remove);     //auth
 

@@ -8,20 +8,16 @@ import Button from './TCP_button'
 import {useGet} from "../utils/useGet";
 
 
-export default function Settings({currentUser}) {
+export default function Settings({currentUser, isAdmin}) {
 
     const history = useHistory();
 
     useEffect(() => { document.title = "Paramètres"; });
 
-    const {data, loading} = useGet(`http://localhost:4000/api/user/${currentUser}`);
-    //const {id, pseudo, password, firstName, lastName, email, about, createdAt, updatedAt} = data.user;
-
 
     return (
         <div className="text-coffee-dark">
-            { loading ? "loading ..." : (
-                (data.user.isAdmin) ? (
+            { (isAdmin) ? (
                     <div className="text-coffee-dark">
                         <div className="mx-auto pb-8 w-5/6 max-w-3xl cursor-default">
                             <p>Vous êtes administrateur !</p>
@@ -46,7 +42,7 @@ export default function Settings({currentUser}) {
 
                                         const payload = {magicWord: values.magicWord}
 
-                                        axios.put(`http://localhost:4000/api/user/setadmin/${data.user.id}`, payload)
+                                        axios.put(`http://localhost:4000/api/user/setadmin/${currentUser}`, payload)
                                             .then(function (response) {
                                                 console.log("response status " + response.status);
                                             })
@@ -101,8 +97,6 @@ export default function Settings({currentUser}) {
                             </Formik>
                         </div>
                     </div>
-
-                )
             )}
         </div>
     )

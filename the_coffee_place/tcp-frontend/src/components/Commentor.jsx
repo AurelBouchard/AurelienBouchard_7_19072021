@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Button from './TCP_button'
 import {useGet} from "../utils/useGet";
 
-const Commentor = ({currentUser, postId, newComm}) => {
+const Commentor = ({currentUser, postId, newComm, isAdmin}) => {
     //const [isOpen, toggleOpen] =useState(false);
 
     const {data, loading} = useGet(`http://localhost:4000/api/posts/${postId}/comments`);
@@ -61,27 +61,38 @@ const Commentor = ({currentUser, postId, newComm}) => {
                     >
                         {props => (
                             <Form >
-                                <div className="p-3 flex flex-col rounded-3xl bg-white md:ml-28 text-coffee-dark">
-                                    {/*affichage des commentaires précédents*/}
+                                <div className="p-3 flex flex-col rounded-3xl text-coffee-dark">
                                     {loading ? "loading ..." : (
-                                        data.slice(0).reverse().map((oldComm) => {
+                                        data.map((oldComm) => {
                                             let key = uuidv4();
                                             return (
-                                                <p key={key}>{oldComm.text}</p>
+                                                <div key={key}>
+                                                    <span className="font-EXO ">{oldComm.author} :</span>
+                                                    <span className="handWritten text-2xl ml-4">{oldComm.text}</span>
+                                                    {(!isAdmin) ? null : <span className="text-red-500 ml-6"
+                                                                              onClick={() => {
+                                                                                  // confirm deletion
+                                                                              }
+                                                                              } ><i className="far fa-trash-alt"></i></span> }
+                                                </div>
                                             )
                                         })
                                     )}
 
+                                    <div className=" flex flex-row">
+                                        <p className="font-EXO mr-2">Vous : </p>
+                                        <div className="bg-blue-gray-100 rounded-2xl flex-1">
+                                            <input className="handWritten text-2xl bg-transparent w-full pl-2
+                                        overflow-ellipsis overflow-hidden whitespace-pre-line cursor-pointer"
+                                                   type='undefined'
+                                                   onChange={props.handleChange}
+                                                   value={props.values.currentComm}
+                                                   name='currentComm'
+                                            />
+                                        </div>
 
-                                    <div className="bg-blue-gray-100 rounded-2xl px-1 cursor-pointer">
-                                        <input className="handWritten text-2xl bg-transparent w-full
-                            overflow-ellipsis overflow-hidden whitespace-pre-line"
-                                               type='undefined'
-                                               onChange={props.handleChange}
-                                               value={props.values.currentComm}
-                                               name='currentComm'
-                                        />
                                     </div>
+
                                     {props.errors.currentComm && <div id="feedback">{props.errors.currentComm}</div>}
 
                                     <div className="btns flex flex-row w-full justify-evenly mt-3 -mb-2">

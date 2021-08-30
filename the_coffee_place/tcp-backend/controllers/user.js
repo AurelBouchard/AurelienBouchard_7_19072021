@@ -145,7 +145,7 @@ exports.setAdmin = (req, res) => {
                 console.log("this is not the magic word");
                 return res.status(401).json({message: "Mauvais mot magique"})
             } else {
-                User.update({isAdmin:1},{where: {id: req.params.id}})
+                User.update({isAdmin:1},{where: {pseudo: req.params.pseudo}})
                     .then(() => {
                         console.log("magic word ok => you are admin !");
                         return res.status(200).json({message: "Vous êtes administrateur"})

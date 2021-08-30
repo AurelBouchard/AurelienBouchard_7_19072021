@@ -16,6 +16,7 @@ import Settings from './components/Settings';
 import NotFound from "./components/NotFound";
 
 import Navbar from './components/TCP_navbar'
+import {useGet} from "./utils/useGet";
 
 
 
@@ -26,15 +27,18 @@ function App() {
     const [currentUser, setCurrentUser] = useState(lastUser);
     let history = useHistory();
 
-    const [haveNewPost, setHaveNewPost] = useState(true);
+    const [haveNewChild, setHaveNewChild] = useState(true);
 
-    function handleNewPost() {
-        setHaveNewPost(false);
+    // need to know early if user is admin :
+    const {data, loading} = useGet(`http://localhost:4000/api/user/${currentUser}`);    // data.user.isAdmin
+
+    function handleNewChild() {
+        setHaveNewChild(false);
     }
 
     useEffect(() => {
-        if (haveNewPost === false) {setHaveNewPost(true)}
-    }, [haveNewPost]);
+        if (haveNewChild === false) {setHaveNewChild(true)}
+    }, [haveNewChild]);
 
 
     function handleAskForSubscription(bool) {
@@ -44,79 +48,87 @@ function App() {
 
     return (
             <div className="App bg-blue-100 pt-16 lg:pt-32l">
-                <Router>
-                    {!isConnected ?
-                        <>
-                            <Switch>
-                                <Route exact path='/signin'>
-                                    {askForSubscription ?
-                                        <CreateAccount
-                                            setAskForSubscription={handleAskForSubscription}
-                                        />
-                                        : <Redirect to='/login'></Redirect>
-                                    }
-                                </Route>
 
-                                <Route exact path='/login'>
-                                    {!askForSubscription ?
-                                        <Connection
-                                            setConnected={setConnected}
-                                            setAskForSubscription={handleAskForSubscription}
-                                            setCurrentUser={setCurrentUser}
-                                        />
-                                        : <Redirect to='/signin'></Redirect>
-                                    }
-                                </Route>
+                {loading ? ("loading ...") : (
+                    <Router>
+                        {!isConnected ?
+                            <>
+                                <Switch>
+                                    <Route exact path='/signin'>
+                                        {askForSubscription ?
+                                            <CreateAccount
+                                                setAskForSubscription={handleAskForSubscription}
+                                            />
+                                            : <Redirect to='/login'></Redirect>
+                                        }
+                                    </Route>
 
-                                <Route path=''>
-                                    <Redirect to='/login'></Redirect>
-                                </Route>
-                            </Switch>
-                        </>
-                        :
-                        <>
-                            <Navbar disconnect={setConnected}/>
-                            <Switch>
-                                <Route path='/login'>
-                                    <Redirect to='/wall'></Redirect>
-                                </Route>
+                                    <Route exact path='/login'>
+                                        {!askForSubscription ?
+                                            <Connection
+                                                setConnected={setConnected}
+                                                setAskForSubscription={handleAskForSubscription}
+                                                setCurrentUser={setCurrentUser}
+                                            />
+                                            : <Redirect to='/signin'></Redirect>
+                                        }
+                                    </Route>
 
-                                <Route exact path='/wall'>
-                                    {haveNewPost ? <Wall currentUser={currentUser} handleNewPost={handleNewPost}/> : null }
-                                </Route>
+                                    <Route path=''>
+                                        <Redirect to='/login'></Redirect>
+                                    </Route>
+                                </Switch>
+                            </>
+                            :
+                            <>
+                                <Navbar disconnect={setConnected}/>
+                                <Switch>
+                                    <Route path='/login'>
+                                        <Redirect to='/wall'></Redirect>
+                                    </Route>
 
-                                <Route exact path='/members'>
-                                    <Members />
-                                </Route>
+                                    <Route exact path='/wall'>
+                                        {haveNewChild ?
+                                            <Wall currentUser={currentUser}
+                                                  handleNewChild={handleNewChild}
+                                                  isAdmin={data.user.isAdmin} />
+                                            : null }
+                                    </Route>
 
-                                <Route exact path='/myprofile'>
-                                    <ProfileEditor currentUser={currentUser} setConnected={setConnected} />
-                                </Route>
+                                    <Route exact path='/members'>
+                                        <Members isAdmin={data.user.isAdmin} />
+                                    </Route>
 
-                                <Route exact path='/settings'>
-                                    <Settings currentUser={currentUser} />
-                                </Route>
+                                    <Route exact path='/myprofile'>
+                                        <ProfileEditor currentUser={currentUser} setConnected={setConnected} />
+                                    </Route>
 
-                                <Route path='/member/:pseudo'>
-                                    <ShowProfile />
-                                </Route>
+                                    <Route exact path='/settings'>
+                                        <Settings currentUser={currentUser} isAdmin={data.user.isAdmin} />
+                                    </Route>
 
-{/*                            <Route path='/post/:id'>
-                            <Post />
-                        </Route>*/}
+                                    <Route path='/member/:pseudo'>
+                                        <ShowProfile isAdmin={data.user.isAdmin} />
+                                    </Route>
+
+    {/*                            <Route path='/post/:id'>
+                                <Post />
+                            </Route>*/}
 
 
 
-{/*                            404 ERROR :                    */}
-                                <Route path='/'>
-                                    <NotFound />
-                                </Route>
+    {/*                            404 ERROR :                    */}
+                                    <Route path='/'>
+                                        <NotFound />
+                                    </Route>
 
-                            </Switch>
-                        </>
-                    }
-                </Router>
+                                </Switch>
+                            </>
+                        }
+                    </Router>
+                )}
             </div>
+
     )
 };
 

@@ -10,7 +10,7 @@ import ScrollToTop from "./ScrollToTop";
 
 
 
-export default function Wall({currentUser, handleNewPost}) {
+export default function Wall({currentUser, handleNewChild, isAdmin}) {
 
     const {data, loading} = useGet('http://localhost:4000/api/posts');
     const {listOfLikedPost, finding} = useGetLikedPost(`http://localhost:4000/api/user/${currentUser}/likedposts`);
@@ -22,7 +22,7 @@ export default function Wall({currentUser, handleNewPost}) {
     return (
         <div className="mx-auto pb-8 w-5/6 max-w-3xl cursor-default">
                 <>
-                    <Redactor author={currentUser} newPost={handleNewPost}/>
+                    <Redactor author={currentUser} newPost={handleNewChild}/>
                 {(loading || finding) ? "loading ..." : (
                     data.slice(0).reverse().map(({date, clock, text, author, nOfLike, nOfComment, UserId, postId }) => {
                         let key = uuidv4();
@@ -40,7 +40,8 @@ export default function Wall({currentUser, handleNewPost}) {
                                 UserId={UserId}
                                 postId={postId}
                                 currentUser={currentUser}
-                                newComm={handleNewPost}
+                                newComm={handleNewChild}
+                                isAdmin={isAdmin}
                             />
                         )
                     })
