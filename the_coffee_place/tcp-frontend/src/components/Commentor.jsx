@@ -70,7 +70,7 @@ const Commentor = ({currentUser, postId, newComm, isAdmin, setModerate, setTarge
                                                 <div key={key}>
                                                     <span className="font-EXO ">{oldComm.author} :</span>
                                                     <span className="handWritten text-2xl ml-4">{oldComm.text}</span>
-                                                    {(!isAdmin) ? null : <span className="text-red-500 ml-6"
+                                                    {(!isAdmin) ? null : <span className="text-red-500 ml-6 hover:cursor-pointer"
                                                                                onClick={(e) => {
                                                                                    e.stopPropagation();
                                                                                    setTarget({type: 'commentaire', id: oldComm.id});

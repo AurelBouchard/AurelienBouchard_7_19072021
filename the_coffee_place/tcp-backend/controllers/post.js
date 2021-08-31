@@ -208,14 +208,30 @@ exports.removePost = (req, res) => {    // ONLY BY ADMIN
 exports.removeComment = (req, res) => {    // ONLY BY ADMIN
     if (isNaN(req.params.index)) {
         // when a pseudo is provided
+
+        // decrement each nOfComm !!
+
+        // then destroy the comms
         Comm.destroy({where: {author: req.params.index}})
             .then(()=> { res.status(200).json({message: "Commentaire(s) supprimé(s)"}); })
             .catch(error => res.status(400).json({ error }));
 
     } else {
         // an id of comment is provided
-        Comm.destroy({where: {id: req.params.index}})
-            .then(()=> { res.status(200).json({message: "Commentaire supprimé"}); })
+        Comm.findOne({where: {id: req.params.index}})
+            .then(comm => {
+                console.log("-----------------------")
+                console.log(comm.postId)
+                return comm.postId;         // find which post is parent
+            }).then(postId => {
+                return Post.findOne({where: {id: postId}});
+            }).then(post => {
+                post.decrement('nOfComment')
+            }).then(() => {
+                Comm.destroy({where: {id: req.params.index}})
+            }).then(()=> {
+                res.status(200).json({message: "Commentaire supprimé"});
+            })
             .catch(error => res.status(400).json({ error }));
     }
 };

@@ -39,7 +39,7 @@ label span{
 }
 
 button.warning:hover{
-    cursor: url("src/assets/icon/warning.png"), none;
+    cursor: url("src/assets/icon/warning.png"), pointer;
 }
 
 
