@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
-
-import Commentor from "./Commentor";
 import axios from "axios";
 
+import Commentor from "./Commentor";
 
-export default function Post({date, clock, liked, text, author, nOfComm, nOfLike, UserId, postId, currentUser, newComm, isAdmin}) {
+
+export default function Post({date, clock, liked, text, author, nOfComm, nOfLike, UserId, postId,
+                                 currentUser, newComm, isAdmin, setModerate, setTarget}) {
     const [showComm, setShowComm] = useState(false);
 
 
@@ -36,7 +37,7 @@ export default function Post({date, clock, liked, text, author, nOfComm, nOfLike
 
                     <div className="mt-2 flex flex-row justify-end">
                         <p className="handWritten text-2xl overflow-hidden overflow-ellipsis whitespace-nowrap h-8 pr-2 -mr-1">{author}</p>
-                        <div className="cursor-pointer h-8 flex flex-col"
+                        <div className="h-8 flex flex-col"
                              onClick={(e) => {
                                  e.stopPropagation();
                                  console.log("click sur like / not like, etat de isLiked :");
@@ -67,15 +68,20 @@ export default function Post({date, clock, liked, text, author, nOfComm, nOfLike
                     </div>
                 </div>
 
-                {(!showComm) ? null : <Commentor postId={postId} currentUser={currentUser} newComm={newComm} isAdmin={isAdmin}/> }
+                {(!showComm) ? null : <Commentor postId={postId} currentUser={currentUser} newComm={newComm}
+                                                 isAdmin={isAdmin} setModerate={setModerate} setTarget={setTarget}/> }
 
                 {(!isAdmin) ? null : <div className="absolute bottom-4 -right-6 text-red-500"
                                           onClick={() => {
-                                              // confirm deletion
+                                              setTarget({type: 'post', id: postId});
+                                              setModerate(true);
                                           }
-                                          } ><i className="far fa-trash-alt"></i></div> }
+                                          }><i className="far fa-trash-alt">
+                </i></div> }
 
             </div>
+
+
 {/*
             {date ? <div className="border-b border-coffee-dark md:-mt-4 w-full flex flex-row justify-center md:justify-start
             font-EXO text-coffee-dark cursor-pointer"

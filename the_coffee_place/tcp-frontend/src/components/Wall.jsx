@@ -7,17 +7,19 @@ import {useGetLikedPost} from '../utils/useGetLikedPost';
 import Redactor from "./Redactor";
 import Post from "./Post";
 import ScrollToTop from "./ScrollToTop";
+import Moderator from "./Moderator";
 
 
 
 export default function Wall({currentUser, handleNewChild, isAdmin}) {
+    const [moderate, setModerate] = useState(false);
+    const [target, setTarget] = useState({type: '', id: 0}); // targeted by moderator
 
     const {data, loading} = useGet('http://localhost:4000/api/posts');
     const {listOfLikedPost, finding} = useGetLikedPost(`http://localhost:4000/api/user/${currentUser}/likedposts`);
 
-    useEffect(() => {
-        document.title = "Discussion";
-    });
+    useEffect(() => { document.title = "Discussion"; });
+
 
     return (
         <div className="mx-auto pb-8 w-5/6 max-w-3xl cursor-default">
@@ -42,10 +44,14 @@ export default function Wall({currentUser, handleNewChild, isAdmin}) {
                                 currentUser={currentUser}
                                 newComm={handleNewChild}
                                 isAdmin={isAdmin}
+                                setModerate={setModerate}
+                                setTarget={setTarget}
                             />
                         )
                     })
                 )}
+
+                    {(!moderate) ? null : <Moderator setModerate={setModerate} target={target} moderated={handleNewChild} /> }
             </>
 
         </div>

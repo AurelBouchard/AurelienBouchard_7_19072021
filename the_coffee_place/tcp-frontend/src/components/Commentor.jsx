@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Button from './TCP_button'
 import {useGet} from "../utils/useGet";
 
-const Commentor = ({currentUser, postId, newComm, isAdmin}) => {
+const Commentor = ({currentUser, postId, newComm, isAdmin, setModerate, setTarget}) => {
     //const [isOpen, toggleOpen] =useState(false);
 
     const {data, loading} = useGet(`http://localhost:4000/api/posts/${postId}/comments`);
@@ -65,15 +65,18 @@ const Commentor = ({currentUser, postId, newComm, isAdmin}) => {
                                     {loading ? "loading ..." : (
                                         data.map((oldComm) => {
                                             let key = uuidv4();
+                                            console.log(oldComm)
                                             return (
                                                 <div key={key}>
                                                     <span className="font-EXO ">{oldComm.author} :</span>
                                                     <span className="handWritten text-2xl ml-4">{oldComm.text}</span>
                                                     {(!isAdmin) ? null : <span className="text-red-500 ml-6"
-                                                                              onClick={() => {
-                                                                                  // confirm deletion
-                                                                              }
-                                                                              } ><i className="far fa-trash-alt"></i></span> }
+                                                                               onClick={(e) => {
+                                                                                   e.stopPropagation();
+                                                                                   setTarget({type: 'commentaire', id: oldComm.id});
+                                                                                   setModerate(true);
+                                                                               }
+                                                                               } ><i className="far fa-trash-alt"></i></span> }
                                                 </div>
                                             )
                                         })

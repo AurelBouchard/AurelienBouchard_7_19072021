@@ -24,7 +24,7 @@ router.put('/:id/comment',  postController.addComment);
 
 router.delete('/:index',    postController.removePost);   // index can be id of post to be removed or pseudo of author
 
-router.delete('/comment/:index',    postController.removeComment);   // index can be id of post to be removed or pseudo of author
+router.delete('/comment/:index',    postController.removeComment);   // index can be id of a comment to be removed or pseudo of author
 
 
 

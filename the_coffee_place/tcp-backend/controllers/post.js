@@ -147,16 +147,15 @@ exports.getComments = (req, res) => {
     console.log("getting all comments for one post")
     Comm.findAll({where: {postId: req.params.id} })
         .then(comments => {
-            console.log(comments);
+            //console.log(comments);
             // adapt comments :
             const formattedComments = comments.map((comm) => {
                 let formattedComm = {};
+                formattedComm['id'] = comm.dataValues.id;
                 formattedComm['text'] = comm.dataValues.text;
                 formattedComm['author'] = comm.dataValues.author;
-                console.log(formattedComm)
                 return formattedComm;
             });
-            console.log("------------------------------------------------------------------------ FINALLY :")
             console.log(formattedComments)
             res.status(200).json(formattedComments)
         })
@@ -164,34 +163,44 @@ exports.getComments = (req, res) => {
 };
 
 
-
-
-
-
-/*exports.modify = (req, res) => {
-    const updatedPost = req.file ?
-        {...JSON.parse(req.body.post),
-            imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
-        } : {...req.body};
-
-    Post.updateOne({ _id: req.params.id }, { ...updatedPost, _id: req.params.id })
-        .then(() => res.status(200).json({ message: "Post modifiée !"}))
-        .catch(error => res.status(400).json({ error }));
-};*/
-
-
 exports.removePost = (req, res) => {    // ONLY BY ADMIN
+    // for each kind of index, before destroy post : destroy likes and comms of this post
+
     if (isNaN(req.params.index)) {
         // when a pseudo is provided
-        Post.destroy({where: {author: req.params.index}})
-            .then(()=> { res.status(200).json({message: "Post(s) supprimé(s)"}); })
+        Post.findOne({where: {author: req.params.index}})
+            .then(post => {
+                Comm.destroy({where: {postId: post.id }})
+                return post;
+            })
+            .then((post) => {
+                Like.destroy({where: {PostId: post.id} })
+            })
+            .then(() => {
+
+                // finally remove the post
+                Post.destroy({where: {author: req.params.index}})
+                    .then(() => { res.status(200).json({message: "Post(s) supprimé(s)"}); })
+            })
             .catch(error => res.status(400).json({ error }));
+
 
     } else {
         // an id of post is provided
-        Post.destroy({where: {id: req.params.index}})
-            .then(()=> { res.status(200).json({message: "Post supprimé"}); })
+        Comm.destroy({where: {postId: req.params.index} })
+            .then(() => {
+                Like.destroy({where: {PostId: req.params.index} })
+            })
+            .then(() => {
+
+                // finally remove the post
+                Post.destroy({where: {id: req.params.index}})
+                    .then(()=> { res.status(200).json({message: "Post supprimé"}); })
+            })
             .catch(error => res.status(400).json({ error }));
+
+
+
     }
 };
 
@@ -211,3 +220,16 @@ exports.removeComment = (req, res) => {    // ONLY BY ADMIN
     }
 };
 
+
+
+
+/*exports.modify = (req, res) => {
+    const updatedPost = req.file ?
+        {...JSON.parse(req.body.post),
+            imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+        } : {...req.body};
+
+    Post.updateOne({ _id: req.params.id }, { ...updatedPost, _id: req.params.id })
+        .then(() => res.status(200).json({ message: "Post modifiée !"}))
+        .catch(error => res.status(400).json({ error }));
+};*/

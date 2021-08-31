@@ -37,3 +37,16 @@ canvas {
 label span{
   color: rgb(118, 118, 118);
 }
+
+button.warning:hover{
+    cursor: url("src/assets/icon/warning.png"), none;
+}
+
+
+.liked:hover{
+    cursor: url("src/assets/icon/thumbs-down.png"), pointer;
+}
+
+.notliked:hover{
+    cursor: url("src/assets/icon/thumbs-up.png"), pointer;
+}

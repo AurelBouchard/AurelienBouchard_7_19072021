@@ -22,11 +22,11 @@ const Connection = ({setConnected, setAskForSubscription, setCurrentUser}) => {
 
     return (
         <div className="flex flex-col justify-between items-center w-full h-auto min-h-screen">
-            <div className="mb-8 md:hidden">
+            <div className="mb-8 md:hidden font-SCRIPT">
                 <H2>The Coffee Place ...</H2>
                 <H3>... la salle de pause de Groupomania</H3>
             </div>
-            <div className="h-0 md:mb-16 md:h-auto md:block overflow-hidden">
+            <div className="h-0 md:mb-16 md:h-auto md:block overflow-hidden font-SCRIPT ">
                 <H1>The Coffee Place ...</H1>
                 <H2>... la salle de pause de Groupomania</H2>
             </div>
@@ -80,7 +80,7 @@ const Connection = ({setConnected, setAskForSubscription, setCurrentUser}) => {
             >
                 {({isSubmitting}) => (
                     <Form>
-                        <div className="mx-8 max-w-sm">
+                        <div className="mx-8 max-w-sm font-EXO">
                             <Card>
                                 <CardHeader color="yellow" size="lg">
                                     <H2 color="white">Connexion</H2>
@@ -90,12 +90,14 @@ const Connection = ({setConnected, setAskForSubscription, setCurrentUser}) => {
                                     <div className="mt-4 mb-8 px-4">
                                         <label htmlFor='pseudo' className='block'>Pseudo</label>
                                         <Field name="pseudo" placeholder="pseudo"/>
-                                        <ErrorMessage name="pseudo" component="div"/>
+                                        <ErrorMessage name="pseudo" component="div"
+                                                      className='-mt-4 mb-1 text-red-500'/>
                                     </div>
                                     <div className="mb-4 px-4">
                                         <label htmlFor='password' className='block'>Mot de passe</label>
-                                        <Field type="password" name="password" placeholder="mot_de_passe"/>
-                                        <ErrorMessage name="password" component="div"/>
+                                        <Field type="password" name="password" placeholder="mot_de_passe" autoComplete="current-password"/>
+                                        <ErrorMessage name="password" component="div"
+                                                      className='-mt-4 mb-1 text-red-500'/>
                                     </div>
                                 </CardBody>
                                 <CardFooter>

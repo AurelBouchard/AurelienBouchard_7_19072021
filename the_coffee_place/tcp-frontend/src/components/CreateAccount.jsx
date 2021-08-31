@@ -110,25 +110,29 @@ const CreateAccount = ({setAskForSubscription}) => {
                                     <div className="mt-4 mb-8 px-4">
                                         <label htmlFor='pseudo' className='block'>Pseudo</label>
                                         <Field id="pseudo" name="pseudo" placeholder="pseudo" />
-                                        <ErrorMessage name="pseudo" component="div" />
+                                        <ErrorMessage name="pseudo" component="div"
+                                                      className='-mt-4 mb-1 text-red-500'/>
                                     </div>
 
                                     <div className="mb-8 px-4">
                                         <label htmlFor='email' className='block'>Email</label>
                                         <Field type="email" id="email"name="email" placeholder="email" />
-                                        <ErrorMessage name="email" component="div" />
+                                        <ErrorMessage name="email" component="div"
+                                                      className='-mt-4 mb-1 text-red-500'/>
                                     </div>
 
                                     <div className="mb-8 px-4">
                                         <label htmlFor='password' className='block'>Mot de passe</label>
                                         <Field type="password" name="password" placeholder="mot_de_passe" />
-                                        <ErrorMessage name="password" component="div" />
+                                        <ErrorMessage name="password" component="div"
+                                                      className='-mt-4 mb-1 text-red-500'/>
                                     </div>
 
                                     <div className="mb-4 px-4">
                                         <label htmlFor='passwordConf' className='block'>Mot de passe</label>
                                         <Field type="password" name="passwordConf" placeholder="Confirmez le mot de passe" />
-                                        <ErrorMessage name="passwordConf" component="div" />
+                                        <ErrorMessage name="passwordConf" component="div"
+                                                      className='-mt-4 mb-1 text-red-500'/>
                                     </div>
 
                                     <div className="mb-8 px-4">
@@ -137,7 +141,8 @@ const CreateAccount = ({setAskForSubscription}) => {
                                         </div>
                                         <label htmlFor='user_captcha_input' className='block'>Captcha</label>
                                         <Field autoComplete="off" id="user_captcha_input" name="user_captcha_input" placeholder="Copiez le captcha" />
-                                        <ErrorMessage name="user_captcha_input" component="div" />
+                                        <ErrorMessage name="user_captcha_input" component="div"
+                                                      className='-mt-4 mb-1 text-red-500'/>
                                     </div>
                                 </CardBody>
                                 <CardFooter>

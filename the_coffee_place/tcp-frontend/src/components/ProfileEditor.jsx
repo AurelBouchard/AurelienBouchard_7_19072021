@@ -151,21 +151,23 @@ export default function ProfileEditor({currentUser, setConnected}) {
                         {({isSubmitting}) => (
 
                             <Form>
-                                <div className="flex flex-col pt-4 md:p-8 mx-auto items-center justify justify-between font-EXO
-                    md:flex-row flex-wrap md:justify-center md:max-w-2xl">
+                                <div className="flex flex-col p-8 mx-auto justify-center items-center font-EXO
+                                max-w-96 md:p-8 md:max-w-2xl">
 
 
                                     <p>Êtes-vous sûr de vouloir supprimer votre profil ?</p>
-                                    <p>Cette action est irréversible.</p>
+                                    <p>Vos articles et commentaires seront conservés.</p>
+                                    <p>Pour les supprimer aussi, veuillez vous adressez à un modérateur.</p>
+                                    <p className="text-red-600">Cette action est irréversible.</p>
 
 
-                                    <div className="admin flex flex-col m-4 mx-16 md:mx-4 md:w-full">
-                                        <div className="md:flex md:flex-row md:justify-around">
+                                    <div className="admin flex flex-col m-4 mx-16 md:mx-4">
+                                        <div className="my-8 mx-auto">
                                             <Button type='reset' text="Annuler" onClick={() => {changeModeTo('normal')}}>
                                             </Button>
-                                            <Button type='submit' text="Confirmer la suppression">
-                                            </Button>
                                         </div>
+                                            <Button type='submit' text="Confirmer la suppression" className={"warning"}>
+                                            </Button>
                                     </div>
 
                                 </div>
