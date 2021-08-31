@@ -4,31 +4,19 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import axios from 'axios';
 
 import Button from './TCP_button';
-import {H1, H2, H3} from "./Headings";
 
-
-import Card from "@material-tailwind/react/Card";
-import CardHeader from "@material-tailwind/react/CardHeader";
-import CardBody from "@material-tailwind/react/CardBody";
-import CardFooter from "@material-tailwind/react/CardFooter";
 
 
 
 const Connection = ({setConnected, setAskForSubscription, setCurrentUser}) => {
 
-    useEffect(() => {
-        document.title = "Membres";
-    })
+    useEffect(() => { document.title = "Connexion"; })
 
     return (
-        <div className="flex flex-col justify-between items-center w-full h-auto min-h-screen">
-            <div className="mb-8 md:hidden font-SCRIPT">
-                <H2>The Coffee Place ...</H2>
-                <H3>... la salle de pause de Groupomania</H3>
-            </div>
-            <div className="h-0 md:mb-16 md:h-auto md:block overflow-hidden font-SCRIPT ">
-                <H1>The Coffee Place ...</H1>
-                <H2>... la salle de pause de Groupomania</H2>
+        <div className="flex flex-col justify-between items-center w-full h-full">
+            <div className="flex flex-col mt-8 md:mt-16 md:mb-8 lg:mt-32 font-SCRIPT text-3xl">
+                <p className="md:text-4xl lg:text-5xl">The Coffee Place</p>
+                {/*<p className="pr-2 w-full sm:text-3xl md:text-4xl text-right">... la salle de pause de Groupomania</p>*/}
             </div>
             <Formik
                 initialValues={{pseudo: '', password: ''}}
@@ -80,27 +68,27 @@ const Connection = ({setConnected, setAskForSubscription, setCurrentUser}) => {
             >
                 {({isSubmitting}) => (
                     <Form>
-                        <div className="mx-8 max-w-sm font-EXO">
-                            <Card>
-                                <CardHeader color="yellow" size="lg">
-                                    <H2 color="white">Connexion</H2>
-                                </CardHeader>
+                        <div className="w-11/12 max-w-sm mx-auto font-EXO">
+                            <div className="bg-white rounded-2xl shadow-lg mt-20 flex flex-col">
+                                <div className="bg-amber-500 rounded-2xl shadow-lg p-8 w-min mx-auto -mt-10" >
+                                    <p className="text-white text-2xl">Connexion</p>
+                                </div>
 
-                                <CardBody>
+                                <div className="px-4">
                                     <div className="mt-4 mb-8 px-4">
                                         <label htmlFor='pseudo' className='block'>Pseudo</label>
                                         <Field name="pseudo" placeholder="pseudo"/>
                                         <ErrorMessage name="pseudo" component="div"
-                                                      className='-mt-4 mb-1 text-red-500'/>
+                                                      className='mb-1 text-red-500'/>
                                     </div>
                                     <div className="mb-4 px-4">
                                         <label htmlFor='password' className='block'>Mot de passe</label>
                                         <Field type="password" name="password" placeholder="mot_de_passe" autoComplete="current-password"/>
                                         <ErrorMessage name="password" component="div"
-                                                      className='-mt-4 mb-1 text-red-500'/>
+                                                      className='mb-1 text-red-500'/>
                                     </div>
-                                </CardBody>
-                                <CardFooter>
+                                </div>
+                                <div className="p-4">
                                     <div className="flex justify-center">
                                         <Button
                                             text="Se connecter"
@@ -109,14 +97,14 @@ const Connection = ({setConnected, setAskForSubscription, setCurrentUser}) => {
                                         >
                                         </Button>
                                     </div>
-                                </CardFooter>
-                            </Card>
+                                </div>
+                            </div>
                         </div>
                     </Form>
                 )}
             </Formik>
 
-            <div className="mt-24">
+            <div className="mt-12">
                 <Button text="Créez un compte en 30 seconde !"
                         onClick={() => {
                             setAskForSubscription(true)

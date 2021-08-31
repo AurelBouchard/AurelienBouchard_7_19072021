@@ -2,10 +2,6 @@ const User = require('../models/User');
 const Post = require('../models/Post');
 const Comm = require('../models/Comm');
 const Like = require('../models/Like');
-//const sequelize = require("../db_management/sequelize");
-//const queryInterface = sequelize.getQueryInterface();
-//const LikersOfPost = require("../models/Like");
-//const {Sequelize} = require("sequelize");
 
 
 
@@ -164,6 +160,7 @@ exports.getComments = (req, res) => {
 
 
 exports.removePost = (req, res) => {    // ONLY BY ADMIN
+
     // for each kind of index, before destroy post : destroy likes and comms of this post
 
     if (isNaN(req.params.index)) {

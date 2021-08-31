@@ -5,15 +5,8 @@ import axios from "axios";
 
 
 import Button from './TCP_button';
-import {H1,H2,H3,H4,H5,H6} from "./Headings.jsx";
 
 
-
-// tailwind material beurk
-import Card from "@material-tailwind/react/Card";
-import CardHeader from "@material-tailwind/react/CardHeader";
-import CardBody from "@material-tailwind/react/CardBody";
-import CardFooter from "@material-tailwind/react/CardFooter";
 
 
 const CreateAccount = ({setAskForSubscription}) => {
@@ -100,13 +93,13 @@ const CreateAccount = ({setAskForSubscription}) => {
             >
                 {({ isSubmitting }) => (
                     <Form>
-                        <div  className="mx-24 max-w-sm">
-                            <Card>
-                                <CardHeader color="yellow" size="lg">
-                                    <H2 color="white">Inscription</H2>
-                                </CardHeader>
+                        <div  className="w-11/12 max-w-sm mx-auto font-EXO">
+                            <div className="bg-white rounded-2xl shadow-lg mt-20 flex flex-col">
+                                <div className="bg-amber-500 rounded-2xl shadow-lg p-8 w-min mx-auto -mt-10" >
+                                    <p className="text-white text-2xl">Inscription</p>
+                                </div>
 
-                                <CardBody>
+                                <div className="px-4">
                                     <div className="mt-4 mb-8 px-4">
                                         <label htmlFor='pseudo' className='block'>Pseudo</label>
                                         <Field id="pseudo" name="pseudo" placeholder="pseudo" />
@@ -144,8 +137,8 @@ const CreateAccount = ({setAskForSubscription}) => {
                                         <ErrorMessage name="user_captcha_input" component="div"
                                                       className='-mt-4 mb-1 text-red-500'/>
                                     </div>
-                                </CardBody>
-                                <CardFooter>
+                                </div>
+                                <div className="p-4">
                                     <div className="flex justify-between">
                                         <Button
                                             text="Annuler"
@@ -160,8 +153,8 @@ const CreateAccount = ({setAskForSubscription}) => {
                                         >
                                         </Button>
                                     </div>
-                                </CardFooter>
-                            </Card>
+                                </div>
+                            </div>
                         </div>
                     </Form>
                 )}

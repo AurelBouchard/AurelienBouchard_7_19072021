@@ -29,19 +29,9 @@ body {
 }
 
 
-canvas {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-label span{
-  color: rgb(118, 118, 118);
-}
-
 button.warning:hover{
     cursor: url("src/assets/icon/warning.png"), pointer;
 }
-
 
 .liked:hover{
     cursor: url("src/assets/icon/thumbs-down.png"), pointer;
@@ -49,4 +39,21 @@ button.warning:hover{
 
 .notliked:hover{
     cursor: url("src/assets/icon/thumbs-up.png"), pointer;
+}
+
+.handWritten {
+    font-family: 'Caveat';
+}
+
+
+/* NEXT : TO REMOVE */
+
+
+canvas {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+label span{
+    color: rgb(118, 118, 118);
 }
