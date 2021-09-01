@@ -63,7 +63,7 @@ export default function Post({date, clock, liked, text, author, nOfComm, nOfLike
                                      .catch(err => { console.log(err) });
 
                         }}>
-                            {liked ? <span className="liked ml-1 h-8 text-sec-dark text-xl"><i className="fas fa-thumbs-up"></i></span>
+                            {liked ? <span className="liked ml-1 h-8 text-sec-med text-xl"><i className="fas fa-thumbs-up"></i></span>
                             : <span className="notliked pt-1 ml-1 h-8 text-ter-light"><i className="fas fa-thumbs-up"></i></span> }
                         </div>
                     </div>

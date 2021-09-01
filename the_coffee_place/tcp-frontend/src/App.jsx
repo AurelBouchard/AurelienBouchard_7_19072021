@@ -16,7 +16,6 @@ import Settings from './components/Settings';
 import NotFound from "./components/NotFound";
 
 import Navbar from './components/TCP_navbar'
-import {useGet} from "./utils/useGet";
 
 
 
@@ -45,7 +44,7 @@ function App() {
 
 
     return (
-            <div className="App bg-ter-dark h-full text-prim font-EXO">
+            <div className="App text-prim font-EXO" >
 
 {/*                {loading ? ("loading ...") : (      */}
                     <Router>

@@ -21,9 +21,9 @@ const Connection = ({setJWT_token, setIsAdmin, setConnected, setAskForSubscripti
     useEffect(() => { document.title = "Connexion"; })
 
     return (
-        <div className="flex flex-col justify-between items-center w-full h-full">
-            <div className="flex flex-col mt-8 md:mt-16 md:mb-8 lg:mt-32 font-SCRIPT text-3xl">
-                <p className="md:text-4xl lg:text-5xl">The Coffee Place</p>
+        <div className="flex flex-col justify-between items-center w-full h-full pt-16 bg-ter-dark">
+            <div id="title" className="flex flex-col md:mb-8 lg:mt-32 handWritten text-3xl h-24 w-11/12">
+                {/*<p className="text-sec-med md:text-4xl lg:text-5xl">The Coffee Place</p>*/}
                 {/*<p className="pr-2 w-full sm:text-3xl md:text-4xl text-right">... la salle de pause de Groupomania</p>*/}
             </div>
             <Formik

@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 
-import {useFetch} from "../utils/useFetch";
+import {useGet} from "../utils/useGet";
 
 import AccessToWall from './AccessToWall'
 
@@ -10,14 +10,15 @@ import AccessToWall from './AccessToWall'
 
 export default function Members() {
 
-    const {data, loading} = useFetch('http://localhost:4000/api/members');
+    const {data, loading} = useGet('http://localhost:4000/api/members');
+
 
     useEffect(() => {
         document.title = "Membres";
     });
 
     return (
-        <div className="relative">
+        <div className="top-20 relative">
             <div className="mx-auto md:max-w-sm max-w-min pb-8">
                 {loading ? "loading ..." : (
 
@@ -25,15 +26,14 @@ export default function Members() {
                             let key = uuidv4();
                             return (
                                 <Link to={`/member/${pseudo}`}          // a changer ------------------
-                                      className="m-2 p-3 flex flex-col md:flex-row rounded-3xl bg-white font-EXO
+                                      className="m-2 p-3 flex flex-col md:flex-row rounded-3xl bg-white
                                       active:translate-y-1 transform transition
-                                      focus:outline-none focus:ring focus:ring-offset-2 focus:ring-coffee focus:ring-offset-foam
-                                      text-coffee-dark"
+                                      focus:outline-none focus:ring focus:ring-offset-2 focus:ring-prim focus:ring-offset-prim-light"
                                       key={key}
-                                      title={"Voir le profil de "+firstName}>
+                                      title={"Voir le profil de "+ (firstName ? firstName : pseudo)}>
                                     <img
                                         className="rounded-2xl"
-                                        src={id}       // a changer --------------
+                                        src='src/assets/icon-above-font.png'       // a changer --------------
                                         alt="Profile picture"
                                         max-width={400} max-height={400}
                                     />
@@ -54,7 +54,7 @@ export default function Members() {
 
             </div>
 
-            <AccessToWall className={"fixed bottom-10 right-10 md:right-32 lg:right-60"}/>
+            <AccessToWall className="fixed bottom-10 right-10 md:right-32 lg:right-60 "/>
 
         </div>
     )

@@ -22,41 +22,44 @@ export default function Wall({currentUser, handleNewChild, isAdmin}) {
 
 
     return (
-        <div className="mx-auto pt-16 p-8 w-5/6 max-w-3xl cursor-default h-maxi">
+        <div className="absolute top-12 w-full">
+            <div className="mx-auto p-8 w-5/6 max-w-3xl cursor-default">
                 <>
                     <Redactor author={currentUser}
                               newPost={handleNewChild}/>
 
-                {(loading || finding) ? "loading ..." : (
-                    data.slice(0).reverse().map(({date, clock, text, author, nOfLike, nOfComment, UserId, postId }) => {
-                        let key = uuidv4();
-                        const isLiked = listOfLikedPost.includes(postId);
-                        return (
-                            <Post
-                                key={key}
-                                date={date}
-                                clock={clock}
-                                liked={isLiked}
-                                author={author}
-                                text={text}
-                                nOfComm={nOfComment}
-                                nOfLike={nOfLike}
-                                UserId={UserId}
-                                postId={postId}
-                                currentUser={currentUser}
-                                newComm={handleNewChild}
-                                isAdmin={isAdmin}
-                                setModerate={setModerate}
-                                setTarget={setTarget}
-                            />
-                        )
-                    })
-                )}
+                    {(loading || finding) ? "loading ..." : (
+                        data.slice(0).reverse().map(({date, clock, text, author, nOfLike, nOfComment, UserId, postId }) => {
+                            let key = uuidv4();
+                            const isLiked = listOfLikedPost.includes(postId);
+                            return (
+                                <Post
+                                    key={key}
+                                    date={date}
+                                    clock={clock}
+                                    liked={isLiked}
+                                    author={author}
+                                    text={text}
+                                    nOfComm={nOfComment}
+                                    nOfLike={nOfLike}
+                                    UserId={UserId}
+                                    postId={postId}
+                                    currentUser={currentUser}
+                                    newComm={handleNewChild}
+                                    isAdmin={isAdmin}
+                                    setModerate={setModerate}
+                                    setTarget={setTarget}
+                                />
+                            )
+                        })
+                    )}
 
                     {(!moderate) ? null : <Moderator setModerate={setModerate}
                                                      target={target}
                                                      moderated={handleNewChild} /> }
-            </>
+                </>
+
+            </div>
 
         </div>
     );

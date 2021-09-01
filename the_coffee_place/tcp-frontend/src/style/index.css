@@ -12,6 +12,12 @@
 
 html {
     height: 100%;
+
+    background: url('src/assets/back-transparent.png') no-repeat center center fixed, #afafaf;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: contain;
 }
 
 body {
@@ -24,11 +30,21 @@ body {
     -moz-osx-font-smoothing: grayscale;
 
     height: 100%;
+    background-color: transparent;
 }
 
 #root {
     height: 100%;
 }
+
+#title {
+    background: url('src/assets/icon-left-font-monochrome-white.svg') no-repeat center top;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: contain;
+}
+
 
 button:hover{
     cursor: pointer;

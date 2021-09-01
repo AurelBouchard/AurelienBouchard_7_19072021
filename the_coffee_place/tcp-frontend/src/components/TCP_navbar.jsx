@@ -1,26 +1,31 @@
 import React, { useState } from "react";
-import {Link} from 'react-router-dom';
-import Navbar from "@material-tailwind/react/Navbar";
-import NavbarContainer from "@material-tailwind/react/NavbarContainer";
+import {Link, useHistory} from 'react-router-dom';
+
+
 import NavbarWrapper from "@material-tailwind/react/NavbarWrapper";
 import NavbarBrand from "@material-tailwind/react/NavbarBrand";
 import NavbarToggler from "@material-tailwind/react/NavbarToggler";
 import NavbarCollapse from "@material-tailwind/react/NavbarCollapse";
 import Nav from "@material-tailwind/react/Nav";
-import NavItem from "@material-tailwind/react/NavItem";
-import NavLink from "@material-tailwind/react/NavLink";
-import NavbarInput from "@material-tailwind/react/NavbarInput";
-import Icon from "@material-tailwind/react/Icon";
+
+
 
 export default function TCP_navbar({setJWT_token}) {
     const [openNavbar, setOpenNavbar] = useState(false);
+    let history = useHistory();
 
     return (
-        <Navbar color="amber"  className="absolute fixed w-full z-30 top-0">
-            <NavbarContainer>
+        <nav className="flex flex-wrap items-center justify-between
+        py-2.5 px-3 mb-3 absolute fixed w-full z-30 top-0
+         bg-sec text-white">
+            <div className="container max-w-7xl px-4 mx-auto flex flex-wrap items-center justify-between">
                 <NavbarWrapper >
-                    <NavbarBrand className=""
-                    >The Coffee Place</NavbarBrand>
+                    <NavbarBrand>
+                        <span className="handWritten text-2xl sm:text-3xl md:text-4xl"
+                              onClick={() => {history.push('/wall')}}>
+                            The Coffee Place
+                        </span>
+                    </NavbarBrand>
 
                     <NavbarToggler
                         color="white"
@@ -30,46 +35,30 @@ export default function TCP_navbar({setJWT_token}) {
                 </NavbarWrapper>
 
                 <NavbarCollapse open={openNavbar}>
-                    <input
-                        className="hover:bg-white"
-                        type="text"
-                        placeholder="Search here"
-                    />
                     <Nav>
-                        <Link to="/myprofile">
-                            <p
-                                className="hover:bg-white">
-                                <i className="far fa-user text-lg"></i>
-                                Mon profile
-                            </p>
+                        <Link to="/myprofile" onClick={() => setOpenNavbar(!openNavbar)}>
+                            <p className="hover:bg-sec-med px-2">
+                                <i className="far fa-user text-lg mr-2"></i>Mon profile</p>
                         </Link>
 
-                        <Link to="/members">
-                            <p
-                                className="hover:bg-white">
-                                <i className="fas fa-users text-lg"></i>
-                                Membres
-                            </p>
+                        <Link to="/members" onClick={() => setOpenNavbar(!openNavbar)}>
+                            <p className="hover:bg-sec-med px-2">
+                                <i className="fas fa-users text-lg mr-2"></i>Membres</p>
                         </Link>
 
-                        <Link to="/settings">
-                            <p
-                            >
-                                <i className="fas fa-cog text-lg"></i>
-                                Paramètres
-                            </p>
+                        <Link to="/settings" onClick={() => setOpenNavbar(!openNavbar)}>
+                            <p className="hover:bg-sec-med px-2">
+                                <i className="fas fa-cog text-lg mr-2"></i>Paramètres</p>
                         </Link>
 
-                        <NavLink
-                            ripple="light"
-                            onClick={() => setJWT_token(false)}>
-                            <i className="fas fa-sign-out-alt text-lg"></i>
-                            Deconnexion
-                        </NavLink>
+                        <Link to="/settings" onClick={() => setJWT_token(false)}>
+                            <p className="hover:bg-sec-med px-2">
+                                <i className="fas fa-door-open text-lg mr-2"></i>Déconnection</p>
+                        </Link>
 
                     </Nav>
                 </NavbarCollapse>
-            </NavbarContainer>
-        </Navbar>
+            </div>
+        </nav>
     );
 }

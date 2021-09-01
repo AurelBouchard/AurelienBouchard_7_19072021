@@ -20,7 +20,7 @@ const CreateAccount = ({setAskForSubscription}) => {
 
 
     return (
-        <div className="flex flex-col pb-8 md:pt-16 items-center w-full h-auto min-h-screen">
+        <div className="flex flex-col pb-8 md:pt-16 items-center w-full h-auto min-h-screen  bg-ter-dark">
             <Formik
                 initialValues={{
                     pseudo: '',

@@ -1,24 +1,23 @@
 import React from 'react';
 import {Link, useHistory, useParams} from 'react-router-dom';
 import Button from './TCP_button'
-import {useFetch} from "../utils/useFetch";
+import {useGet} from "../utils/useGet";
 
 export default function ShowProfile() {
     let {pseudo} = useParams();
     const history = useHistory();
 
-    const {data, loading} = useFetch(`http://localhost:4000/api/members/${pseudo}`);
+    const {data, loading} = useGet(`http://localhost:4000/api/members/${pseudo}`);
 
     return (
-        <div className="font-EXO text-coffee-dark">
+        <div className="pt-16">
             {loading ? "loading ..." : (
-                <div className="editor flex flex-col pt-4 md:p-8 mx-auto items-center
+                <div className="editor flex flex-col pt-4 md:p-8 mx-auto items-center  bg-opacity-50 backdrop-filter backdrop-blur-lg
                 md:flex-row flex-wrap md:justify-center md:max-w-4xl">
                     <div className="rounded-2xl bg-white p-3 md:m-8 md:self-start w-52 h-52 md:w-96 md:h-96 flex">
                         <img
                             className="m-auto w-full h-full object-cover"
-                            /*src="../src/temp/scarlett_273*380.jpg"*/
-                            src="../src/temp/berlean_855*570.jpg"
+                            src='src/assets/icon-above-font.png'
                             alt="Profile picture"
                         />
 

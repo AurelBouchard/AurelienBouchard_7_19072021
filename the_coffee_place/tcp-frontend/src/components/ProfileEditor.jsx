@@ -23,7 +23,7 @@ export default function ProfileEditor({currentUser, setJWT_token}) {
 
     if (mode === 'changePW') {
         return (
-            <div className="text-coffee-dark">
+            <div className="">
                 {loading ? ("loading ...") : (
                     <Formik     // change password case
                         initialValues={{
@@ -67,8 +67,8 @@ export default function ProfileEditor({currentUser, setJWT_token}) {
                                 setSubmitting(false);
                             }, 400);
 
-                            //
-                            changeModeTo('normal');
+                            // disconnection
+                            setJWT_token(null);
                         }}
                     >
 
@@ -81,7 +81,7 @@ export default function ProfileEditor({currentUser, setJWT_token}) {
 
                                     <div className="flex flex-col m-4 md:m-8">
                                         <label htmlFor='oldPassword' className='block mb-1 mt-2'>Mot de passe actuel :</label>
-                                        <Field type="password" id="oldPassword" name="oldPassword" autocomplete='off'
+                                        <Field type="password" id="oldPassword" name="oldPassword" autoComplete="off"
                                                className='handWritten mb-4 pl-1 text-2xl rounded
                 focus:outline-none focus:ring focus:ring-offset-2 focus:ring-prim focus:ring-offset-prim-light'/>
                                         <ErrorMessage name="oldPassword" component="div"
@@ -90,7 +90,7 @@ export default function ProfileEditor({currentUser, setJWT_token}) {
 
                                     <div className="flex flex-col m-4 md:m-8">
                                         <label htmlFor='newPassword' className='block mb-1 mt-2'>Nouveau mot de passe :</label>
-                                        <Field type="password" id="newPassword" name="newPassword" autocomplete='new-password'
+                                        <Field type="password" id="newPassword" name="newPassword" autoComplete="off"
                                                className='handWritten mb-4 pl-1 text-2xl rounded
                 focus:outline-none focus:ring focus:ring-offset-2 focus:ring-prim focus:ring-offset-prim-light'/>
                                         <ErrorMessage name="newPassword" component="div"
@@ -117,7 +117,7 @@ export default function ProfileEditor({currentUser, setJWT_token}) {
     }
     else if (mode === 'rmProfile') {
         return (
-            <div className="text-coffee-dark">
+            <div className="pt-16">
                 {loading ? ("loading ...") : (
                     <Formik     // change password case
                         initialValues={{ }}
@@ -180,7 +180,7 @@ export default function ProfileEditor({currentUser, setJWT_token}) {
     }
     else {  // normal case
         return (
-            <div className="pt-16">
+            <div className="pt-16  bg-opacity-50 backdrop-filter backdrop-blur-lg">
                 {loading ? ("loading ...") : (
                     <Formik     // normal case
                         initialValues={{
@@ -245,16 +245,18 @@ export default function ProfileEditor({currentUser, setJWT_token}) {
                             <Form>
                                 <div className="editor flex flex-col pt-4 md:p-8 mx-auto items-center
                     md:flex-row flex-wrap md:justify-center md:max-w-2xl">
-                                    <img
-                                        className="rounded-2xl bg-white md:m-8 md:self-start "
-                                        src="src/assets/coffee-cup-192.png"
-                                        alt="Profile picture"
-                                        max-width={200} max-height={200}    // md: 200 -> 300
-                                        onClick={() => {
-                                            alert("Choisissez une photo")
-                                        }
-                                        }
-                                    />
+                                    <div className="w-48 md:w-72 h-48 md:h-72  md:m-8 ">
+                                        <img
+                                            className="rounded-2xl bg-white"
+                                            src='src/assets/icon-above-font.png'
+                                            alt="Profile picture"
+                                            onClick={() => {
+                                                alert("Choisissez une photo")
+                                            }
+                                            }
+                                        />
+
+                                    </div>
 
                                     <div className="names flex flex-col m-4 md:m-8">
                                         <label htmlFor='pseudo' className='block mb-1'>Pseudo :</label>

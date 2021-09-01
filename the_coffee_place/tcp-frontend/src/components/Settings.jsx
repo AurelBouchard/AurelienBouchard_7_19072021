@@ -15,15 +15,12 @@ export default function Settings({ JWT_token, currentUser, isAdmin}) {
 
 
     return (
-        <div className="text-coffee-dark">
+        <div className="pt-16 bg-opacity-50 backdrop-filter backdrop-blur-lg">
             { (isAdmin) ? (
-                    <div className="text-coffee-dark">
-                        <div className="mx-auto pb-8 w-5/6 max-w-3xl cursor-default">
+                        <div className="mx-auto pb-8 w-5/6 max-w-3xl">
                             <p>Vous êtes administrateur !</p>
                         </div>
-                    </div>
                 ) : (
-                    <div className="text-coffee-dark">
                         <div className="mx-auto pb-8 w-5/6 max-w-3xl cursor-default">
                             <Formik     // change password case
                                 initialValues={{magicWord: ''}}
@@ -64,22 +61,22 @@ export default function Settings({ JWT_token, currentUser, isAdmin}) {
                                 {({isSubmitting}) => (
 
                                     <Form>
-                                        <div className="flex flex-col pt-4 md:p-8 mx-auto items-center font-EXO
+                                        <div className="flex flex-col pt-4 md:p-8 mx-auto items-center
                     md:flex-row flex-wrap md:justify-center md:max-w-2xl">
 
                                             <p>Entrez le mot magique pour devenir administrateur :</p>
 
-                                            <div className="flex flex-col m-4 md:m-8">
+                                            <div className="flex flex-col p-4 md:m-8">
                                                 <Field type="text" id="magicWord" name="magicWord" autocomplete='off'
-                                                       className='handWritten mb-4 pl-1 text-2xl text-coffee-dark rounded
-                focus:outline-none focus:ring focus:ring-offset-2 focus:ring-coffee focus:ring-offset-foam'/>
+                                                       className='handWritten mb-4 pl-1 text-2xl rounded
+                focus:outline-none focus:ring focus:ring-offset-2 focus:ring-prim focus:ring-offset-prim-light'/>
                                                 <ErrorMessage name="magicWord" component="div"
                                                               className='-mt-4 mb-1 text-red-500'/>
                                             </div>
 
 
-                                            <div className="admin flex flex-col m-4 mx-16 md:mx-4 md:w-full">
-                                                <div className="md:flex md:flex-row md:justify-around">
+                                            <div className="admin p-4 px-16 md:mx-4 w-full">
+                                                <div className="flex flex-row justify-around ">
                                                     <Button type='reset' text="Annuler" onClick={() => {
                                                         history.goBack()
                                                     }}>
@@ -96,7 +93,6 @@ export default function Settings({ JWT_token, currentUser, isAdmin}) {
                                 )}
                             </Formik>
                         </div>
-                    </div>
             )}
         </div>
     )
