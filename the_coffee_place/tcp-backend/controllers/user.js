@@ -30,9 +30,14 @@ exports.signUp = (req, res) => {
                     console.log("User "+user.dataValues.id+" created.");
                     res.status(201).json({message: "Le nouvel utilisateur a été créé !"});
                 })
-                .catch(err => { try { console.log("Unable to create user : \n" + err.name + ".\n" + err.parent.text);
-                    } catch { console.log(err); }
+                .catch(err => { try {
+                    console.log("Unable to create user : \n" + err.name + ".\n" + err.parent.text);
+                    res.status(500).json({message: err.parent.text});
+
+                    } catch {
+                    console.log(err);
                     res.status(500).json({err});
+                }
                 });
 
         })

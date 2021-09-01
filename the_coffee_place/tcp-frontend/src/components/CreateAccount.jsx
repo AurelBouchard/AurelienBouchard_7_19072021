@@ -5,16 +5,19 @@ import axios from "axios";
 
 
 import Button from './TCP_button';
+import DbError from "./DbError";
 
 
 
 
 const CreateAccount = ({setAskForSubscription}) => {
+    const [dbError, setDbError] = useState(null);
 
     useEffect(() => {
         document.title = "Inscription";
         loadCaptchaEnginge(6);
     });
+
 
     return (
         <div className="flex flex-col pt-16 md:pt-32 items-center w-full h-auto min-h-screen">
@@ -58,6 +61,7 @@ const CreateAccount = ({setAskForSubscription}) => {
 
                         if (validateCaptcha(user_captcha_value)!==true) {
                             console.log("captcha incorrect, êtes-vous un robot ?")
+                            setDbError("Le captcha est incorrect")
                             setSubmitting(false);
                         return
                         }
@@ -70,20 +74,15 @@ const CreateAccount = ({setAskForSubscription}) => {
 
                         axios.post('http://localhost:4000/api/user/signup', payload)
                             .then(function (response) {
-                                //console.log(response.data);
-                                console.log(response.status);
-                                //console.log(response.statusText);
-                                console.log(response.headers);
-                                console.log(response.config);
-                                //setState( {data: response, loading: false} );
-
+                                console.log(response.statusText);
                             })
                             .then(() => {
                                 setAskForSubscription(false);
                                 console.log("Vous êtes inscrit(e)")
                             })
-                            .catch(err => {
-                                console.log(err)
+                            .catch(error => {
+                                console.log(error.response.data.message);
+                                setDbError(error.response.data.message);
                             });
 
 
@@ -159,6 +158,9 @@ const CreateAccount = ({setAskForSubscription}) => {
                     </Form>
                 )}
             </Formik>
+
+            {(!dbError) ? null : <DbError dbError={dbError} setDbError={setDbError}/>}
+
         </div>
     )   // end of return
 };

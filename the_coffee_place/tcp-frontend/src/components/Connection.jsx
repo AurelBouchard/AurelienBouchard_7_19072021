@@ -4,6 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import axios from 'axios';
 
 import Button from './TCP_button';
+import DbError from './DbError';
 
 
 
@@ -13,6 +14,7 @@ export let JWT_token = "";
 
 
 const Connection = ({setJWT_token, setIsAdmin, setConnected, setAskForSubscription, setCurrentUser}) => {
+    const [dbError, setDbError] = useState(null);
 
     const lastUser = localStorage.getItem('tcp_user');
 
@@ -50,8 +52,9 @@ const Connection = ({setJWT_token, setIsAdmin, setConnected, setAskForSubscripti
                             .then(function (response) {
                                 console.log("response.data :");
                                 console.log(response.data);
-                                //JWT_token=response.data.token;
                                 return ({token: 'Bearer '+response.data.token, isAdmin: response.data.isAdmin});
+
+
                             })
                             .then(({token, isAdmin}) => {
                                 console.log(token)
@@ -69,6 +72,7 @@ const Connection = ({setJWT_token, setIsAdmin, setConnected, setAskForSubscripti
                             })
                             .catch(err => {
                                 console.log(err)
+                                setDbError(err.message);
                             });
 
 
@@ -122,6 +126,9 @@ const Connection = ({setJWT_token, setIsAdmin, setConnected, setAskForSubscripti
                 >
                 </Button>
             </div>
+
+            {(!dbError) ? null : <DbError dbError={dbError} setDbError={setDbError}/>}
+
         </div>
     );
 };
