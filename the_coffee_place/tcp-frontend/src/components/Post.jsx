@@ -13,18 +13,18 @@ export default function Post({date, clock, liked, text, author, nOfComm, nOfLike
     return (
         <>
             <div className="mt-4 p-3 flex flex-col rounded-3xl bg-white text-coffee-dark relative">
-                <div className="bg-blue-gray-100 rounded-2xl px-1 cursor-pointer"
+                <div className="bg-ter-light rounded-2xl px-1 cursor-pointer"
                      onClick={() => {
                     /*        will handle large view with router.redirect and router.parameters     */
                     alert('show full')}}>
-                    <p className="handWritten text-2xl
+                    <p className="pl-1 handWritten text-2xl
                     overflow-ellipsis overflow-hidden whitespace-pre-line">{text}</p>
                 </div>
 
                 <div className="footer flex flex-row justify-between items-end">
                     <p className="mt-2 mr-4 font-EXO">{clock}</p>
 
-                    <div className="comments font-EXO cursor-pointer h-6 flex flex-row w-1/3"
+                    <div className="comments cursor-pointer h-6 flex flex-row w-1/3"
                          onClick={() => {setShowComm(!showComm);} }>
                         <span className="overflow-ellipsis overflow-hidden h-6 mr-1 min-w-0 flex-shrink">
                             Commentaires
@@ -63,8 +63,8 @@ export default function Post({date, clock, liked, text, author, nOfComm, nOfLike
                                      .catch(err => { console.log(err) });
 
                         }}>
-                            {liked ? <span className="liked ml-1 h-8 text-coffee text-xl"><i className="fas fa-thumbs-up"></i></span>
-                            : <span className="notliked pt-1 ml-1 h-8 text-gray-300"><i className="fas fa-thumbs-up"></i></span> }
+                            {liked ? <span className="liked ml-1 h-8 text-sec-dark text-xl"><i className="fas fa-thumbs-up"></i></span>
+                            : <span className="notliked pt-1 ml-1 h-8 text-ter-light"><i className="fas fa-thumbs-up"></i></span> }
                         </div>
                     </div>
                 </div>

@@ -82,9 +82,10 @@ const Connection = ({setJWT_token, setIsAdmin, setConnected, setAskForSubscripti
             >
                 {({isSubmitting}) => (
                     <Form>
-                        <div className="w-11/12 max-w-sm mx-auto font-EXO">
+                        <div className="w-11/12 max-w-sm mx-auto">
                             <div className="bg-white rounded-2xl shadow-lg mt-20 flex flex-col">
-                                <div className="bg-amber-500 rounded-2xl shadow-lg p-8 w-min mx-auto -mt-10" >
+                                <div className="bg-gradient-to-tl from-prim to-prim-light
+                                rounded-2xl shadow-lg p-8 w-min mx-auto -mt-10" >
                                     <p className="text-white text-2xl">Connexion</p>
                                 </div>
 

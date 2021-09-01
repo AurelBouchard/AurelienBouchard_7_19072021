@@ -8,8 +8,8 @@ export default function Input({type, placeholder, label, value}) {
                 value={value}
                 type={type}
                 placeholder={placeholder}
-                className='handWritten mb-4 pl-1 text-2xl text-coffee-dark rounded
-                focus:outline-none focus:ring focus:ring-offset-2 focus:ring-coffee focus:ring-offset-foam'
+                className='handWritten mb-4 pl-1 text-2xl rounded
+                focus:outline-none focus:ring focus:ring-offset-2 focus:ring-prim focus:ring-offset-white'
             />
         </>
     )

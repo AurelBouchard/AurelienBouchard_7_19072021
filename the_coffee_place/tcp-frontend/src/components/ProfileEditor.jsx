@@ -75,15 +75,15 @@ export default function ProfileEditor({currentUser, setJWT_token}) {
                         {({isSubmitting}) => (
 
                             <Form>
-                                <div className="flex flex-col pt-4 md:p-8 mx-auto items-center font-EXO
+                                <div className="flex flex-col pt-16 mx-auto items-center
                     md:flex-row flex-wrap md:justify-center md:max-w-2xl">
 
 
                                     <div className="flex flex-col m-4 md:m-8">
                                         <label htmlFor='oldPassword' className='block mb-1 mt-2'>Mot de passe actuel :</label>
                                         <Field type="password" id="oldPassword" name="oldPassword" autocomplete='off'
-                                               className='handWritten mb-4 pl-1 text-2xl text-coffee-dark rounded
-                focus:outline-none focus:ring focus:ring-offset-2 focus:ring-coffee focus:ring-offset-foam'/>
+                                               className='handWritten mb-4 pl-1 text-2xl rounded
+                focus:outline-none focus:ring focus:ring-offset-2 focus:ring-prim focus:ring-offset-prim-light'/>
                                         <ErrorMessage name="oldPassword" component="div"
                                                       className='-mt-4 mb-1 text-red-500'/>
                                     </div>
@@ -91,8 +91,8 @@ export default function ProfileEditor({currentUser, setJWT_token}) {
                                     <div className="flex flex-col m-4 md:m-8">
                                         <label htmlFor='newPassword' className='block mb-1 mt-2'>Nouveau mot de passe :</label>
                                         <Field type="password" id="newPassword" name="newPassword" autocomplete='new-password'
-                                               className='handWritten mb-4 pl-1 text-2xl text-coffee-dark rounded
-                focus:outline-none focus:ring focus:ring-offset-2 focus:ring-coffee focus:ring-offset-foam'/>
+                                               className='handWritten mb-4 pl-1 text-2xl rounded
+                focus:outline-none focus:ring focus:ring-offset-2 focus:ring-prim focus:ring-offset-prim-light'/>
                                         <ErrorMessage name="newPassword" component="div"
                                                       className='-mt-4 mb-1 text-red-500'/>
                                     </div>
@@ -151,8 +151,8 @@ export default function ProfileEditor({currentUser, setJWT_token}) {
                         {({isSubmitting}) => (
 
                             <Form>
-                                <div className="flex flex-col p-8 mx-auto justify-center items-center font-EXO
-                                max-w-96 md:p-8 md:max-w-2xl">
+                                <div className="flex flex-col p-16 mx-auto justify-center items-center
+                                max-w-96 md:max-w-2xl">
 
 
                                     <p>Êtes-vous sûr de vouloir supprimer votre profil ?</p>
@@ -180,7 +180,7 @@ export default function ProfileEditor({currentUser, setJWT_token}) {
     }
     else {  // normal case
         return (
-            <div className="text-coffee-dark">
+            <div className="pt-16">
                 {loading ? ("loading ...") : (
                     <Formik     // normal case
                         initialValues={{
@@ -243,7 +243,7 @@ export default function ProfileEditor({currentUser, setJWT_token}) {
                         {({isSubmitting}) => (
 
                             <Form>
-                                <div className="editor flex flex-col pt-4 md:p-8 mx-auto items-center font-EXO
+                                <div className="editor flex flex-col pt-4 md:p-8 mx-auto items-center
                     md:flex-row flex-wrap md:justify-center md:max-w-2xl">
                                     <img
                                         className="rounded-2xl bg-white md:m-8 md:self-start "
@@ -258,26 +258,26 @@ export default function ProfileEditor({currentUser, setJWT_token}) {
 
                                     <div className="names flex flex-col m-4 md:m-8">
                                         <label htmlFor='pseudo' className='block mb-1'>Pseudo :</label>
-                                        <Field type='text' id="pseudo" name="pseudo" className='handWritten mb-4 pl-1 text-2xl text-coffee-dark rounded
-                focus:outline-none focus:ring focus:ring-offset-2 focus:ring-coffee focus:ring-offset-foam'/>
+                                        <Field type='text' id="pseudo" name="pseudo" className='handWritten mb-4 pl-1 text-2xl  rounded
+                focus:outline-none focus:ring focus:ring-offset-4 focus:ring-prim focus:ring-offset-prim-light'/>
                                         <ErrorMessage name="pseudo" component="div"
                                                       className='-mt-4 mb-1 text-red-500'/>
 
                                         <label htmlFor='firstName' className='block mb-1 mt-2'>Prénom :</label>
-                                        <Field type='text' id="firstName" name="firstName" className='handWritten mb-4 pl-1 text-2xl text-coffee-dark rounded
-                focus:outline-none focus:ring focus:ring-offset-2 focus:ring-coffee focus:ring-offset-foam'/>
+                                        <Field type='text' id="firstName" name="firstName" className='handWritten mb-4 pl-1 text-2xl  rounded
+                focus:outline-none focus:ring focus:ring-offset-2 focus:ring-prim focus:ring-offset-prim-light'/>
                                         <ErrorMessage name="firstName" component="div"
                                                       className='-mt-4 mb-1 text-red-500'/>
 
                                         <label htmlFor='lastName' className='block mb-1 mt-2'>Nom :</label>
-                                        <Field type='text' id="lastName" name="lastName" className='handWritten mb-4 pl-1 text-2xl text-coffee-dark rounded
-                focus:outline-none focus:ring focus:ring-offset-2 focus:ring-coffee focus:ring-offset-foam'/>
+                                        <Field type='text' id="lastName" name="lastName" className='handWritten mb-4 pl-1 text-2xl  rounded
+                focus:outline-none focus:ring focus:ring-offset-2 focus:ring-prim focus:ring-offset-prim-light'/>
                                         <ErrorMessage name="lastName" component="div"
                                                       className='-mt-4 mb-1 text-red-500'/>
 
                                         <label htmlFor='email' className='block mb-1 mt-2'>Email :</label>
-                                        <Field type="email" id="email" name="email" className='handWritten mb-4 pl-1 text-2xl text-coffee-dark rounded
-                focus:outline-none focus:ring focus:ring-offset-2 focus:ring-coffee focus:ring-offset-foam'/>
+                                        <Field type="email" id="email" name="email" className='handWritten mb-4 pl-1 text-2xl  rounded
+                focus:outline-none focus:ring focus:ring-offset-2 focus:ring-prim focus:ring-offset-prim-light'/>
                                         <ErrorMessage name="email" component="div"
                                                       className='-mt-4 mb-1 text-red-500'/>
                                     </div>
@@ -285,8 +285,8 @@ export default function ProfileEditor({currentUser, setJWT_token}) {
                                     <div className="intro flex flex-col m-4 md:w-full ">
                                         <label htmlFor='about' className='block mb-1'>A propos de moi :</label>
                                         <Field type='undefined' autoComplete='off' id="about" name="about"
-                                               className='handWritten mb-4 pl-1 text-2xl text-coffee-dark rounded
-                focus:outline-none focus:ring focus:ring-offset-2 focus:ring-coffee focus:ring-offset-foam'/>
+                                               className='handWritten mb-4 pl-1 text-2xl  rounded
+                focus:outline-none focus:ring focus:ring-offset-2 focus:ring-prim focus:ring-offset-prim-light'/>
                                         <ErrorMessage name="about" component="div"
                                                       className='-mt-4 mb-1 text-red-500'/>
                                     </div>

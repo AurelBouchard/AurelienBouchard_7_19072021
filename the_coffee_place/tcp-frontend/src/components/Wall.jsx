@@ -22,7 +22,7 @@ export default function Wall({currentUser, handleNewChild, isAdmin}) {
 
 
     return (
-        <div className="mx-auto pb-8 w-5/6 max-w-3xl cursor-default">
+        <div className="mx-auto pt-16 p-8 w-5/6 max-w-3xl cursor-default h-maxi">
                 <>
                     <Redactor author={currentUser}
                               newPost={handleNewChild}/>

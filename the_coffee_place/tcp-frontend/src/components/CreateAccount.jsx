@@ -20,7 +20,7 @@ const CreateAccount = ({setAskForSubscription}) => {
 
 
     return (
-        <div className="flex flex-col pt-16 md:pt-32 items-center w-full h-auto min-h-screen">
+        <div className="flex flex-col pb-8 md:pt-16 items-center w-full h-auto min-h-screen">
             <Formik
                 initialValues={{
                     pseudo: '',
@@ -92,9 +92,10 @@ const CreateAccount = ({setAskForSubscription}) => {
             >
                 {({ isSubmitting }) => (
                     <Form>
-                        <div  className="w-11/12 max-w-sm mx-auto font-EXO">
+                        <div  className="w-11/12 max-w-sm mx-auto">
                             <div className="bg-white rounded-2xl shadow-lg mt-20 flex flex-col">
-                                <div className="bg-amber-500 rounded-2xl shadow-lg p-8 w-min mx-auto -mt-10" >
+                                <div className="bg-gradient-to-tl from-prim to-prim-light
+                                 rounded-2xl shadow-lg p-8 w-min mx-auto -mt-10" >
                                     <p className="text-white text-2xl">Inscription</p>
                                 </div>
 

@@ -68,7 +68,7 @@ const Commentor = ({currentUser, postId, newComm, isAdmin, setModerate, setTarge
                                             console.log(oldComm)
                                             return (
                                                 <div key={key}>
-                                                    <span className="font-EXO ">{oldComm.author} :</span>
+                                                    <span>{oldComm.author} :</span>
                                                     <span className="handWritten text-2xl ml-4">{oldComm.text}</span>
                                                     {(!isAdmin) ? null : <span className="text-red-500 ml-6 hover:cursor-pointer"
                                                                                onClick={(e) => {
@@ -83,8 +83,8 @@ const Commentor = ({currentUser, postId, newComm, isAdmin, setModerate, setTarge
                                     )}
 
                                     <div className=" flex flex-row">
-                                        <p className="font-EXO mr-2">Vous : </p>
-                                        <div className="bg-blue-gray-100 rounded-2xl flex-1">
+                                        <p className="mr-2">Vous : </p>
+                                        <div className="bg-ter-light rounded-2xl flex-1">
                                             <input className="handWritten text-2xl bg-transparent w-full pl-2
                                         overflow-ellipsis overflow-hidden whitespace-pre-line cursor-pointer"
                                                    type='undefined'

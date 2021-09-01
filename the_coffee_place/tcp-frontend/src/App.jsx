@@ -45,7 +45,7 @@ function App() {
 
 
     return (
-            <div className="App bg-blue-100">
+            <div className="App bg-ter-dark h-full text-prim font-EXO">
 
 {/*                {loading ? ("loading ...") : (      */}
                     <Router>

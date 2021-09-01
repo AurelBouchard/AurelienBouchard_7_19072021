@@ -67,9 +67,9 @@ const Redactor = ({author, newPost}) => {
                     >
                         {props => (
                             <Form >
-                                <div className="mt-4 p-3 flex flex-col rounded-3xl bg-white md:ml-28 text-coffee-dark">
-                                    <div className="bg-blue-gray-100 rounded-2xl px-1 cursor-pointer">
-                                        <input className="handWritten text-2xl bg-transparent w-full
+                                <div className="mt-4 p-3 flex flex-col rounded-3xl bg-white md:ml-28">
+                                    <div className="bg-ter-light rounded-2xl px-1 cursor-pointer">
+                                        <input className="pl-2 handWritten text-2xl bg-transparent w-full
                             overflow-ellipsis overflow-hidden whitespace-pre-line"
                                         type='undefined'
                                         onChange={props.handleChange}
