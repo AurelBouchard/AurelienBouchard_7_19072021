@@ -5,10 +5,9 @@ import {Link, useHistory} from 'react-router-dom';
 
 
 import Button from './TCP_button'
-import {useGet} from "../utils/useGet";
 
 
-export default function Settings({currentUser, isAdmin}) {
+export default function Settings({ JWT_token, currentUser, isAdmin}) {
 
     const history = useHistory();
 
@@ -42,7 +41,8 @@ export default function Settings({currentUser, isAdmin}) {
 
                                         const payload = {magicWord: values.magicWord}
 
-                                        axios.put(`http://localhost:4000/api/user/setadmin/${currentUser}`, payload)
+                                        axios.put(`http://localhost:4000/api/user/setadmin/${currentUser}`, payload,
+                                            {headers: { Authorization: 'Bearer '+JWT_token } })
                                             .then(function (response) {
                                                 console.log("response status " + response.status);
                                             })

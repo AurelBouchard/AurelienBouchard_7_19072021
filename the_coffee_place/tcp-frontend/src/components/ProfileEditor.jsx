@@ -8,7 +8,7 @@ import Button from './TCP_button'
 import {useGet} from "../utils/useGet";
 
 
-export default function ProfileEditor({currentUser, setConnected}) {
+export default function ProfileEditor({currentUser, setJWT_token}) {
     const [mode, changeModeTo] = useState('normal'); // possible states : 'normal' / 'changePW' / 'rmProfile'
 
     const history = useHistory();
@@ -144,7 +144,7 @@ export default function ProfileEditor({currentUser, setConnected}) {
                             }, 400);
 
                             // disconnect from app
-                            setConnected(false);
+                            setJWT_token(null);
                         }}
                     >
 

@@ -24,7 +24,9 @@ export default function Wall({currentUser, handleNewChild, isAdmin}) {
     return (
         <div className="mx-auto pb-8 w-5/6 max-w-3xl cursor-default">
                 <>
-                    <Redactor author={currentUser} newPost={handleNewChild}/>
+                    <Redactor author={currentUser}
+                              newPost={handleNewChild}/>
+
                 {(loading || finding) ? "loading ..." : (
                     data.slice(0).reverse().map(({date, clock, text, author, nOfLike, nOfComment, UserId, postId }) => {
                         let key = uuidv4();
@@ -51,7 +53,9 @@ export default function Wall({currentUser, handleNewChild, isAdmin}) {
                     })
                 )}
 
-                    {(!moderate) ? null : <Moderator setModerate={setModerate} target={target} moderated={handleNewChild} /> }
+                    {(!moderate) ? null : <Moderator setModerate={setModerate}
+                                                     target={target}
+                                                     moderated={handleNewChild} /> }
             </>
 
         </div>

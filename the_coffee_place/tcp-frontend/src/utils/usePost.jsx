@@ -2,12 +2,13 @@
 
 import {useEffect, useState} from "react";
 import axios from 'axios';
+import {JWT_token} from "../components/Connection";
 
 const initialState = {data:null, loading: true};
 
 
 
-export const usePost = ({url, params, payload}) => {
+export const usePost = ({url, payload}) => {
     const [state, setState] = useState(initialState);
 
     useEffect(async() => {
@@ -15,11 +16,7 @@ export const usePost = ({url, params, payload}) => {
 
         axios.post('http://localhost:4000/api/posts', payload)
             .then(function (response) {
-                console.log(response.data);
-                console.log(response.status);
                 console.log(response.statusText);
-                console.log(response.headers);
-                console.log(response.config);
                 setState( {data: response, loading: false} );
             });
 

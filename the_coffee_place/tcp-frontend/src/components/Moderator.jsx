@@ -4,7 +4,7 @@ import axios from "axios";
 import Button from './TCP_button'
 
 
-const Moderator = ({setModerate, target, moderated}) => {
+const Moderator = ({JWT_token, setModerate, target, moderated}) => {
 
     return (
         <div className="bg-opacity-20 backdrop-filter backdrop-blur-sm h-full w-full fixed top-0 left-0
@@ -18,10 +18,12 @@ const Moderator = ({setModerate, target, moderated}) => {
                 </Button>
                 <Button text="Confirmer" onClick={() => {
                     if (target.type === 'commentaire') {
-                        axios.delete(`http://localhost:4000/api/posts/comment/${target.id}`)
+                        axios.delete(`http://localhost:4000/api/posts/comment/${target.id}`,
+                            {headers: { Authorization: 'Bearer '+JWT_token } })
                     }
                     if (target.type === 'post') {
-                        axios.delete(`http://localhost:4000/api/posts/${target.id}`)
+                        axios.delete(`http://localhost:4000/api/posts/${target.id}`,
+                            {headers: { Authorization: 'Bearer '+JWT_token } })
                     }
                     moderated(true);
                     setModerate(false);

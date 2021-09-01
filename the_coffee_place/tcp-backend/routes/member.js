@@ -5,9 +5,9 @@ const memberController = require('../controllers/member');
 const auth = require('../middleware/auth');
 
 
-router.get("/", memberController.getAll);//auth
+router.get("/",         auth,   memberController.getAll);
 
-router.get("/:pseudo", memberController.getOne);//auth
+router.get("/:pseudo",  auth,   memberController.getOne);
 
 
 

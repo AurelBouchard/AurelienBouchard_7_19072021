@@ -4,6 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 import Button from './TCP_button'
 
+
 const Redactor = ({author, newPost}) => {
     const [isOpen, toggleOpen] =useState(false);
 

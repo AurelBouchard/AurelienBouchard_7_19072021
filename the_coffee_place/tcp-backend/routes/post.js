@@ -10,21 +10,21 @@ const postController = require('../controllers/post');
 //#########################################################
 
 
-router.post('/',            postController.create);    //fileManager,
+router.post('/',            auth,   postController.create);    //fileManager,
 
-router.get('/',             postController.getAll);
+router.get('/',             auth,   postController.getAll);
 
-router.get('/:id',          postController.findById);
+router.get('/:id',          auth,   postController.findById);
 
-router.get('/:id/comments', postController.getComments);
+router.get('/:id/comments', auth,   postController.getComments);
 
-router.put('/:id/like',     postController.addLike);
+router.put('/:id/like',     auth,   postController.addLike);
 
-router.put('/:id/comment',  postController.addComment);
+router.put('/:id/comment',  auth,   postController.addComment);
 
-router.delete('/:index',    postController.removePost);   // index can be id of post to be removed or pseudo of author
+router.delete('/:index',    auth,   postController.removePost);   // index can be id of post to be removed or pseudo of author
 
-router.delete('/comment/:index',    postController.removeComment);   // index can be id of a comment to be removed or pseudo of author
+router.delete('/comment/:index',    auth,   postController.removeComment);   // index can be id of a comment to be removed or pseudo of author
 
 
 

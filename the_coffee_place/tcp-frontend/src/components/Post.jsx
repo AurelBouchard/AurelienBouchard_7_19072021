@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import axios from "axios";
 
+
 import Commentor from "./Commentor";
 
 
@@ -68,8 +69,12 @@ export default function Post({date, clock, liked, text, author, nOfComm, nOfLike
                     </div>
                 </div>
 
-                {(!showComm) ? null : <Commentor postId={postId} currentUser={currentUser} newComm={newComm}
-                                                 isAdmin={isAdmin} setModerate={setModerate} setTarget={setTarget}/> }
+                {(!showComm) ? null : <Commentor postId={postId}
+                                                 currentUser={currentUser}
+                                                 newComm={newComm}
+                                                 isAdmin={isAdmin}
+                                                 setModerate={setModerate}
+                                                 setTarget={setTarget}/> }
 
                 {(!isAdmin) ? null : <div className="absolute bottom-4 -right-6 text-red-500 hover:cursor-pointer"
                                           onClick={() => {

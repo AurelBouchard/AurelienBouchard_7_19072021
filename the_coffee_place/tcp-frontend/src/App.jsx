@@ -20,17 +20,15 @@ import {useGet} from "./utils/useGet";
 
 
 
-function App() {
-    const [isConnected, setConnected] = useState(false);
-    const [askForSubscription, setAskForSubscription] = useState(false);
-    const lastUser = localStorage.getItem('tcp_user');
-    const [currentUser, setCurrentUser] = useState(lastUser);
-    let history = useHistory();
 
+function App() {
+    const [askForSubscription, setAskForSubscription] = useState(false);
+    const [currentUser, setCurrentUser] = useState(null);
+    const [JWT_token, setJWT_token] = useState(null);
+    const [isAdmin, setIsAdmin] = useState(false);
     const [haveNewChild, setHaveNewChild] = useState(true);
 
-    // need to know early if user is admin :
-    const {data, loading} = useGet(`http://localhost:4000/api/user/${currentUser}`);    // data.user.isAdmin
+
 
     function handleNewChild() {
         setHaveNewChild(false);
@@ -49,9 +47,9 @@ function App() {
     return (
             <div className="App bg-blue-100">
 
-                {loading ? ("loading ...") : (
+{/*                {loading ? ("loading ...") : (      */}
                     <Router>
-                        {!isConnected ?
+                        {!JWT_token ?
                             <>
                                 <Switch>
                                     <Route exact path='/signin'>
@@ -66,7 +64,8 @@ function App() {
                                     <Route exact path='/login'>
                                         {!askForSubscription ?
                                             <Connection
-                                                setConnected={setConnected}
+                                                setJWT_token={setJWT_token}
+                                                setIsAdmin={setIsAdmin}
                                                 setAskForSubscription={handleAskForSubscription}
                                                 setCurrentUser={setCurrentUser}
                                             />
@@ -81,7 +80,8 @@ function App() {
                             </>
                             :
                             <>
-                                <Navbar disconnect={setConnected}/>
+                                <Navbar JWT_token={JWT_token}
+                                        setJWT_token={setJWT_token}/>
                                 <Switch>
                                     <Route path='/login'>
                                         <Redirect to='/wall'></Redirect>
@@ -89,26 +89,33 @@ function App() {
 
                                     <Route exact path='/wall'>
                                         {haveNewChild ?
-                                            <Wall currentUser={currentUser}
+                                            <Wall JWT_token={JWT_token}
+                                                  currentUser={currentUser}
                                                   handleNewChild={handleNewChild}
-                                                  isAdmin={data.user.isAdmin} />
+                                                  isAdmin={isAdmin} />
                                             : null }
                                     </Route>
 
                                     <Route exact path='/members'>
-                                        <Members isAdmin={data.user.isAdmin} />
+                                        <Members JWT_token={JWT_token}
+                                                 isAdmin={isAdmin} />
                                     </Route>
 
                                     <Route exact path='/myprofile'>
-                                        <ProfileEditor currentUser={currentUser} setConnected={setConnected} />
+                                        <ProfileEditor JWT_token={JWT_token}
+                                                       currentUser={currentUser}
+                                                       setJWT_token={setJWT_token} />
                                     </Route>
 
                                     <Route exact path='/settings'>
-                                        <Settings currentUser={currentUser} isAdmin={data.user.isAdmin} />
+                                        <Settings JWT_token={JWT_token}
+                                                  currentUser={currentUser}
+                                                  isAdmin={isAdmin} />
                                     </Route>
 
                                     <Route path='/member/:pseudo'>
-                                        <ShowProfile isAdmin={data.user.isAdmin} />
+                                        <ShowProfile JWT_token={JWT_token}
+                                                     isAdmin={isAdmin} />
                                     </Route>
 
     {/*                            <Route path='/post/:id'>
@@ -126,7 +133,7 @@ function App() {
                             </>
                         }
                     </Router>
-                )}
+{/*                )}*/}
             </div>
 
     )

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 import axios from 'axios';
@@ -7,8 +7,14 @@ import Button from './TCP_button';
 
 
 
+export let JWT_token = "";
 
-const Connection = ({setConnected, setAskForSubscription, setCurrentUser}) => {
+
+
+
+const Connection = ({setJWT_token, setIsAdmin, setConnected, setAskForSubscription, setCurrentUser}) => {
+
+    const lastUser = localStorage.getItem('tcp_user');
 
     useEffect(() => { document.title = "Connexion"; })
 
@@ -19,7 +25,7 @@ const Connection = ({setConnected, setAskForSubscription, setCurrentUser}) => {
                 {/*<p className="pr-2 w-full sm:text-3xl md:text-4xl text-right">... la salle de pause de Groupomania</p>*/}
             </div>
             <Formik
-                initialValues={{pseudo: '', password: ''}}
+                initialValues={{pseudo: lastUser, password: ''}}
                 validate={values => {
                     const errors = {};
                     if (!values.pseudo) {
@@ -42,19 +48,23 @@ const Connection = ({setConnected, setAskForSubscription, setCurrentUser}) => {
 
                         axios.post('http://localhost:4000/api/user/login', payload)
                             .then(function (response) {
-                                //console.log(response.data);
-                                console.log(response.status);
-                                //console.log(response.statusText);
-                                console.log(response.headers);
-                                console.log(response.config);
-                                //setState( {data: response, loading: false} );
-
+                                console.log("response.data :");
+                                console.log(response.data);
+                                //JWT_token=response.data.token;
+                                return ({token: 'Bearer '+response.data.token, isAdmin: response.data.isAdmin});
                             })
-                            .then(() => {
-                                setConnected(true);
+                            .then(({token, isAdmin}) => {
+                                console.log(token)
+                                console.log("tout est ok !!");
+                                setJWT_token(token);
+
+                                //axios.defaults.baseURL = 'https:
+                                axios.defaults.headers.common['Authorization'] = token;
+
                                 setAskForSubscription(false);
                                 localStorage.setItem('tcp_user', values.pseudo)
                                 setCurrentUser(values.pseudo);
+                                isAdmin && setIsAdmin(true);
                                 console.log("Vous êtes connecté(e) en tant que " + values.pseudo)
                             })
                             .catch(err => {
@@ -77,7 +87,7 @@ const Connection = ({setConnected, setAskForSubscription, setCurrentUser}) => {
                                 <div className="px-4">
                                     <div className="mt-4 mb-8 px-4">
                                         <label htmlFor='pseudo' className='block'>Pseudo</label>
-                                        <Field name="pseudo" placeholder="pseudo"/>
+                                        <Field name="pseudo" placeholder="pseudo" autoComplete="nickName"/>
                                         <ErrorMessage name="pseudo" component="div"
                                                       className='mb-1 text-red-500'/>
                                     </div>

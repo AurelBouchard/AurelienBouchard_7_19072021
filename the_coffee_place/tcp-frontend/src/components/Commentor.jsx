@@ -6,8 +6,8 @@ import { v4 as uuidv4 } from 'uuid';
 import Button from './TCP_button'
 import {useGet} from "../utils/useGet";
 
+
 const Commentor = ({currentUser, postId, newComm, isAdmin, setModerate, setTarget}) => {
-    //const [isOpen, toggleOpen] =useState(false);
 
     const {data, loading} = useGet(`http://localhost:4000/api/posts/${postId}/comments`);
 

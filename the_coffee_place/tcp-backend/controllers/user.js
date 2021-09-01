@@ -1,10 +1,8 @@
-const sequelize = require('../db_management/sequelize');
-const queryInterface = sequelize.getQueryInterface();
-const User = require('../models/User.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+
+const User = require('../models/User.js');
 const Like = require("../models/Like");
-const {getLikedPosts} = require("./user");
 
 
 
@@ -43,7 +41,7 @@ exports.signUp = (req, res) => {
 
 
 exports.logIn = (req, res) => {
-    User.findOne({where: {pseudo: req.body.pseudo}})
+    User.findOne({where: {pseudo: req.body.pseudo}, attributes: ['pseudo', 'password'] })
         .then(user => {
             if (!user) {
                 console.log("User not found");
@@ -56,14 +54,14 @@ exports.logIn = (req, res) => {
                         return res.status(401).json({error: "Mot de passe erroné."});}
 
                     console.log("User logged in.");
-                    res.status(200).json({/*
-                        userId: user.id,
-                        token:
-                            jwt.sign(
-                            {userId: user.id},
-                                process.env.JWT_PASS_PHRASE,
-                            {expiresIn: '8h'}
-                        )*/
+                    res.status(200).json({
+                        pseudo: user.pseudo,
+                            token:
+                                jwt.sign(
+                                    {pseudo: user.pseudo},
+                                    `${process.env.JWT_PASS_PHRASE}`,
+                                    {expiresIn: '8h'}
+                                )
                     });
                 })
                 .catch(error => res.status(500).json({error}));

@@ -12,7 +12,7 @@ import NavLink from "@material-tailwind/react/NavLink";
 import NavbarInput from "@material-tailwind/react/NavbarInput";
 import Icon from "@material-tailwind/react/Icon";
 
-export default function TCP_navbar({disconnect}) {
+export default function TCP_navbar({setJWT_token}) {
     const [openNavbar, setOpenNavbar] = useState(false);
 
     return (
@@ -62,7 +62,7 @@ export default function TCP_navbar({disconnect}) {
 
                         <NavLink
                             ripple="light"
-                            onClick={() => disconnect()}>
+                            onClick={() => setJWT_token(false)}>
                             <i className="fas fa-sign-out-alt text-lg"></i>
                             Deconnexion
                         </NavLink>

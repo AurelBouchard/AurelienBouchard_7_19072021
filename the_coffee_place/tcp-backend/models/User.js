@@ -19,11 +19,11 @@ const User = sequelize.define("User", {
     },
     firstName: {
         type: Sequelize.STRING,
-        allowNull: true,
+        defaultValue: undefined,
     },
     lastName: {
         type: Sequelize.STRING,
-        allowNull: true,
+        defaultValue: undefined,
     },
     email: {
         type: Sequelize.STRING,
