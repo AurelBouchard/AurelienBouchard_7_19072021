@@ -5,13 +5,10 @@ const sequelize = new Sequelize(`${process.env.DB_NAME}`, `${process.env.DB_USER
 /*    define: {
         freezeTableName: true
     },*/
-    dialect: "mariadb",
-    dialectOptions: {
-        options: {
-            requestTimeout: 20000
-        }
-    },
-    host: process.env.DB_HOST
+    dialect: "mysql",
+
+    host: process.env.DB_HOST,
+    port: process.env.DB_port
 });
 
 module.exports = sequelize;
