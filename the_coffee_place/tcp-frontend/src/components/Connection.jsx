@@ -67,7 +67,8 @@ const Connection = ({setJWT_token, setIsAdmin, setConnected, setAskForSubscripti
                                 setAskForSubscription(false);
                                 localStorage.setItem('tcp_user', values.pseudo)
                                 setCurrentUser(values.pseudo);
-                                isAdmin && setIsAdmin(true);
+
+                                isAdmin ? setIsAdmin(true) : setIsAdmin(false) ;
                                 console.log("Vous êtes connecté(e) en tant que " + values.pseudo)
                             })
                             .catch(err => {

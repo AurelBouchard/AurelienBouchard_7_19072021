@@ -81,8 +81,8 @@ const CreateAccount = ({setAskForSubscription}) => {
                                 console.log("Vous êtes inscrit(e)")
                             })
                             .catch(error => {
-                                console.log(error.response.data.message);
-                                setDbError(error.response.data.message);
+                                console.log(error.response.data.message.errors[0].message);
+                                setDbError(error.response.data.message.errors[0].message);
                             });
 
 

@@ -248,7 +248,7 @@ export default function ProfileEditor({currentUser, setJWT_token}) {
                                     <div className="w-48 md:w-72 h-48 md:h-72  md:m-8 ">
                                         <img
                                             className="rounded-2xl bg-white"
-                                            src='src/assets/icon-above-font.png'
+                                            src='/src/assets/icon-above-font.png'
                                             alt="Profile picture"
                                             onClick={() => {
                                                 alert("Choisissez une photo")

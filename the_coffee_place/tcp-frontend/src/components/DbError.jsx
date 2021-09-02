@@ -21,15 +21,27 @@ export default DbError;
 
 function gentleError(errorMessage) {
     let errorType = "";
-    const isDuplicate = errorMessage.includes("Duplicate");
+    let isDuplicate = false
+    /*    try {
+            if (errorMessage.includes("Duplicate")) {
+                // last word is "'email'" or "'pseudo'"
+                errorType = (errorMessage.split(" ")).pop();
+            } else {
+                // it embed an status error code
+                errorType = errorMessage.slice(-3);
+            }
+        } catch { }*/
 
-    if (isDuplicate) {
-        // last word is "'email'" or "'pseudo'"
-        errorType = (errorMessage.split(" ")).pop();
-    } else {
-        // it embed an status error code
-        errorType = errorMessage.slice(-3);
-    }
+        try {
+            if (errorMessage.includes("unique")) {
+                // word next to 1st point is "'email'" or "'pseudo'"
+                errorType = (errorMessage.split(".")[1]).split(" ")[0];
+            } else {
+                // it embed an status error code
+                errorType = errorMessage.slice(-3);
+            }
+        } catch { }
+
 
 
     let gentleMessage = "";
@@ -41,11 +53,14 @@ function gentleError(errorMessage) {
         case "401":
             gentleMessage = "Mot de passe incorrect ...";
             break;
-        case "'email'":
+        case "email":
             gentleMessage = "Cet email est déjà utilisé.";
             break;
-        case "'pseudo'":
+        case "pseudo":
             gentleMessage = "Ce pseudo est déjà utilisé.";
+            break;
+        case "duplicate":
+            gentleMessage = "Ce pseudo et/ou cet email est déjà utilisé.";
             break;
 
 

@@ -10,7 +10,7 @@ export const useUsersLikes = (mutations, currentUser) => {
     const [state, setState] = useState(initialState);
 
     useEffect(async() => {
-        if (currentUser == null) return;
+        //if (currentUser == null) return; // THIS LINE AVOID THE 1st REFRESH OF WALL, SO LIKED POSTS ARE FROM THE PREVIOUS USER
 
         setState(initialState);
 

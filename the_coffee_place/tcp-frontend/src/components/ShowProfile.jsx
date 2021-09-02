@@ -17,7 +17,7 @@ export default function ShowProfile() {
                     <div className="rounded-2xl bg-white p-3 md:m-8 md:self-start w-52 h-52 md:w-96 md:h-96 flex">
                         <img
                             className="m-auto w-full h-full object-cover"
-                            src='src/assets/icon-above-font.png'
+                            src='/src/assets/icon-above-font.png'
                             alt="Profile picture"
                         />
 

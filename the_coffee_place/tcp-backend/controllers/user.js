@@ -32,7 +32,7 @@ exports.signUp = (req, res) => {
                 })
                 .catch(err => { try {
                     console.log("Unable to create user : \n" + err.name + ".\n" + err.parent.text);
-                    res.status(500).json({message: err.parent.text});
+                    res.status(500).json({message: (err.parent.text || err)});
 
                     } catch {
                     console.log(err);
