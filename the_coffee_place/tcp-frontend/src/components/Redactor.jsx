@@ -5,7 +5,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import Button from './TCP_button'
 
 
-const Redactor = ({author, newPost}) => {
+const Redactor = ({author, onNewPost}) => {
     const [isOpen, toggleOpen] =useState(false);
 
     return (
@@ -54,7 +54,7 @@ const Redactor = ({author, newPost}) => {
                                     toggleOpen(!isOpen);
 
                                     // reload wall (redactor's parent)
-                                    newPost();
+                                    onNewPost();
 
                                 })
                                 .catch(err => {

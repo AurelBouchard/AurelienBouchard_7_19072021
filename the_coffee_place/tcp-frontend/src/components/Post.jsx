@@ -6,7 +6,7 @@ import Commentor from "./Commentor";
 
 
 export default function Post({date, clock, liked, text, author, nOfComm, nOfLike, postId,
-                                 currentUser, newComm, isAdmin, setModerate, setTarget}) {
+                                 currentUser, onNewComm, onLikeChange, isAdmin, setModerate, setTarget}) {
     const [showComm, setShowComm] = useState(false);
 
 
@@ -58,11 +58,15 @@ export default function Post({date, clock, liked, text, author, nOfComm, nOfLike
                                      })
                                      .then(() => {
                                          console.log("like/notlike ok");
-
-                                         // reload wall (post's parent)
-                                         newComm();
+                                         // anyway need reload wall (post's parent)
+                                         onLikeChange();
                                      })
-                                     .catch(err => { console.log(err) });
+                                     .catch(err => {
+                                         console.log(err);
+                                         // anyway need reload wall (post's parent)
+                                         onLikeChange();
+                                     });
+
 
                         }}>
                             {liked ? <span className="liked ml-1 h-8 text-sec-med text-xl"><i className="fas fa-thumbs-up"></i></span>
@@ -73,7 +77,7 @@ export default function Post({date, clock, liked, text, author, nOfComm, nOfLike
 
                 {(!showComm) ? null : <Commentor postId={postId}
                                                  currentUser={currentUser}
-                                                 newComm={newComm}
+                                                 onNewComm={onNewComm}
                                                  isAdmin={isAdmin}
                                                  setModerate={setModerate}
                                                  setTarget={setTarget}/> }

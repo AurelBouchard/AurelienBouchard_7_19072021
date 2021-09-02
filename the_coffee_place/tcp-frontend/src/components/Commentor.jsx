@@ -7,7 +7,7 @@ import Button from './TCP_button'
 import {useGet} from "../utils/useGet";
 
 
-const Commentor = ({currentUser, postId, newComm, isAdmin, setModerate, setTarget}) => {
+const Commentor = ({currentUser, postId, onNewComm, isAdmin, setModerate, setTarget}) => {
 
     const {data, loading} = useGet(`http://localhost:4000/api/posts/${postId}/comments`);
 
@@ -48,7 +48,7 @@ const Commentor = ({currentUser, postId, newComm, isAdmin, setModerate, setTarge
                                         actions.resetForm();
 
                                         // reload wall (commentor's parent)
-                                        newComm();
+                                        onNewComm();
 
                                     })
                                     .catch(err => {
