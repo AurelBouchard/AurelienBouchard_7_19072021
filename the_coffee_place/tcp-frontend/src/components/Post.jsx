@@ -5,7 +5,7 @@ import axios from "axios";
 import Commentor from "./Commentor";
 
 
-export default function Post({date, clock, liked, text, author, nOfComm, nOfLike, UserId, postId,
+export default function Post({date, clock, liked, text, author, nOfComm, nOfLike, postId,
                                  currentUser, newComm, isAdmin, setModerate, setTarget}) {
     const [showComm, setShowComm] = useState(false);
 
@@ -14,9 +14,11 @@ export default function Post({date, clock, liked, text, author, nOfComm, nOfLike
         <>
             <div className="mt-4 p-3 flex flex-col rounded-3xl bg-white text-coffee-dark relative">
                 <div className="bg-ter-light rounded-2xl px-1 cursor-pointer"
-                     onClick={() => {
-                    /*        will handle large view with router.redirect and router.parameters     */
-                    alert('show full')}}>
+                     /* onClick={() => {    */
+                     /*       will handle large view with router.redirect and router.parameters     */
+                    /*alert('show full')}} */
+                    >
+
                     <p className="pl-1 handWritten text-2xl
                     overflow-ellipsis overflow-hidden whitespace-pre-line">{text}</p>
                 </div>

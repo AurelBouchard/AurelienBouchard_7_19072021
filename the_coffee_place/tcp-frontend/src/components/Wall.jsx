@@ -29,7 +29,7 @@ export default function Wall({currentUser, handleNewChild, isAdmin}) {
                               newPost={handleNewChild}/>
 
                     {(loading || finding) ? "loading ..." : (
-                        data.slice(0).reverse().map(({date, clock, text, author, nOfLike, nOfComment, UserId, postId }) => {
+                        data.slice(0).reverse().map(({date, clock, text, author, nOfLike, nOfComment, postId }) => {
                             let key = uuidv4();
                             const isLiked = listOfLikedPost.includes(postId);
                             return (
@@ -42,7 +42,6 @@ export default function Wall({currentUser, handleNewChild, isAdmin}) {
                                     text={text}
                                     nOfComm={nOfComment}
                                     nOfLike={nOfLike}
-                                    UserId={UserId}
                                     postId={postId}
                                     currentUser={currentUser}
                                     newComm={handleNewChild}

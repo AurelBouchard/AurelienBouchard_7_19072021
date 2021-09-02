@@ -1,12 +1,17 @@
 const Sequelize = require("sequelize");
 require('dotenv').config();
 
-const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+const sequelize = new Sequelize(`${process.env.DB_NAME}`, `${process.env.DB_USER}`, `${process.env.DB_PASSWORD}`, {
 /*    define: {
         freezeTableName: true
     },*/
     dialect: "mariadb",
-    host: process.env.DB_HOST,
+    dialectOptions: {
+        options: {
+            requestTimeout: 20000
+        }
+    },
+    host: process.env.DB_HOST
 });
 
 module.exports = sequelize;
