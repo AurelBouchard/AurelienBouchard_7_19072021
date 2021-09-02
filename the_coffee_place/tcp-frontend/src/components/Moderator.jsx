@@ -23,7 +23,7 @@ const Moderator = ({setModerate, target, moderated}) => {
                     if (target.type === 'post') {
                         axios.delete(`http://localhost:4000/api/posts/${target.id}`)
                     }
-                    moderated(true);
+                    moderated();
                     setModerate(false);
                 }} >
                 </Button>

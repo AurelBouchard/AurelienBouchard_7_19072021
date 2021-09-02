@@ -46,7 +46,7 @@ exports.signUp = (req, res) => {
 
 
 exports.logIn = (req, res) => {
-    User.findOne({where: {pseudo: req.body.pseudo}, attributes: ['pseudo', 'password'] })
+    User.findOne({where: {pseudo: req.body.pseudo}, attributes: ['pseudo', 'password', 'isAdmin'] })
         .then(user => {
             if (!user) {
                 console.log("User not found");
@@ -60,6 +60,7 @@ exports.logIn = (req, res) => {
 
                     console.log("User logged in.");
                     res.status(200).json({
+                        isAdmin: user.isAdmin,
                         pseudo: user.pseudo,
                             token:
                                 jwt.sign(

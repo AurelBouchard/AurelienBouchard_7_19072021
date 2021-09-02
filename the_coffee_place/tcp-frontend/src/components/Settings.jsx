@@ -7,7 +7,7 @@ import {Link, useHistory} from 'react-router-dom';
 import Button from './TCP_button'
 
 
-export default function Settings({ JWT_token, currentUser, isAdmin}) {
+export default function Settings({currentUser, isAdmin, setIsAdmin}) {
 
     const history = useHistory();
 
@@ -38,12 +38,12 @@ export default function Settings({ JWT_token, currentUser, isAdmin}) {
 
                                         const payload = {magicWord: values.magicWord}
 
-                                        axios.put(`http://localhost:4000/api/user/setadmin/${currentUser}`, payload,
-                                            {headers: { Authorization: 'Bearer '+JWT_token } })
+                                        axios.put(`http://localhost:4000/api/user/setadmin/${currentUser}`, payload)
                                             .then(function (response) {
                                                 console.log("response status " + response.status);
                                             })
                                             .then(() => {
+                                                setIsAdmin=(true);
                                                 alert("Votre statut a été mis à jour");
                                                 console.log("status successfully updated")
                                             })

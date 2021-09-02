@@ -31,6 +31,7 @@ function App() {
 
     function handleNewChild() {
         setHaveNewChild(false);
+        console.log("should refresh app")
     }
 
     useEffect(() => {
@@ -64,9 +65,9 @@ function App() {
                                         {!askForSubscription ?
                                             <Connection
                                                 setJWT_token={setJWT_token}
-                                                setIsAdmin={setIsAdmin}
                                                 setAskForSubscription={handleAskForSubscription}
                                                 setCurrentUser={setCurrentUser}
+                                                setIsAdmin={setIsAdmin}
                                             />
                                             : <Redirect to='/signin'></Redirect>
                                         }
@@ -109,7 +110,8 @@ function App() {
                                     <Route exact path='/settings'>
                                         <Settings JWT_token={JWT_token}
                                                   currentUser={currentUser}
-                                                  isAdmin={isAdmin} />
+                                                  isAdmin={isAdmin}
+                                                  setIsAdmin={setIsAdmin} />
                                     </Route>
 
                                     <Route path='/member/:pseudo'>
