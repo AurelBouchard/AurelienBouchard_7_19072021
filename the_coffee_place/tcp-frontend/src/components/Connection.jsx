@@ -22,7 +22,7 @@ const Connection = ({setJWT_token, setIsAdmin, setConnected, setAskForSubscripti
 
     return (
         <div className="flex flex-col justify-between items-center w-full h-full pt-16 bg-ter-dark">
-            <div id="title" className="flex flex-col md:mb-8 lg:mt-32 handWritten text-3xl h-24 w-11/12">
+            <div id="title" className="flex flex-col md:mb-8 handWritten text-3xl h-24 w-11/12">
                 {/*<p className="text-sec-med md:text-4xl lg:text-5xl">The Coffee Place</p>*/}
                 {/*<p className="pr-2 w-full sm:text-3xl md:text-4xl text-right">... la salle de pause de Groupomania</p>*/}
             </div>
@@ -93,13 +93,15 @@ const Connection = ({setJWT_token, setIsAdmin, setConnected, setAskForSubscripti
                                 <div className="px-4">
                                     <div className="mt-4 mb-8 px-4">
                                         <label htmlFor='pseudo' className='block'>Pseudo</label>
-                                        <Field name="pseudo" placeholder="pseudo" autoComplete="nickName"/>
+                                        <Field name="pseudo" placeholder="pseudo" autoComplete="nickName"
+                                               className=" rounded focus:outline-none focus:ring focus:ring-offset-2 focus:ring-prim focus:ring-offset-white"/>
                                         <ErrorMessage name="pseudo" component="div"
                                                       className='mb-1 text-red-500'/>
                                     </div>
                                     <div className="mb-4 px-4">
                                         <label htmlFor='password' className='block'>Mot de passe</label>
-                                        <Field type="password" name="password" placeholder="mot_de_passe" autoComplete="current-password"/>
+                                        <Field type="password" name="password" placeholder="mot_de_passe" autoComplete="current-password"
+                                               className=" rounded focus:outline-none focus:ring focus:ring-offset-2 focus:ring-prim focus:ring-offset-white"/>
                                         <ErrorMessage name="password" component="div"
                                                       className='mb-1 text-red-500'/>
                                     </div>
