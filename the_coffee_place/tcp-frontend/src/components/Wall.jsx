@@ -31,7 +31,7 @@ export default function Wall({currentUser, handleNewChild, isAdmin}) {
 
     return (
         <div className="absolute top-12 w-full">
-            <div className="mx-auto p-8 w-5/6 max-w-3xl cursor-default">
+            <div className="mx-auto p-8 md:w-5/6 max-w-3xl cursor-default">
                 <>
                     <Redactor author={currentUser}
                               onNewPost={updatePostMutations} />

@@ -88,16 +88,15 @@ exports.getFullProfile = (req, res) => {
 
 
 exports.getLikedPosts = (req, res) => {
-    console.log("getting the list of id of posts liked by this user")
+    console.log("\ngetting the list of id of posts liked by this user")
     Like.findAll({where: {pseudo: req.params.pseudo}, attributes:['PostId']} )
         .then(likedPosts => {
-            console.log(likedPosts)
             const list = likedPosts.map( like => like.dataValues.PostId );
             console.log("list :");
             console.log(list);
             res.status(200).json(list)
         })
-        .catch(err => { try { console.log("Unable to create user : \n" + err.name + ".\n" + err.parent.text);
+        .catch(err => { try { console.log("\nUnable to create user : \n" + err.name + ".\n" + err.parent.text);
         } catch { console.log(err); }
             res.status(404).json({err});
         });
