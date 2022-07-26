@@ -34,7 +34,7 @@ Some neede features :
 + Users can post comments
 
 
-[========]
+<br />
 
 
 <a name="demo"></a>
@@ -43,7 +43,7 @@ Some neede features :
 Available soon ...
 
 
-[========]
+<br />
 
 
 <a name="stack"></a>
@@ -68,7 +68,7 @@ Available soon ...
     * *autoprefixer* + *postcss* under the hood
 
 
-[========]
+<br />
 
 
 <a name="setup"></a>
@@ -94,7 +94,7 @@ Available soon ...
 `yarn start`
 
 
-[========]
+<br />
 
 
 <a name="usage"></a>
@@ -108,7 +108,7 @@ Available soon ...
 + ### find user
 
 
-[========]
+<br />
 
 
 <a name="folder"></a>
@@ -215,14 +215,14 @@ the_coffee_place
 </pre>
 
 
-[========]
+<br />
 
 
 <a name="upcoming"></a>
 ## 7. Upcoming changes
 
 
-[========]
+<br />
 
 
 <a name="contact"></a>
@@ -230,7 +230,7 @@ the_coffee_place
 Author : [AurelBouchard](mailto:au.bouchard@gmail.com)
 
 
-[========]
+<br />
 
 
 <a name="licence"></a>
