@@ -47,7 +47,6 @@ function App() {
     return (
             <div className="App text-prim font-EXO" >
 
-{/*                {loading ? ("loading ...") : (      */}
                     <Router>
                         {!JWT_token ?
                             <>
