@@ -14,7 +14,7 @@ Contents
  * [3. Stack](#stack)
  * [4. Installation](#setup)
  * [5. Usage](#usage)
- * [6. Folder](#configuration)
+ * [6. Folder](#folder)
  * [7. Upcoming changes](#upcoming)
  * [8. Contact](#contact)
  * [9. License](#license)
@@ -27,20 +27,24 @@ The fake firm "Groupomania" want to set up a private social network restricted t
 
 The product is a SPA (single page application) with a mobile first UI and it's obvioulsly responsive.
 
-Some needed features :
+Some neede features :
 + Users can easily create an account
 + The app is mobile friendly
 + Users can post text
 + Users can post comments
 
+
 [========]
+
 
 <a name="demo"></a>
 ## 2. Live demo
 
 Available soon ...
 
+
 [========]
+
 
 <a name="stack"></a>
 ## 3. Stack
@@ -63,7 +67,9 @@ Available soon ...
     * [*Vite*](https://vitejs.dev/ "vitejs.dev")
     * *autoprefixer* + *postcss* under the hood
 
+
 [========]
+
 
 <a name="setup"></a>
 ## 4. Installation
@@ -87,7 +93,9 @@ Available soon ...
 - #### 2. in frontend folder:
 `yarn start`
 
+
 [========]
+
 
 <a name="usage"></a>
 ## 5. Usage
@@ -99,7 +107,9 @@ Available soon ...
 + ### user profile
 + ### find user
 
+
 [========]
+
 
 <a name="folder"></a>
 ## 6. Folder
@@ -109,105 +119,119 @@ Available soon ...
 ### File Structure
 <pre>
 the_coffee_place
-├─ tcp-backend
-│    ├─ app.js
-│    ├─ cloud_sql_proxy
-│    ├─ controllers
-│    │   ├─ member.js
-│    │   ├─ post.js
-│    │   └─ user.js
-│    ├─ db_management
-│    │   ├─ connection.js
-│    │   ├─ sequelize.js
-│    │   └─ setup.js
-│    ├─ .env
-│    ├─ middleware
-│    │    └─ auth.js
-│    ├─ models
-│    │    ├─ Comm.js
-│    │    ├─ Like.js
-│    │    ├─ Post.js
-│    │    └─ User.js
-│    ├─ node_modules
-│    │    └─ a lot ...
-│    ├─ package.json
-│    ├─ routes
-│    │    ├─ member.js
-│    │    ├─ post.js
-│    │    └─ user.js
-│    ├─ server.js
-│    └─ yarn.lock
-└─ tcp-frontend
-        ├─ .gitignore
-        ├─ index.html
-        ├─ node_modules
-        │    └─ a lot ...
-        ├─ package.json
-        ├─ postcss.config.js
-        ├─ public
-        ├─  README.md
-        ├─  src
-        │    ├─ App.jsx
-        │    ├─ assets
-        │    │    ├─ back-transparent.png
-        │    │    ├─ coffee-cup-192.png
-        │    │    ├─ favicon.ico
-        │    │    ├─ icon
-        │    │    │    ├─ thumbs-down.png
-        │    │    │    ├─ thumbs-up.png
-        │    │    │    └─ warning.png
-        │    │    ├─ icon-above-font.png
-        │    │    ├─ icon-above-font.svg
-        │    │    ├─ icon-left-font-monochrome-white.svg
-        │    │    └─ icon.png
-        │    ├─ components
-        │    │    ├─ AccessToWall.jsx
-        │    │    ├─ Commentor.jsx
-        │    │    ├─ Connection.jsx
-        │    │    ├─ CreateAccount.jsx
-        │    │    ├─ DbError.jsx
-        │    │    ├─ Headings.jsx
-        │    │    ├─ Members.jsx
-        │    │    ├─ Moderator.jsx
-        │    │    ├─ NotFound.jsx
-        │    │    ├─ Post.jsx
-        │    │    ├─ ProfileEditor.jsx
-        │    │    ├─ Redactor.jsx
-        │    │    ├─ ScrollToTop.jsx
-        │    │    ├─ Settings.jsx
-        │    │    ├─ ShowProfile.jsx
-        │    │    ├─ TCP_button.jsx
-        │    │    ├─ TCP_input.jsx
-        │    │    ├─ TCP_navbar.jsx
-        │    │    └─ Wall.jsx
-        │    ├─ main.jsx
-        │    ├─ style
-        │    │    ├─ fonts
-        │    │    │    ├─ Caveat-Medium.ttf
-        │    │    │    └─ Exo2-Medium.otf
-        │    │    └─ index.css
-        │    └─ utils
-        │            ├─ useGet.jsx
-        │            ├─ usePosts.jsx
-        │            └─ useUsersLikes.jsx
-        ├─ tail wind.config.js
-        ├─ vite.config.js
-        ├─ yarn-error.log
-        └─ yarn.lock
+├── tcp-backend
+│   ├── app.js
+│   ├── cloud_sql_proxy
+│   ├── controllers
+│   │   ├── member.js
+│   │   ├── post.js
+│   │   └── user.js
+│   ├── db_management
+│   │   ├── connection.js
+│   │   ├── sequelize.js
+│   │   └── setup.js
+│   ├── .env
+│   ├── middleware
+│   │   └── auth.js
+│   ├── models
+│   │   ├── Comm.js
+│   │   ├── Like.js
+│   │   ├── Post.js
+│   │   └── User.js
+│   ├── node_modules
+│   │   └── a lot ...
+│   ├── package.json
+│   ├── routes
+│   │   ├── member.js
+│   │   ├── post.js
+│   │   └── user.js
+│   ├── server.js
+│   └── yarn.lock
+└── tcp-frontend
+    ├── .gitignore
+    ├── .idea
+    │   ├── .gitignore
+    │   ├── inspectionProfiles
+    │   │   └── Project_Default.xml
+    │   ├── modules.xml
+    │   ├── tcp-frontend.iml
+    │   ├── vcs.xml
+    │   └── workspace.xml
+    ├── index.html
+    ├── node_modules
+    │   └── a lot ...
+    ├── package.json
+    ├── postcss.config.js
+    ├── public
+    ├── README.md
+    ├── src
+    │   ├── App.jsx
+    │   ├── assets
+    │   │   ├── back-transparent.png
+    │   │   ├── coffee-cup-192.png
+    │   │   ├── favicon.ico
+    │   │   ├── icon
+    │   │   │   ├── thumbs-down.png
+    │   │   │   ├── thumbs-up.png
+    │   │   │   └── warning.png
+    │   │   ├── icon-above-font.png
+    │   │   ├── icon-above-font.svg
+    │   │   ├── icon-left-font-monochrome-white.svg
+    │   │   └── icon.png
+    │   ├── components
+    │   │   ├── AccessToWall.jsx
+    │   │   ├── Commentor.jsx
+    │   │   ├── Connection.jsx
+    │   │   ├── CreateAccount.jsx
+    │   │   ├── DbError.jsx
+    │   │   ├── Headings.jsx
+    │   │   ├── Members.jsx
+    │   │   ├── Moderator.jsx
+    │   │   ├── NotFound.jsx
+    │   │   ├── Post.jsx
+    │   │   ├── ProfileEditor.jsx
+    │   │   ├── Redactor.jsx
+    │   │   ├── ScrollToTop.jsx
+    │   │   ├── Settings.jsx
+    │   │   ├── ShowProfile.jsx
+    │   │   ├── TCP_button.jsx
+    │   │   ├── TCP_input.jsx
+    │   │   ├── TCP_navbar.jsx
+    │   │   └── Wall.jsx
+    │   ├── main.jsx
+    │   ├── style
+    │   │   ├── fonts
+    │   │   │   ├── Caveat-Medium.ttf
+    │   │   │   └── Exo2-Medium.otf
+    │   │   └── index.css
+    │   └── utils
+    │       ├── useGet.jsx
+    │       ├── usePosts.jsx
+    │       └── useUsersLikes.jsx
+    ├── tailwind.config.js
+    ├── vite.config.js
+    ├── yarn-error.log
+    └── yarn.lock
 </pre>
 
+
 [========]
+
 
 <a name="upcoming"></a>
 ## 7. Upcoming changes
 
+
 [========]
+
 
 <a name="contact"></a>
 ## 8. Contact
 Author : [AurelBouchard](mailto:au.bouchard@gmail.com)
 
+
 [========]
+
 
 <a name="licence"></a>
 ## 9. Licence
