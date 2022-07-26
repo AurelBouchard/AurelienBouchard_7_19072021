@@ -81,8 +81,8 @@ const CreateAccount = ({setAskForSubscription}) => {
                                 console.log("Vous êtes inscrit(e)")
                             })
                             .catch(error => {
-                                console.log(error.response.data.message);
-                                setDbError(error.response.data.message);
+                                console.log(error.response.data.message.errors[0].message);
+                                setDbError(error.response.data.message.errors[0].message);
                             });
 
 
@@ -102,28 +102,36 @@ const CreateAccount = ({setAskForSubscription}) => {
                                 <div className="px-4">
                                     <div className="mt-4 mb-4 px-4">
                                         <label htmlFor='pseudo' className='block'>Pseudo</label>
-                                        <Field id="pseudo" name="pseudo" placeholder="pseudo" />
+                                        <Field id="pseudo" name="pseudo" placeholder="pseudo"
+                                               className=" rounded focus:outline-none focus:ring focus:ring-offset-2
+                                               focus:ring-prim focus:ring-offset-white"/>
                                         <ErrorMessage name="pseudo" component="div"
                                                       className='mb-1 text-red-500'/>
                                     </div>
 
                                     <div className="mb-4 px-4">
                                         <label htmlFor='email' className='block'>Email</label>
-                                        <Field type="email" id="email"name="email" placeholder="email" />
+                                        <Field type="email" id="email"name="email" placeholder="email"
+                                               className=" rounded focus:outline-none focus:ring focus:ring-offset-2
+                                               focus:ring-prim focus:ring-offset-white"/>
                                         <ErrorMessage name="email" component="div"
                                                       className='mb-1 text-red-500'/>
                                     </div>
 
                                     <div className="mb-4 px-4">
                                         <label htmlFor='password' className='block'>Mot de passe</label>
-                                        <Field type="password" name="password" placeholder="mot_de_passe" />
+                                        <Field type="password" name="password" placeholder="mot_de_passe"
+                                               className=" rounded focus:outline-none focus:ring focus:ring-offset-2
+                                               focus:ring-prim focus:ring-offset-white"/>
                                         <ErrorMessage name="password" component="div"
                                                       className='mb-1 text-red-500'/>
                                     </div>
 
                                     <div className="mb-4 px-4">
                                         <label htmlFor='passwordConf' className='block'>Mot de passe</label>
-                                        <Field type="password" name="passwordConf" placeholder="Confirmez le mot de passe" />
+                                        <Field type="password" name="passwordConf" placeholder="Confirmez le mot de passe"
+                                               className=" rounded focus:outline-none focus:ring focus:ring-offset-2
+                                               focus:ring-prim focus:ring-offset-white"/>
                                         <ErrorMessage name="passwordConf" component="div"
                                                       className='mb-1 text-red-500'/>
                                     </div>
@@ -133,7 +141,9 @@ const CreateAccount = ({setAskForSubscription}) => {
                                             <LoadCanvasTemplateNoReload className="text-center"/>
                                         </div>
                                         <label htmlFor='user_captcha_input' className='block'>Captcha</label>
-                                        <Field autoComplete="off" id="user_captcha_input" name="user_captcha_input" placeholder="Copiez le captcha" />
+                                        <Field autoComplete="off" id="user_captcha_input" name="user_captcha_input" placeholder="Copiez le captcha"
+                                               className=" rounded focus:outline-none focus:ring focus:ring-offset-2
+                                               focus:ring-prim focus:ring-offset-white"/>
                                         <ErrorMessage name="user_captcha_input" component="div"
                                                       className='mb-1 text-red-500'/>
                                     </div>

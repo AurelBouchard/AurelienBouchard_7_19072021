@@ -7,7 +7,7 @@ import Button from './TCP_button'
 import {useGet} from "../utils/useGet";
 
 
-const Commentor = ({currentUser, postId, newComm, isAdmin, setModerate, setTarget}) => {
+const Commentor = ({currentUser, postId, onNewComm, isAdmin, setModerate, setTarget}) => {
 
     const {data, loading} = useGet(`http://localhost:4000/api/posts/${postId}/comments`);
 
@@ -48,7 +48,7 @@ const Commentor = ({currentUser, postId, newComm, isAdmin, setModerate, setTarge
                                         actions.resetForm();
 
                                         // reload wall (commentor's parent)
-                                        newComm();
+                                        onNewComm();
 
                                     })
                                     .catch(err => {
@@ -86,7 +86,8 @@ const Commentor = ({currentUser, postId, newComm, isAdmin, setModerate, setTarge
                                         <p className="mr-2">Vous : </p>
                                         <div className="bg-ter-light rounded-2xl flex-1">
                                             <input className="handWritten text-2xl bg-transparent w-full pl-2
-                                        overflow-ellipsis overflow-hidden whitespace-pre-line cursor-pointer"
+                                        overflow-ellipsis overflow-hidden whitespace-pre-line cursor-pointer
+                                        rounded-2xl focus:outline-none focus:ring focus:ring-offset-2 focus:ring-prim focus:ring-offset-white"
                                                    type='undefined'
                                                    onChange={props.handleChange}
                                                    value={props.values.currentComm}
@@ -96,7 +97,7 @@ const Commentor = ({currentUser, postId, newComm, isAdmin, setModerate, setTarge
 
                                     </div>
 
-                                    {props.errors.currentComm && <div id="feedback">{props.errors.currentComm}</div>}
+                                    {props.errors.currentComm && <div id="feedback" className="text-red-500">{props.errors.currentComm}</div>}
 
                                     <div className="btns flex flex-row w-full justify-evenly mt-3 -mb-2">
                                         <Button text="Effacer" type='reset' onClick={props.handleReset} >

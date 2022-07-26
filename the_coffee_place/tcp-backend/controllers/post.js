@@ -28,7 +28,7 @@ exports.create = (req, res) => {
 
 exports.addLike = (req, res) => {
     if (req.body.liked) {
-        // STRATEGY : find who like, find the concerned post then increment the nOfLikers and create Like that belong to that post
+        // STRATEGY : find who like, find the concerned post, check if it is already liked, then increment the nOfLikers and create Like that belong to that post
         console.log("\nfinding who is the liker");
         User.findOne({where: {pseudo: req.body.pseudo}})
             .then(user => {
@@ -36,12 +36,23 @@ exports.addLike = (req, res) => {
                 console.log("\nfinding the post");
                 return Post.findOne({where: {id: req.params.id}})
                     .then((post) => {
-                        console.log("\nincrement nOfLike of this post");
-                        post.increment('nOfLike');
 
-                        console.log("create like");
-                        post.createLike({'userId':user.id, 'pseudo':req.body.pseudo});
-                        res.status(201).json({message: "Like ajouté"});
+                        console.log("\nchecking if duplicate like");
+                        Like.findOne({where: {userId: user.id, PostId: post.id}})
+                            .then((like) => {
+
+                                if (like == null) {
+                                    console.log("\nincrement nOfLike of this post");
+                                    post.increment('nOfLike');
+
+                                    console.log("create like");
+                                    post.createLike({'userId':user.id, 'pseudo':req.body.pseudo});
+                                    res.status(201).json({message: "Like ajouté"});
+                                } else {
+                                    console.log("\nduplicate");
+                                    res.status(500).json({message: "duplicate entry, could be race condition mistake"});
+                                }
+                            })
                     })
                     .catch(err => {
                         try { console.log("Error while creating like : \n" + err.name + ".\n" + err.parent.text);
@@ -63,9 +74,14 @@ exports.addLike = (req, res) => {
                 return Post.findOne({where: {id: req.params.id}})
             })
             .then((post) => {
-                console.log("\ndecrement nOfLike of this post");
-                post.decrement('nOfLike');
-                res.status(200).json({message: "Like supprimé"})
+                if (post.nOfLike > 0) {
+                    console.log("\ndecrement nOfLike of this post");
+                    post.decrement('nOfLike');
+                    res.status(200).json({message: "Like supprimé"})
+                } else {
+                    console.log("\nno decrement under zero");
+                    res.status(500).json({message: "no decrement under zero"})
+                }
             })
             .catch(err => {
                 try { console.log("Error while removing like : \n" + err.name + ".\n" + err.parent.text);

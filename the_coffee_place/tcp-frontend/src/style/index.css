@@ -51,11 +51,11 @@ button:hover{
 }
 
 button.warning:hover{
-    cursor: url("src/assets/icon/warning.png"), pointer;
+    cursor: url("/src/assets/icon/warning.png"), pointer;
 }
 
 .liked:hover{
-    cursor: url("src/assets/icon/thumbs-down.png"), pointer;
+    cursor: url("/src/assets/icon/thumbs-down.png"), pointer;
 }
 
 .notliked:hover{
