@@ -84,11 +84,19 @@ Available soon ...
 `yarn install`
 
 ### Run the servers:
-> **Warning**
-> Servers need open ports to listen to.
+> **Warning** <br />
+> Servers need open ports to listen to ! <br />
+> Front listen to 3000. <br />
+> Back listen to 4000. <br />
+> If any of those ports are already in use, the server listen to the next (eg: 3001 and 4001). <br />
+> Initial ports can be changed in .env file. <br />
 
 - #### 1. in backend folder:
 `node server`
+
+> **No SQL engine** <br />
+> An error will occure because the SQL database is off! <br />
+> I will fix it soon. <br />
 
 - #### 2. in frontend folder:
 `yarn start`
@@ -101,7 +109,9 @@ Available soon ...
 ## 5. Usage
 
 + ### create account
+
 + ### connect
+
 + ### new post
 + ### new comment
 + ### user profile
@@ -149,14 +159,6 @@ the_coffee_place
 │   └── yarn.lock
 └── tcp-frontend
     ├── .gitignore
-    ├── .idea
-    │   ├── .gitignore
-    │   ├── inspectionProfiles
-    │   │   └── Project_Default.xml
-    │   ├── modules.xml
-    │   ├── tcp-frontend.iml
-    │   ├── vcs.xml
-    │   └── workspace.xml
     ├── index.html
     ├── node_modules
     │   └── a lot ...
@@ -220,6 +222,9 @@ the_coffee_place
 
 <a name="upcoming"></a>
 ## 7. Upcoming changes
++ fix SQL database issue
++ color theming
++ add dark mode
 
 
 <br />
