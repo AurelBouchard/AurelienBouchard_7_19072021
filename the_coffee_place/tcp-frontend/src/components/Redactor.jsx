@@ -7,7 +7,6 @@ import Button from './TCP_button'
 /**
  * Form to add a post.
  *
- *
  * @param author
  * @param onNewPost
  * @returns {JSX.Element}

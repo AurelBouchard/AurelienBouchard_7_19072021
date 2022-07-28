@@ -1,5 +1,16 @@
 import React from "react";
 
+
+/**
+ * Styled input.
+ *
+ * @param type
+ * @param placeholder
+ * @param label
+ * @param value
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function Input({type, placeholder, label, value}) {
     return (
         <>

@@ -6,7 +6,16 @@ import {Link, useHistory} from 'react-router-dom';
 
 import Button from './TCP_button'
 
-
+/**
+ * Page to edit user's settings.
+ * Ability to become admin.
+ *
+ * @param currentUser
+ * @param isAdmin
+ * @param setIsAdmin
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function Settings({currentUser, isAdmin, setIsAdmin}) {
 
     const history = useHistory();

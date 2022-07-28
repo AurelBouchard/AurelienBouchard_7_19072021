@@ -5,7 +5,14 @@ import {JWT_token} from "../components/Connection";
 
 const initialState = {listOfLikedPost:undefined, finding: true};
 
-
+/**
+ * Use axios.get, return if loading or not and data when available.
+ * End point : /api/user/${currentUser}/likedposts
+ *
+ * @param mutations
+ * @param currentUser
+ * @returns {{listOfLikedPost: undefined, finding: boolean}}
+ */
 export const useUsersLikes = (mutations, currentUser) => {
     const [state, setState] = useState(initialState);
 

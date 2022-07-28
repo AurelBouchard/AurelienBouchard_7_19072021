@@ -12,7 +12,15 @@ import Moderator from "./Moderator";
 import {usePosts} from "../utils/usePosts";
 
 
-
+/**
+ * Page displaying all posts, newest first.
+ *
+ * @param currentUser
+ * @param handleNewChild used to rerender
+ * @param isAdmin
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function Wall({currentUser, handleNewChild, isAdmin}) {
     const [moderate, setModerate] = useState(false);
     const [target, setTarget] = useState({type: '', id: 0}); // targeted by moderator
@@ -26,9 +34,9 @@ export default function Wall({currentUser, handleNewChild, isAdmin}) {
 
     const updatePostMutations = useCallback(() => setPostMutations(m => m + 1), []);
     const updateLikeMutations = useCallback(() => setLikeMutations(m => m + 1), []);
-
-
-
+    
+    
+    
     return (
         <div className="absolute top-12 w-full">
             <div className="mx-auto p-8 md:w-5/6 max-w-3xl cursor-default">

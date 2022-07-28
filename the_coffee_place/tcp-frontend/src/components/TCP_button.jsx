@@ -1,5 +1,16 @@
 import React from "react";
 
+/**
+ * Styled button. Additional classes can be passed in props.
+ *
+ * @param text
+ * @param type
+ * @param disabled
+ * @param onClick
+ * @param className
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function Button({text, type, disabled, onClick, className}) {
     return (
             <button

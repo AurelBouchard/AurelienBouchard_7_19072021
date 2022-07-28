@@ -4,10 +4,13 @@ import axios from "axios";
 import Button from './TCP_button'
 
 /**
+ * Show modal when admin is moderating.
+ * Aim is to delete a post or a comment identified by target object.
+ * Object target = {type, id}.
  *
- * @param setModerate
- * @param target
- * @param onModerate
+ * @param setModerate when action is finished, set moderate to false to close this Moderator modal
+ * @param target used to identified what will be deleted
+ * @param onModerate used to rerender
  * @returns {JSX.Element}
  * @constructor
  */

@@ -9,7 +9,13 @@ import NavbarCollapse from "@material-tailwind/react/NavbarCollapse";
 import Nav from "@material-tailwind/react/Nav";
 
 
-
+/**
+ * Show the styled navbar.
+ *
+ * @param setJWT_token set JWT to false when user disconnects
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function TCP_navbar({setJWT_token}) {
     const [openNavbar, setOpenNavbar] = useState(false);
     let history = useHistory();

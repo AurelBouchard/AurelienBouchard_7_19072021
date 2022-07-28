@@ -3,6 +3,13 @@ import {Link, useHistory, useParams} from 'react-router-dom';
 import Button from './TCP_button'
 import {useGet} from "../utils/useGet";
 
+/**
+ * Page to expose profile of an other user.
+ * 
+ * @param pseudo
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function ShowProfile() {
     let {pseudo} = useParams();
     const history = useHistory();

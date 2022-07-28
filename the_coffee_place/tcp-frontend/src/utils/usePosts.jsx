@@ -5,7 +5,13 @@ import {JWT_token} from "../components/Connection";
 
 const initialState = {data:undefined, loading: true};
 
-
+/**
+ * Use axios.get, return if loading or not and data when available.
+ * End point : /api/posts
+ *
+ * @param mutations
+ * @returns {{data: undefined, loading: boolean}}
+ */
 export const usePosts = (mutations) => {
     const [state, setState] = useState(initialState);
 
