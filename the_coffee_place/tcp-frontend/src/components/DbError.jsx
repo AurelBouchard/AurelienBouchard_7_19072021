@@ -3,7 +3,16 @@ import axios from "axios";
 
 import Button from './TCP_button'
 
-
+/**
+ * Modal that show error from DB
+ *
+ * @see gentleError
+ *
+ * @param dbError
+ * @param setDbError
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const DbError = ({dbError, setDbError}) => {
 
     return (
@@ -19,6 +28,13 @@ const DbError = ({dbError, setDbError}) => {
 
 export default DbError;
 
+
+/**
+ * Try to detect the source of the error and return a human readable message
+ *
+ * @param errorMessage
+ * @returns {string}
+ */
 function gentleError(errorMessage) {
     let errorType = "";
     let isDuplicate = false

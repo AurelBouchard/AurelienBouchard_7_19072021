@@ -3,7 +3,14 @@ import axios from "axios";
 
 import Button from './TCP_button'
 
-
+/**
+ *
+ * @param setModerate
+ * @param target
+ * @param onModerate
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const Moderator = ({setModerate, target, onModerate}) => {
 
     return (

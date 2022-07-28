@@ -11,9 +11,17 @@ import DbError from './DbError';
 export let JWT_token = "";
 
 
-
-
-const Connection = ({setJWT_token, setIsAdmin, setConnected, setAskForSubscription, setCurrentUser}) => {
+/**
+ * Connection page with several entries
+ *
+ * @param setJWT_token JWT_token is the proof of connection
+ * @param setIsAdmin according to server response
+ * @param setAskForSubscription if user don't have account
+ * @param setCurrentUser when successfully connected
+ * @returns {JSX.Element}
+ * @constructor
+ */
+const Connection = ({setJWT_token, setIsAdmin, setAskForSubscription, setCurrentUser}) => {
     const [dbError, setDbError] = useState(null);
 
     const lastUser = localStorage.getItem('tcp_user');

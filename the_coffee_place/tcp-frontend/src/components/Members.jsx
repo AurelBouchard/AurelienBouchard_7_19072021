@@ -7,7 +7,12 @@ import {useGet} from "../utils/useGet";
 import AccessToWall from './AccessToWall'
 
 
-
+/**
+ * Page that show all members
+ *
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function Members() {
 
     const {data, loading} = useGet('http://localhost:4000/api/members');

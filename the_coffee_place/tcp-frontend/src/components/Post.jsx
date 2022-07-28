@@ -4,18 +4,30 @@ import axios from "axios";
 
 import Commentor from "./Commentor";
 
-
+/**
+ * Display a card of a post with all props as data
+ *
+ * @param date
+ * @param clock
+ * @param liked
+ * @param text
+ * @param author
+ * @param nOfComm
+ * @param nOfLike
+ * @param postId
+ * @param currentUser
+ * @param onNewComm
+ * @param onLikeChange
+ * @param isAdmin
+ * @param setModerate
+ * @param setTarget
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function Post({date, clock, liked, text, author, nOfComm, nOfLike, postId,
                                  currentUser, onNewComm, onLikeChange, isAdmin, setModerate, setTarget}) {
     const [showComm, setShowComm] = useState(false);
     let clicable = true;
-
-/*
-    useEffect(() => { if (!clicable) {
-        console.log("unclick ...")
-        clicable = true};
-    }, [clicable])
-*/
 
 
     return (

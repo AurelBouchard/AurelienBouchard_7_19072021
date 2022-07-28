@@ -7,7 +7,15 @@ import {Link, useHistory} from 'react-router-dom';
 import Button from './TCP_button'
 import {useGet} from "../utils/useGet";
 
-
+/**
+ * Page to edit user's own profile.
+ * In case of renewing password JWT_token is set to false.
+ *
+ * @param currentUser
+ * @param setJWT_token
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function ProfileEditor({currentUser, setJWT_token}) {
     const [mode, changeModeTo] = useState('normal'); // possible states : 'normal' / 'changePW' / 'rmProfile'
 

@@ -3,6 +3,11 @@ import {Link} from 'react-router-dom';
 import {Button} from "@material-tailwind/react";
 import AccessToWall from "./AccessToWall";
 
+/**
+ * error 404 page with shortcut to Wall
+ *
+ * @returns {JSX.Element}
+ */
 export default function notFound() {
     return (
             <div className="flex flex-col flex-wrap p-16 items-center justify-center w-full md:flex-row md:justify-evenly">

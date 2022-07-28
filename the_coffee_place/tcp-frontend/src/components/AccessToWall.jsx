@@ -1,6 +1,15 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
+
+/**
+ * Shortcut to the Wall using Link from 'react-router-dom'
+ * Class from param className will be applied to the container div
+ *
+ * @param className
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function AccessToWall({className}) {
   return (
       <div className={className}>

@@ -8,8 +8,13 @@ import Button from './TCP_button';
 import DbError from "./DbError";
 
 
-
-
+/**
+ * Account creation page
+ *
+ * @param setAskForSubscription will be set to false if user go through account creation
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const CreateAccount = ({setAskForSubscription}) => {
     const [dbError, setDbError] = useState(null);
 
